@@ -36,7 +36,7 @@ export default function Navbar() {
         <a href="#" className="flex items-center gap-3.5 group">
           <div className="relative">
             <img
-              src="https://lh3.googleusercontent.com/aida/AEtjO1WX1mg66dqCZAhLp1aoBOem3_fzPHB_BWqiDDtLDPSPsMDyEq3GX7fw3sKEPaH9q30isxYws6rLQ8GwwiAcCxCcwzcoRsyjvS-lnEY784PE_wOpk-ZuwYGro7f5vE7XUAVp2cKNUfT41Fj_bjucEwbREDvhU7FYx_jB1BNjWqRzUcjki8uFt32D-e9vBQLsREeerx8m2OA0Z5sMkPvH7YIMQXk7sIXyvpzBdJNHatBbNhWdfctN77AlACmL"
+              src="/logo.png"
               alt="Kunal M Saini Logo"
               className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
@@ -80,7 +80,7 @@ export default function Navbar() {
             title="Kunal M Saini"
           >
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuChNQ6EhDnduAe7OANNru152JW_gu5zsoYBBFAFCCNoiS2j6hxKjNzbeayYtpmkEdRU58BW_zWZMvEnJdJOWBTpvaj4PQHlAbmzCKQGNyd5Se9-OoiXapsQGoJeIbFONvXYHR0vQMHvBjXnVfTKE7gd2CYcGo2EIZkGVIT0pRgB7eRDhVL8No2uMykyjA259qE4ZqreJ5lDBV5VqVQMJKn8ejM1mHo1jcEjQ93dF_HghpN07HVwNMHm0A"
+              src="/profile.png"
               alt="Kunal M Saini Avatar"
               className="w-full h-full object-cover"
             />

@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="flex flex-col gap-2 max-w-lg">
             <div className="flex items-center gap-3">
               <img
-                src="https://lh3.googleusercontent.com/aida/AEtjO1WX1mg66dqCZAhLp1aoBOem3_fzPHB_BWqiDDtLDPSPsMDyEq3GX7fw3sKEPaH9q30isxYws6rLQ8GwwiAcCxCcwzcoRsyjvS-lnEY784PE_wOpk-ZuwYGro7f5vE7XUAVp2cKNUfT41Fj_bjucEwbREDvhU7FYx_jB1BNjWqRzUcjki8uFt32D-e9vBQLsREeerx8m2OA0Z5sMkPvH7YIMQXk7sIXyvpzBdJNHatBbNhWdfctN77AlACmL"
+                src="/logo.png"
                 alt="Kunal M Saini Logo"
                 className="h-7 w-auto object-contain"
               />

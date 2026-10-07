@@ -32,7 +32,7 @@ export default function About() {
           <div className="relative w-full max-w-md p-3 rounded-2xl bg-[#1c2028]/80 border border-white/[0.08] backdrop-blur-2xl shadow-[0_16px_48px_rgba(0,0,0,0.7)]">
             <div className="relative aspect-square w-full rounded-xl overflow-hidden shadow-inner bg-[#0a0e16]">
               <img
-                src="https://lh3.googleusercontent.com/aida/AEtjO1XxRrDNRjya-Rs_u5qs3f_tvyuizmAK44SIXF0jl31pkRWOaJMS0FuSBYM9ch9dbDdzL65NYCoCvt-OsqQDc18uvShyqmc93KgZgSQdOUdUcfXSoRt3bXjFbLmLfS5ot8tMOIau9E76soeBAmdjlL99Cpx1lzCYvLERDl2Ek_53AmnvSp_Q2RXTfuPy4zKKV0kfn2MnWxlIyhkiPgrSPbcpQZJXFklP-UAiFAmZVMXTtKSA_SpznpKRjgy9"
+                src="/profile.png"
                 alt="Kunal M Saini — Performance Marketing Specialist & AI Systems Expert"
                 className="w-full h-full object-cover object-center filter contrast-105"
               />
