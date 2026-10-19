@@ -5,10 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
 
 const NAV_LINKS = [
-  { name: "Services", href: "#services" },
-  { name: "AI Systems", href: "#ai-systems" },
-  { name: "Case Studies", href: "#case-studies" },
-  { name: "About Me", href: "#about" },
+  { name: "Services", href: "/#services" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "AI Systems", href: "/#ai-systems" },
+  { name: "Case Studies", href: "/#case-studies" },
+  { name: "About Me", href: "/#about" },
 ];
 
 export default function Navbar() {
@@ -33,7 +34,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
         {/* Brand Logo */}
-        <a href="#" className="flex items-center gap-3.5 group">
+        <a href="/" className="flex items-center gap-3.5 group">
           <div className="relative">
             <img
               src="/logo.png"
@@ -68,14 +69,14 @@ export default function Navbar() {
         {/* Right Action & Profile */}
         <div className="hidden sm:flex items-center gap-4">
           <a
-            href="#audit-form"
+            href="/#audit-form"
             className="relative inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#003919] bg-[#00FF87] emerald-glow hover:brightness-110 active:scale-95 transition-all duration-200"
           >
             <span>Book Strategy Call</span>
             <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
           </a>
           <a
-            href="#about"
+            href="/#about"
             className="relative block w-9 h-9 rounded-full overflow-hidden ring-2 ring-[#00FF87]/40 shadow-[0_0_12px_rgba(0,255,135,0.3)] hover:ring-[#00FF87] transition-all"
             title="Kunal M Saini"
           >
@@ -90,10 +91,10 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <div className="flex sm:hidden items-center gap-3">
           <a
-            href="#audit-form"
+            href="/pricing"
             className="px-4 py-2 rounded-full font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#003919] bg-[#00FF87] emerald-glow"
           >
-            Book Call
+            Pricing
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -127,7 +128,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#audit-form"
+                href="/#audit-form"
                 onClick={() => setMobileMenuOpen(false)}
                 className="mt-3 flex items-center justify-center gap-2 py-3 rounded-full font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#003919] bg-[#00FF87] emerald-glow"
               >

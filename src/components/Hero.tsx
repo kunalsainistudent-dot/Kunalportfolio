@@ -13,6 +13,7 @@ import {
   Activity,
   CheckCircle2,
   Database,
+  CreditCard,
 } from "lucide-react";
 
 export default function Hero() {
@@ -71,15 +72,22 @@ export default function Hero() {
         className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-14"
       >
         <a
-          href="#audit-form"
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-['Plus_Jakarta_Sans'] text-base font-bold text-[#003919] bg-[#00FF87] emerald-glow hover:brightness-110 active:scale-95 transition-all duration-200"
+          href="/pricing"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-['Plus_Jakarta_Sans'] text-base font-bold text-[#003919] bg-[#00FF87] emerald-glow hover:brightness-110 active:scale-95 transition-all duration-200"
         >
-          <span>Book Strategy Call</span>
+          <span>View Pricing &amp; Book</span>
+          <CreditCard className="w-4 h-4 stroke-[2.5]" />
+        </a>
+        <a
+          href="#audit-form"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-['Plus_Jakarta_Sans'] text-base font-semibold text-[#dfe2ee] bg-[#262a33]/80 border border-white/10 backdrop-blur-xl hover:bg-[#31353e] hover:text-[#00FF87] transition-all duration-200"
+        >
+          <span>Free Strategy Audit</span>
           <Calendar className="w-4 h-4 stroke-[2.5]" />
         </a>
         <a
           href="#services"
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full font-['Plus_Jakarta_Sans'] text-base font-semibold text-[#dfe2ee] bg-[#262a33]/60 border border-white/10 backdrop-blur-xl hover:bg-[#31353e] hover:text-[#00FF87] hover:border-[#00FF87]/40 shadow-[0_0_24px_rgba(119,1,208,0.2)] transition-all duration-200"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-['Plus_Jakarta_Sans'] text-base font-semibold text-[#94A3B8] bg-transparent border border-white/10 hover:text-white hover:border-white/30 transition-all duration-200"
         >
           <span>Explore AI Workflows</span>
           <Network className="w-4 h-4" />

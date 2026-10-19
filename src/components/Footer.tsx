@@ -27,8 +27,14 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Social Profiles */}
+          {/* Navigation & Social Profiles */}
           <div className="flex flex-wrap items-center gap-3">
+            <a
+              href="/pricing"
+              className="px-4 py-2 rounded-full bg-[#1c2028] hover:bg-[#262a33] text-[#00FF87] border border-[#00FF87]/30 font-['Plus_Jakarta_Sans'] text-xs font-semibold transition-all duration-200"
+            >
+              Services &amp; Pricing
+            </a>
             <a
               href="https://linkedin.com/in/digitalkunalsaini786"
               target="_blank"

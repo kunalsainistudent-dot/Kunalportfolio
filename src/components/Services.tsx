@@ -156,6 +156,28 @@ export default function Services() {
           );
         })}
       </div>
+
+      {/* Pricing Menu Callout Banner */}
+      <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-[#1c2028]/80 border border-white/[0.08] backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="flex flex-col text-center sm:text-left">
+          <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#00FF87] uppercase tracking-wider mb-1">
+            Transparent Pricing &amp; Retainer Packages
+          </span>
+          <h4 className="font-['Space_Grotesk'] text-xl font-bold text-[#dfe2ee]">
+            Looking for specific audit fees, AI systems, or monthly retainer models?
+          </h4>
+          <p className="font-['Inter'] text-xs sm:text-sm text-[#94A3B8] mt-1">
+            Review the full service rate card with instant 10% deposit or full Razorpay checkout.
+          </p>
+        </div>
+        <a
+          href="/pricing"
+          className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#003919] bg-[#00FF87] emerald-glow hover:brightness-110 active:scale-95 transition-all"
+        >
+          <span>View Pricing &amp; Packages</span>
+          <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+        </a>
+      </div>
     </section>
   );
 }
