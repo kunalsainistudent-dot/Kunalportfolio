@@ -50,7 +50,11 @@ export default function RazorpayModal({
     type: "deposit" | "full";
   } | null>(null);
 
-  // Dynamically load Razorpay checkout script
+  const [apiKey, setApiKey] = useState<string>(
+    process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || ""
+  );
+
+  // Dynamically load Razorpay checkout script and resolve key from server if needed
   useEffect(() => {
     if (typeof window !== "undefined" && !(window as any).Razorpay) {
       const script = document.createElement("script");
@@ -62,7 +66,19 @@ export default function RazorpayModal({
     } else {
       setScriptLoaded(true);
     }
-  }, []);
+
+    // If NEXT_PUBLIC_RAZORPAY_KEY_ID is missing or placeholder, fetch from /api/razorpay/key (reads RAZORPAY_KEY_ID)
+    if (!apiKey || apiKey === "rzp_test_placeholder") {
+      fetch("/api/razorpay/key")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.key && data.key !== "rzp_test_placeholder") {
+            setApiKey(data.key);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [apiKey]);
 
   // Reset form when modal opens with a new service
   useEffect(() => {
@@ -91,10 +107,20 @@ export default function RazorpayModal({
     setLoading(true);
     setError(null);
 
-    const razorpayKey =
-      process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_placeholder";
+    // Resolve key from state, client env, or server API (supports both RAZORPAY_KEY_ID & NEXT_PUBLIC_RAZORPAY_KEY_ID)
+    let razorpayKey = apiKey || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "";
+    if (!razorpayKey || razorpayKey === "rzp_test_placeholder") {
+      try {
+        const res = await fetch("/api/razorpay/key");
+        const data = await res.json();
+        if (data?.key && data.key !== "rzp_test_placeholder") {
+          razorpayKey = data.key;
+          setApiKey(data.key);
+        }
+      } catch (err) {}
+    }
 
-    // If key is unconfigured or placeholder, offer a realistic simulation mode with notification
+    // If key is unconfigured or placeholder, offer a realistic simulation mode for demo
     const isPlaceholder =
       !razorpayKey ||
       razorpayKey === "rzp_test_placeholder" ||
