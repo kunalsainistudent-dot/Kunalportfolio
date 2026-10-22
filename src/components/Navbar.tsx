@@ -69,7 +69,9 @@ export default function Navbar() {
         {/* Right Action & Profile */}
         <div className="hidden sm:flex items-center gap-4">
           <a
-            href="/#audit-form"
+            href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+            target="_blank"
+            rel="noopener noreferrer"
             className="relative inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#003919] bg-[#00FF87] emerald-glow hover:brightness-110 active:scale-95 transition-all duration-200"
           >
             <span>Book Strategy Call</span>
@@ -128,7 +130,9 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="/#audit-form"
+                href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
                 className="mt-3 flex items-center justify-center gap-2 py-3 rounded-full font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#003919] bg-[#00FF87] emerald-glow"
               >

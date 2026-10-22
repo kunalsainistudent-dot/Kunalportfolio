@@ -288,21 +288,30 @@ export default function RazorpayModal({
                 {/* Next Steps CTAs */}
                 <div className="flex flex-col sm:flex-row items-center gap-3 w-full mt-2">
                   <a
+                    href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:flex-1 py-3 px-5 rounded-full font-['Plus_Jakarta_Sans'] font-bold text-xs sm:text-sm text-[#003919] bg-[#00FF87] emerald-glow flex items-center justify-center gap-2 hover:brightness-110 transition-all"
+                  >
+                    <Calendar className="w-4 h-4 stroke-[2.5]" />
+                    <span>Book Kickoff Call</span>
+                  </a>
+                  <a
                     href={`https://wa.me/91786?text=Hi%20Kunal,%20I%20just%20booked%20the%20${encodeURIComponent(
                       service.title
                     )}%20via%20your%20website%20(Ref:%20${successData.paymentId}).`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:flex-1 py-3 px-5 rounded-full font-['Plus_Jakarta_Sans'] font-bold text-xs sm:text-sm text-[#003919] bg-[#00FF87] emerald-glow flex items-center justify-center gap-2 hover:brightness-110 transition-all"
+                    className="w-full sm:flex-1 py-3 px-5 rounded-full font-['Plus_Jakarta_Sans'] font-semibold text-xs sm:text-sm text-[#dfe2ee] bg-[#1c2028] hover:bg-[#262a33] border border-white/10 flex items-center justify-center gap-2 transition-all"
                   >
                     <span>Connect on WhatsApp</span>
                     <ExternalLink className="w-4 h-4" />
                   </a>
                   <button
                     onClick={onClose}
-                    className="w-full sm:w-auto py-3 px-6 rounded-full font-['Plus_Jakarta_Sans'] font-semibold text-xs text-[#dfe2ee] bg-[#1c2028] hover:bg-[#262a33] border border-white/10 transition-colors"
+                    className="w-full sm:w-auto py-3 px-6 rounded-full font-['Plus_Jakarta_Sans'] font-semibold text-xs text-[#94A3B8] hover:text-white bg-[#0a0e16] hover:bg-[#1c2028] border border-white/10 transition-colors"
                   >
-                    Close Window
+                    Close
                   </button>
                 </div>
               </div>

@@ -30,8 +30,16 @@ export default function Footer() {
           {/* Navigation & Social Profiles */}
           <div className="flex flex-wrap items-center gap-3">
             <a
+              href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-full bg-[#00FF87]/15 hover:bg-[#00FF87]/25 text-[#00FF87] border border-[#00FF87]/40 font-['Plus_Jakarta_Sans'] text-xs font-semibold transition-all duration-200"
+            >
+              Book Strategy Call
+            </a>
+            <a
               href="/pricing"
-              className="px-4 py-2 rounded-full bg-[#1c2028] hover:bg-[#262a33] text-[#00FF87] border border-[#00FF87]/30 font-['Plus_Jakarta_Sans'] text-xs font-semibold transition-all duration-200"
+              className="px-4 py-2 rounded-full bg-[#1c2028] hover:bg-[#262a33] text-[#dfe2ee] hover:text-[#00FF87] border border-white/[0.06] font-['Plus_Jakarta_Sans'] text-xs font-semibold transition-all duration-200"
             >
               Services &amp; Pricing
             </a>

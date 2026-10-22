@@ -58,7 +58,15 @@ export default function ContactForm() {
           Let&apos;s Scale Your Acquisition
         </h2>
         <p className="font-['Inter'] text-base sm:text-lg text-[#94A3B8] mt-3 leading-relaxed">
-          Fill out the strategic diagnostic below to claim your 1-on-1 performance audit.
+          Fill out the strategic diagnostic below to claim your 1-on-1 performance audit, or{" "}
+          <a
+            href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#00FF87] hover:underline font-semibold inline-flex items-center gap-1"
+          >
+            book your call directly on Google Calendar &rarr;
+          </a>
         </p>
       </div>
 

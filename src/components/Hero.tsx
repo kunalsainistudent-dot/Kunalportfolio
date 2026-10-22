@@ -79,10 +79,12 @@ export default function Hero() {
           <CreditCard className="w-4 h-4 stroke-[2.5]" />
         </a>
         <a
-          href="#audit-form"
+          href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-['Plus_Jakarta_Sans'] text-base font-semibold text-[#dfe2ee] bg-[#262a33]/80 border border-white/10 backdrop-blur-xl hover:bg-[#31353e] hover:text-[#00FF87] transition-all duration-200"
         >
-          <span>Free Strategy Audit</span>
+          <span>Book Strategy Call</span>
           <Calendar className="w-4 h-4 stroke-[2.5]" />
         </a>
         <a
