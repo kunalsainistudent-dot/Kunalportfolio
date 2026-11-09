@@ -17,10 +17,10 @@ const SERVICES = [
     id: "ads-funnels",
     title: "Meta & Google Ads Funnels",
     tag: "Scale & Acquire",
-    tagColor: "bg-[#00FF87]/15 text-[#60ff98] border-[#00FF87]/30",
+    tagColor: "bg-[#ee8733]/15 text-[#ee8733] border-[#ee8733]/30",
     icon: Megaphone,
-    iconColor: "text-[#00FF87]",
-    hoverGlow: "hover:shadow-[0_0_35px_rgba(0,255,135,0.22)] hover:border-[#00FF87]/40",
+    iconColor: "text-[#ee8733]",
+    hoverGlow: "hover:shadow-[0_0_35px_rgba(238,135,51,0.22)] hover:border-[#ee8733]/40",
     description:
       "High-converting paid acquisition, lead gen, and scaling eCommerce stores through granular audience segmentation and ruthless attribution.",
     deliverables: [
@@ -33,10 +33,10 @@ const SERVICES = [
     id: "ai-systems",
     title: "AI Systems & Marketing Automation",
     tag: "Next-Gen Automations",
-    tagColor: "bg-[#7701d0]/25 text-[#dcb8ff] border-[#8A2BE2]/40",
+    tagColor: "bg-[#367cf1]/15 text-[#367cf1] border-[#367cf1]/30",
     icon: Bot,
-    iconColor: "text-[#dcb8ff]",
-    hoverGlow: "hover:shadow-[0_0_35px_rgba(138,43,226,0.28)] hover:border-[#8A2BE2]/40",
+    iconColor: "text-[#367cf1]",
+    hoverGlow: "hover:shadow-[0_0_35px_rgba(54,124,241,0.25)] hover:border-[#367cf1]/40",
     description:
       "Building modern AI workflows, chat funnels, and automated asset creation to scale output while dramatically lowering CPA.",
     deliverables: [
@@ -49,10 +49,10 @@ const SERVICES = [
     id: "psychology",
     title: "Consumer & Marketing Psychology",
     tag: "Creative Strategy",
-    tagColor: "bg-[#60efff]/15 text-[#60efff] border-[#60efff]/30",
+    tagColor: "bg-[#ffaa66]/15 text-[#ffaa66] border-[#ffaa66]/30",
     icon: BrainCircuit,
-    iconColor: "text-[#60efff]",
-    hoverGlow: "hover:shadow-[0_0_35px_rgba(96,239,255,0.22)] hover:border-[#60efff]/40",
+    iconColor: "text-[#ffaa66]",
+    hoverGlow: "hover:shadow-[0_0_35px_rgba(238,135,51,0.2)] hover:border-[#ffaa66]/40",
     description:
       "Deconstructing buying behavior to craft high-CTR ad creatives & angles that trigger genuine, non-coercive purchase urgency.",
     deliverables: [
@@ -65,10 +65,10 @@ const SERVICES = [
     id: "cro-funnels",
     title: "CRO & Growth Funnels",
     tag: "ROAS Maximizer",
-    tagColor: "bg-[#00FF87]/15 text-[#60ff98] border-[#00FF87]/30",
+    tagColor: "bg-[#ee8733]/15 text-[#ee8733] border-[#ee8733]/30",
     icon: TrendingUp,
-    iconColor: "text-[#00FF87]",
-    hoverGlow: "hover:shadow-[0_0_35px_rgba(0,255,135,0.22)] hover:border-[#00FF87]/40",
+    iconColor: "text-[#ee8733]",
+    hoverGlow: "hover:shadow-[0_0_35px_rgba(238,135,51,0.22)] hover:border-[#ee8733]/40",
     description:
       "Optimizing landing pages and acquisition funnels for maximum ROAS and ruthless friction elimination across desktop and mobile.",
     deliverables: [
@@ -87,67 +87,66 @@ export default function Services() {
     >
       {/* Header */}
       <div className="flex flex-col items-center text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#181c24] text-[#00FF87] border border-white/[0.08] font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#171c29] text-[#ee8733] border border-[#ee8733]/30 font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
           <Layers className="w-3.5 h-3.5" />
           Full-Stack Acquisition Framework
         </div>
-        <h2 className="font-['Space_Grotesk'] text-3xl sm:text-4xl lg:text-5xl font-bold text-[#dfe2ee] tracking-tight max-w-3xl leading-tight">
+        <h2 className="font-['Space_Grotesk'] text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffffff] tracking-tight max-w-3xl leading-tight">
           Precision Growth Engines Engineered for Non-Linear Scale
         </h2>
-        <p className="font-['Inter'] text-base sm:text-lg text-[#94A3B8] max-w-2xl mt-4 leading-relaxed">
+        <p className="font-['Inter'] text-base sm:text-lg text-[#dcdfe3] max-w-2xl mt-4 leading-relaxed">
           Bespoke acquisition pipelines merging empirical media buying, behavioral
           psychology, and LLM automation.
         </p>
       </div>
 
-      {/* Grid of 4 Service Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-        {SERVICES.map((service, index) => {
-          const Icon = service.icon;
+      {/* 4 Service Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {SERVICES.map((srv, idx) => {
+          const Icon = srv.icon;
           return (
             <motion.div
-              key={service.id}
-              id={service.id === "ai-systems" ? "ai-systems" : undefined}
-              initial={{ opacity: 0, y: 25 }}
+              key={srv.id}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`p-6 rounded-2xl bg-[#1c2028]/60 border border-white/[0.08] backdrop-blur-xl shadow-lg transition-all duration-300 flex flex-col justify-between group ${service.hoverGlow}`}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className={`p-8 rounded-2xl bg-[#171c29]/75 border border-white/[0.08] backdrop-blur-2xl shadow-xl transition-all duration-300 flex flex-col justify-between ${srv.hoverGlow}`}
             >
               <div>
-                {/* Card Top: Icon & Badge */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-[#262a33] flex items-center justify-center border border-white/[0.06] group-hover:scale-110 transition-transform">
-                    <Icon className={`w-6 h-6 ${service.iconColor}`} />
+                <div className="flex items-center justify-between mb-6">
+                  <div
+                    className={`p-3 rounded-xl bg-[#0c0e14]/90 border border-white/[0.06] ${srv.iconColor}`}
+                  >
+                    <Icon className="w-6 h-6" />
                   </div>
                   <span
-                    className={`px-3 py-1 rounded-full border text-[11px] font-['Plus_Jakarta_Sans'] font-semibold ${service.tagColor}`}
+                    className={`px-3 py-1 rounded-full text-xs font-['Plus_Jakarta_Sans'] font-bold uppercase tracking-wider border ${srv.tagColor}`}
                   >
-                    {service.tag}
+                    {srv.tag}
                   </span>
                 </div>
 
-                {/* Card Headline & Copy */}
-                <h3 className="font-['Space_Grotesk'] text-xl font-bold text-[#dfe2ee] mb-3 group-hover:text-white transition-colors">
-                  {service.title}
+                <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-[#ffffff] mb-3">
+                  {srv.title}
                 </h3>
-                <p className="font-['Inter'] text-sm text-[#94A3B8] leading-relaxed mb-6">
-                  {service.description}
+                <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] leading-relaxed mb-6">
+                  {srv.description}
                 </p>
               </div>
 
-              {/* Deliverables Box */}
-              <div className="pt-4 border-t border-white/[0.06] bg-[#0a0e16]/50 rounded-xl p-3.5 flex flex-col gap-2.5">
-                <span className="font-['Plus_Jakarta_Sans'] text-[11px] font-bold text-[#dfe2ee] uppercase tracking-wider">
-                  Key Deliverables
+              <div>
+                <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#94A3B8] uppercase tracking-wider block mb-3">
+                  Core Engineering Deliverables:
                 </span>
-                <ul className="flex flex-col gap-2 font-['Inter'] text-xs text-[#94A3B8]">
-                  {service.deliverables.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle2
-                        className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${service.iconColor}`}
-                      />
-                      <span>{item}</span>
+                <ul className="flex flex-col gap-2.5">
+                  {srv.deliverables.map((del, dIdx) => (
+                    <li
+                      key={dIdx}
+                      className="flex items-center gap-2.5 text-xs sm:text-sm font-['Inter'] text-[#ffffff]"
+                    >
+                      <CheckCircle2 className={`w-4 h-4 shrink-0 ${srv.iconColor}`} />
+                      <span>{del}</span>
                     </li>
                   ))}
                 </ul>
@@ -158,21 +157,21 @@ export default function Services() {
       </div>
 
       {/* Pricing Menu Callout Banner */}
-      <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-[#1c2028]/80 border border-white/[0.08] backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+      <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-[#171c29]/85 border border-white/[0.08] backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div className="flex flex-col text-center sm:text-left">
-          <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#00FF87] uppercase tracking-wider mb-1">
+          <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733] uppercase tracking-wider mb-1">
             Transparent Pricing &amp; Retainer Packages
           </span>
-          <h4 className="font-['Space_Grotesk'] text-xl font-bold text-[#dfe2ee]">
+          <h4 className="font-['Space_Grotesk'] text-xl font-bold text-[#ffffff]">
             Looking for specific audit fees, AI systems, or monthly retainer models?
           </h4>
-          <p className="font-['Inter'] text-xs sm:text-sm text-[#94A3B8] mt-1">
+          <p className="font-['Inter'] text-xs sm:text-sm text-[#dcdfe3] mt-1">
             Review the full service rate card with instant 10% deposit or full Razorpay checkout.
           </p>
         </div>
         <a
           href="/pricing"
-          className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#003919] bg-[#00FF87] emerald-glow hover:brightness-110 active:scale-95 transition-all"
+          className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#ffffff] bg-[#ee8733] orange-glow hover:bg-[#ff9747] active:scale-95 transition-all"
         >
           <span>View Pricing &amp; Packages</span>
           <ArrowRight className="w-4 h-4 stroke-[2.5]" />
