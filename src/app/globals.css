@@ -1,30 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Navy & Dark Palette (Style A) */
-  --color-obsidian: #0c0e14;
-  --color-obsidian-lowest: #08090d;
-  --color-navy: #171c29;
-  --color-navy-dark: #0c0e14;
-  --color-navy-deep: #08090d;
-  --color-surface-low: #121622;
-  --color-surface: #171c29;
-  --color-surface-card: #1c2232;
-  --color-surface-high: #232a3d;
-  --color-surface-highest: #2e364d;
+  /* Warm Cream & White Palette */
+  --color-cream-bg: #fcf2e8;
+  --color-cream-subtle: #f7ece0;
+  --color-cream-muted: #f0e2d3;
+  --color-card-white: #ffffff;
+  
+  /* Text & Contrast */
+  --color-text-black: #0c0a09;
+  --color-text-dark: #1c1917;
+  --color-text-muted: #57534e;
+  --color-text-subtle: #78716c;
 
-  /* Signature Burnt Orange Accent (Brand Signature #ee8733) */
+  /* Signature Brand Orange (#ee8733 / #ff5500) */
   --color-orange-accent: #ee8733;
-  --color-orange-hover: #ff9747;
-  --color-orange-dim: #ed8532;
-  --color-orange-deep: #3f1e15;
-  --color-orange-dark: #2a150e;
-  --color-orange-light: #ffd4b2;
+  --color-orange-vibrant: #ff5500;
+  --color-orange-hover: #ff6a1a;
+  --color-orange-deep: #c86314;
+  --color-orange-light: #fff2e6;
+  --color-orange-border: rgba(238, 135, 51, 0.3);
 
-  /* Tech & Trust Accents */
-  --color-blue-accent: #367cf1;
-  --color-blue-dim: #2563eb;
-  --color-amber-accent: #f59e0b;
+  /* Tech Blue Accent */
+  --color-blue-accent: #2563eb;
 
   /* Typography */
   --font-display: 'Space Grotesk', 'Poppins', system-ui, -apple-system, sans-serif;
@@ -34,14 +32,14 @@
 }
 
 :root {
-  --background: #0c0e14;
-  --foreground: #ffffff;
-  color-scheme: dark;
+  --background: #fcf2e8;
+  --foreground: #0c0a09;
+  color-scheme: light;
 }
 
 body {
-  background-color: #0c0e14;
-  color: #ffffff;
+  background-color: #fcf2e8;
+  color: #0c0a09;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
@@ -53,50 +51,49 @@ body {
 
 /* Glass panel helpers */
 .glass-panel {
-  background: rgba(23, 28, 41, 0.75);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(238, 135, 51, 0.16);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
 .glass-panel-interactive {
-  background: rgba(23, 28, 41, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(238, 135, 51, 0.16);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-interactive:hover {
-  background: rgba(28, 34, 50, 0.88);
+  background: #ffffff;
   border-color: rgba(238, 135, 51, 0.45);
-  box-shadow: 0 0 30px rgba(238, 135, 51, 0.18), inset 0 0 12px rgba(238, 135, 51, 0.06);
+  box-shadow: 0 14px 40px rgba(238, 135, 51, 0.12), inset 0 0 12px rgba(238, 135, 51, 0.03);
+  transform: translateY(-2px);
 }
 
 /* Signature Orange Glow */
 .orange-glow {
-  box-shadow: 0 0 24px rgba(238, 135, 51, 0.4);
+  box-shadow: 0 8px 25px rgba(238, 135, 51, 0.35);
 }
 
 .orange-glow:hover {
-  box-shadow: 0 0 38px rgba(238, 135, 51, 0.65);
+  box-shadow: 0 12px 35px rgba(238, 135, 51, 0.5);
 }
 
 .orange-glow-sm {
-  box-shadow: 0 0 14px rgba(238, 135, 51, 0.28);
+  box-shadow: 0 4px 15px rgba(238, 135, 51, 0.25);
 }
 
-.blue-glow {
-  box-shadow: 0 0 24px rgba(54, 124, 241, 0.35);
-}
-
-/* Legacy emerald-glow backward compatibility mapping to orange-glow */
+/* Backward compatibility mapping */
 .emerald-glow {
-  box-shadow: 0 0 24px rgba(238, 135, 51, 0.4);
+  box-shadow: 0 8px 25px rgba(238, 135, 51, 0.35);
 }
 
 .emerald-glow:hover {
-  box-shadow: 0 0 38px rgba(238, 135, 51, 0.65);
+  box-shadow: 0 12px 35px rgba(238, 135, 51, 0.5);
 }
 
 /* Custom subtle scrollbar */
@@ -105,11 +102,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0c0e14;
+  background: #fcf2e8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1c2232;
+  background: #e7d7c7;
   border-radius: 9999px;
 }
 

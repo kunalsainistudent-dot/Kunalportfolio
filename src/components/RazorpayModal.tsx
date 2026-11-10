@@ -184,7 +184,7 @@ export default function RazorpayModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/85 backdrop-blur-md"
+          className="fixed inset-0 bg-black/60 backdrop-blur-md"
         />
 
         {/* Modal Card */}
@@ -193,28 +193,28 @@ export default function RazorpayModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3 }}
-          className="relative w-full max-w-2xl bg-[#0c0e14] border border-white/10 rounded-3xl shadow-[0_24px_80px_rgba(0,0,0,0.9)] overflow-hidden z-10 my-8"
+          className="relative w-full max-w-2xl bg-[#ffffff] border border-[#eaddcf] rounded-3xl shadow-[0_24px_80px_rgba(0,0,0,0.2)] overflow-hidden z-10 my-8"
         >
-          {/* Subtle Top Accent Glow */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#ee8733] to-transparent opacity-80" />
+          {/* Top Accent Orange Border */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#ee8733]" />
 
           {/* Modal Header */}
-          <div className="p-6 sm:p-8 pb-4 border-b border-white/[0.08] flex items-start justify-between gap-4">
+          <div className="p-6 sm:p-8 pb-4 border-b border-[#eaddcf] flex items-start justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#3f1e15]/70 border border-[#ee8733]/30 text-[#ffd4b2] text-[11px] font-['Plus_Jakarta_Sans'] font-bold uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#fff2e6] border border-[#ee8733]/40 text-[#ee8733] text-[11px] font-['Plus_Jakarta_Sans'] font-bold uppercase tracking-wider mb-2">
                 <Sparkles className="w-3 h-3 text-[#ee8733]" />
                 Service Checkout &amp; Booking
               </div>
-              <h2 className="font-['Space_Grotesk'] text-2xl sm:text-3xl font-bold text-[#ffffff]">
+              <h2 className="font-['Space_Grotesk'] text-2xl sm:text-3xl font-extrabold text-[#0c0a09]">
                 {service.title}
               </h2>
-              <p className="font-['Inter'] text-xs sm:text-sm text-[#94A3B8] mt-1">
+              <p className="font-['Inter'] text-xs sm:text-sm text-[#57534e] mt-1">
                 Typical Scope: {service.typicalEngagement}
               </p>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg bg-[#171c29] text-[#94A3B8] hover:text-white border border-white/10 transition-colors"
+              className="p-2 rounded-xl bg-[#fcf2e8] text-[#57534e] hover:text-[#0c0a09] border border-[#eaddcf] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -225,38 +225,38 @@ export default function RazorpayModal({
             {successData ? (
               /* Success Confirmation View */
               <div className="py-6 flex flex-col items-center text-center gap-5">
-                <div className="w-16 h-16 rounded-full bg-[#ee8733]/20 border border-[#ee8733]/40 flex items-center justify-center text-[#ee8733] shadow-[0_0_30px_rgba(238,135,51,0.4)]">
+                <div className="w-16 h-16 rounded-full bg-[#fff2e6] border border-[#ee8733]/40 flex items-center justify-center text-[#ee8733] shadow-[0_0_30px_rgba(238,135,51,0.25)]">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
                 <div>
-                  <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-[#ffffff]">
+                  <h3 className="font-['Space_Grotesk'] text-2xl font-extrabold text-[#0c0a09]">
                     Booking Initiated &amp; Confirmed!
                   </h3>
-                  <p className="font-['Inter'] text-sm text-[#dcdfe3] mt-2 max-w-md mx-auto">
+                  <p className="font-['Inter'] text-sm text-[#57534e] mt-2 max-w-md mx-auto">
                     Your {successData.type === "deposit" ? "10% booking deposit" : "full payment"} has been received. Kunal will review your business scope and reach out within 24 hours.
                   </p>
                 </div>
 
                 {/* Receipt Card */}
-                <div className="w-full p-5 rounded-xl bg-[#0c0e14]/90 border border-white/[0.08] text-left flex flex-col gap-3 font-['Inter'] text-xs text-[#94A3B8]">
-                  <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
+                <div className="w-full p-6 rounded-2xl bg-[#fcf2e8] border border-[#eaddcf] text-left flex flex-col gap-3 font-['Inter'] text-xs text-[#57534e]">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#eaddcf]">
                     <span>Transaction Reference</span>
-                    <span className="font-mono text-[#ffffff] font-medium">{successData.paymentId}</span>
+                    <span className="font-mono text-[#0c0a09] font-bold">{successData.paymentId}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Service Booked</span>
-                    <span className="text-[#ffffff] font-semibold">{service.title}</span>
+                    <span className="text-[#0c0a09] font-bold">{service.title}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Amount Paid Today</span>
-                    <span className="text-[#ee8733] font-bold text-sm">
+                    <span className="text-[#ee8733] font-extrabold text-base">
                       ₹{successData.amount.toLocaleString("en-IN")}
                     </span>
                   </div>
                   {successData.type === "deposit" && balanceRemaining > 0 && (
-                    <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+                    <div className="flex items-center justify-between pt-2 border-t border-[#eaddcf]">
                       <span>Remaining Balance (upon delivery/milestone)</span>
-                      <span className="text-[#ffffff]">₹{balanceRemaining.toLocaleString("en-IN")}</span>
+                      <span className="text-[#0c0a09] font-bold">₹{balanceRemaining.toLocaleString("en-IN")}</span>
                     </div>
                   )}
                 </div>
@@ -267,7 +267,7 @@ export default function RazorpayModal({
                     href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:flex-1 py-3 px-5 rounded-full font-['Plus_Jakarta_Sans'] font-bold text-xs sm:text-sm text-[#ffffff] bg-[#ee8733] orange-glow flex items-center justify-center gap-2 hover:bg-[#ff9747] transition-all"
+                    className="w-full sm:flex-1 py-3.5 px-5 rounded-full font-['Plus_Jakarta_Sans'] font-bold text-xs sm:text-sm text-[#ffffff] bg-[#ee8733] orange-glow flex items-center justify-center gap-2 hover:bg-[#ff6a1a] transition-all"
                   >
                     <Calendar className="w-4 h-4 stroke-[2.5]" />
                     <span>Book Kickoff Call</span>
@@ -278,14 +278,14 @@ export default function RazorpayModal({
                     )}%20via%20your%20website%20(Ref:%20${successData.paymentId}).`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:flex-1 py-3 px-5 rounded-full font-['Plus_Jakarta_Sans'] font-semibold text-xs sm:text-sm text-[#dcdfe3] bg-[#171c29] hover:bg-[#202738] border border-white/10 flex items-center justify-center gap-2 transition-all"
+                    className="w-full sm:flex-1 py-3.5 px-5 rounded-full font-['Plus_Jakarta_Sans'] font-bold text-xs sm:text-sm text-[#0c0a09] bg-[#ffffff] hover:bg-[#fcf2e8] border-2 border-[#0c0a09] flex items-center justify-center gap-2 transition-all"
                   >
                     <span>Connect on WhatsApp</span>
                     <ExternalLink className="w-4 h-4" />
                   </a>
                   <button
                     onClick={onClose}
-                    className="w-full sm:w-auto py-3 px-6 rounded-full font-['Plus_Jakarta_Sans'] font-semibold text-xs text-[#94A3B8] hover:text-white bg-[#0c0e14] hover:bg-[#171c29] border border-white/10 transition-colors"
+                    className="w-full sm:w-auto py-3.5 px-6 rounded-full font-['Plus_Jakarta_Sans'] font-bold text-xs text-[#57534e] hover:text-[#0c0a09] bg-[#fcf2e8] border border-[#eaddcf] transition-colors"
                   >
                     Close
                   </button>
@@ -296,7 +296,7 @@ export default function RazorpayModal({
               <form onSubmit={handlePayment} className="flex flex-col gap-6">
                 {/* 10% Deposit vs Full Payment Switch */}
                 <div className="flex flex-col gap-2.5">
-                  <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider text-[#ffffff]">
+                  <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider text-[#0c0a09]">
                     Select Payment Commitment
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -304,32 +304,32 @@ export default function RazorpayModal({
                     <button
                       type="button"
                       onClick={() => setPaymentType("deposit")}
-                      className={`p-4 rounded-xl border text-left flex flex-col justify-between transition-all ${
+                      className={`p-5 rounded-2xl border-2 text-left flex flex-col justify-between transition-all ${
                         paymentType === "deposit"
-                          ? "bg-[#171c29] border-[#ee8733] shadow-[0_0_20px_rgba(238,135,51,0.2)] ring-1 ring-[#ee8733]"
-                          : "bg-[#0c0e14]/60 border-white/[0.08] hover:border-white/20"
+                          ? "bg-[#fff2e6] border-[#ee8733] shadow-sm"
+                          : "bg-[#ffffff] border-[#eaddcf] hover:border-[#ee8733]/40"
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ffffff]">
+                        <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09]">
                           10% Booking Deposit
                         </span>
                         <span
                           className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                             paymentType === "deposit"
                               ? "border-[#ee8733] bg-[#ee8733]"
-                              : "border-white/30"
+                              : "border-[#eaddcf]"
                           }`}
                         >
                           {paymentType === "deposit" && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0c0e14]" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#ffffff]" />
                           )}
                         </span>
                       </div>
-                      <div className="font-['Space_Grotesk'] text-2xl font-bold text-[#ee8733] my-1">
+                      <div className="font-['Space_Grotesk'] text-2xl font-extrabold text-[#ee8733] my-1">
                         ₹{depositFee.toLocaleString("en-IN")}
                       </div>
-                      <p className="font-['Inter'] text-[11px] text-[#94A3B8]">
+                      <p className="font-['Inter'] text-[11px] text-[#57534e]">
                         Lock in calendar availability &amp; initialize kickoff. Balance billed upon delivery.
                       </p>
                     </button>
@@ -338,32 +338,32 @@ export default function RazorpayModal({
                     <button
                       type="button"
                       onClick={() => setPaymentType("full")}
-                      className={`p-4 rounded-xl border text-left flex flex-col justify-between transition-all ${
+                      className={`p-5 rounded-2xl border-2 text-left flex flex-col justify-between transition-all ${
                         paymentType === "full"
-                          ? "bg-[#171c29] border-[#ee8733] shadow-[0_0_20px_rgba(238,135,51,0.2)] ring-1 ring-[#ee8733]"
-                          : "bg-[#0c0e14]/60 border-white/[0.08] hover:border-white/20"
+                          ? "bg-[#fff2e6] border-[#ee8733] shadow-sm"
+                          : "bg-[#ffffff] border-[#eaddcf] hover:border-[#ee8733]/40"
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ffffff]">
+                        <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09]">
                           100% Full Payment
                         </span>
                         <span
                           className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                             paymentType === "full"
                               ? "border-[#ee8733] bg-[#ee8733]"
-                              : "border-white/30"
+                              : "border-[#eaddcf]"
                           }`}
                         >
                           {paymentType === "full" && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0c0e14]" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#ffffff]" />
                           )}
                         </span>
                       </div>
-                      <div className="font-['Space_Grotesk'] text-2xl font-bold text-[#ffffff] my-1">
+                      <div className="font-['Space_Grotesk'] text-2xl font-extrabold text-[#0c0a09] my-1">
                         ₹{totalFee.toLocaleString("en-IN")}
                       </div>
-                      <p className="font-['Inter'] text-[11px] text-[#94A3B8]">
+                      <p className="font-['Inter'] text-[11px] text-[#57534e]">
                         Complete one-time settlement upfront for immediate priority execution.
                       </p>
                     </button>
@@ -372,13 +372,13 @@ export default function RazorpayModal({
 
                 {/* Client Contact Inputs */}
                 <div className="flex flex-col gap-4 pt-2">
-                  <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider text-[#ffffff]">
+                  <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider text-[#0c0a09]">
                     Client &amp; Company Telemetry
                   </span>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5">
-                      <label className="font-['Plus_Jakarta_Sans'] text-xs text-[#94A3B8]">
+                      <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#57534e]">
                         Your Full Name *
                       </label>
                       <input
@@ -388,12 +388,12 @@ export default function RazorpayModal({
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Alex Rivera"
-                        className="h-11 px-3.5 rounded-xl bg-[#0c0e14]/90 text-[#ffffff] text-xs font-['Inter'] border border-white/[0.08] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
+                        className="h-11 px-4 rounded-xl bg-[#fcf2e8] text-[#0c0a09] text-xs font-['Inter'] font-medium border border-[#eaddcf] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label className="font-['Plus_Jakarta_Sans'] text-xs text-[#94A3B8]">
+                      <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#57534e]">
                         Business Email *
                       </label>
                       <input
@@ -403,12 +403,12 @@ export default function RazorpayModal({
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="alex@company.com"
-                        className="h-11 px-3.5 rounded-xl bg-[#0c0e14]/90 text-[#ffffff] text-xs font-['Inter'] border border-white/[0.08] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
+                        className="h-11 px-4 rounded-xl bg-[#fcf2e8] text-[#0c0a09] text-xs font-['Inter'] font-medium border border-[#eaddcf] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label className="font-['Plus_Jakarta_Sans'] text-xs text-[#94A3B8]">
+                      <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#57534e]">
                         Phone / WhatsApp Number *
                       </label>
                       <input
@@ -418,12 +418,12 @@ export default function RazorpayModal({
                         value={formData.phone}
                         onChange={handleInputChange}
                         placeholder="+91 98765 43210"
-                        className="h-11 px-3.5 rounded-xl bg-[#0c0e14]/90 text-[#ffffff] text-xs font-['Inter'] border border-white/[0.08] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
+                        className="h-11 px-4 rounded-xl bg-[#fcf2e8] text-[#0c0a09] text-xs font-['Inter'] font-medium border border-[#eaddcf] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label className="font-['Plus_Jakarta_Sans'] text-xs text-[#94A3B8]">
+                      <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#57534e]">
                         Company / Brand Name
                       </label>
                       <input
@@ -432,13 +432,13 @@ export default function RazorpayModal({
                         value={formData.company}
                         onChange={handleInputChange}
                         placeholder="Rivera Growth Co"
-                        className="h-11 px-3.5 rounded-xl bg-[#0c0e14]/90 text-[#ffffff] text-xs font-['Inter'] border border-white/[0.08] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
+                        className="h-11 px-4 rounded-xl bg-[#fcf2e8] text-[#0c0a09] text-xs font-['Inter'] font-medium border border-[#eaddcf] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <label className="font-['Plus_Jakarta_Sans'] text-xs text-[#94A3B8]">
+                    <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#57534e]">
                       Website or Ad Account Link (Optional)
                     </label>
                     <input
@@ -447,31 +447,31 @@ export default function RazorpayModal({
                       value={formData.website}
                       onChange={handleInputChange}
                       placeholder="https://yourbrand.com"
-                      className="h-11 px-3.5 rounded-xl bg-[#0c0e14]/90 text-[#ffffff] text-xs font-['Inter'] border border-white/[0.08] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
+                      className="h-11 px-4 rounded-xl bg-[#fcf2e8] text-[#0c0a09] text-xs font-['Inter'] font-medium border border-[#eaddcf] focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] focus:outline-none"
                     />
                   </div>
                 </div>
 
                 {/* Price Breakdown Banner */}
-                <div className="p-4 rounded-xl bg-[#0c0e14]/90 border border-white/[0.08] flex items-center justify-between">
+                <div className="p-5 rounded-2xl bg-[#fcf2e8] border border-[#eaddcf] flex items-center justify-between">
                   <div className="flex flex-col">
-                    <span className="font-['Plus_Jakarta_Sans'] text-xs text-[#94A3B8]">
+                    <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#57534e]">
                       Total Payable Today:
                     </span>
-                    <span className="font-['Inter'] text-[11px] text-[#64748b]">
+                    <span className="font-['Inter'] text-[11px] text-[#78716c]">
                       {paymentType === "deposit"
                         ? `10% deposit of ₹${totalFee.toLocaleString("en-IN")}`
                         : "100% upfront settlement"}
                     </span>
                   </div>
-                  <div className="font-['Space_Grotesk'] text-3xl font-bold text-[#ee8733]">
+                  <div className="font-['Space_Grotesk'] text-3xl font-extrabold text-[#ee8733]">
                     ₹{dueToday.toLocaleString("en-IN")}
                   </div>
                 </div>
 
                 {error && (
-                  <div className="p-3.5 rounded-xl bg-red-950/40 border border-red-500/30 text-red-200 text-xs flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                  <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
                     <span>{error}</span>
                   </div>
                 )}
@@ -480,7 +480,7 @@ export default function RazorpayModal({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-4 rounded-full font-['Plus_Jakarta_Sans'] font-bold text-sm text-[#ffffff] bg-[#ee8733] orange-glow flex items-center justify-center gap-2 hover:bg-[#ff9747] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed transition-all shadow-xl"
+                  className="w-full py-4 rounded-full font-['Plus_Jakarta_Sans'] font-bold text-sm text-[#ffffff] bg-[#ee8733] orange-glow flex items-center justify-center gap-2 hover:bg-[#ff6a1a] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed transition-all shadow-md"
                 >
                   {loading ? (
                     <>
@@ -498,7 +498,7 @@ export default function RazorpayModal({
                 </button>
 
                 {/* Trust Footer */}
-                <div className="flex items-center justify-center gap-2 text-[#94A3B8] font-['Inter'] text-[11px] text-center">
+                <div className="flex items-center justify-center gap-2 text-[#78716c] font-['Inter'] text-[11px] text-center font-medium">
                   <ShieldCheck className="w-4 h-4 text-[#ee8733] shrink-0" />
                   <span>
                     Secured by Razorpay • 256-Bit SSL Encrypted • Instant Booking Invoice
