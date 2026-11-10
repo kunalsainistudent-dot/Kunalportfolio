@@ -12,7 +12,15 @@ import {
   CheckCircle2,
   BarChart,
   Layers,
+  ArrowRight,
+  ShieldCheck,
+  Quote,
 } from "lucide-react";
+
+/**
+ * Ported & adapted from Page UI (components/landing/showcase/LandingShowcase.tsx & LandingProductProblemSolution.tsx)
+ * Inherits brand tokens: #fcf2e8 canvas, #ffffff cards, #ee8733 accents, bold black/orange font sequence.
+ */
 
 const CASE_STUDIES = [
   {
@@ -22,12 +30,14 @@ const CASE_STUDIES = [
     icon: Building,
     accentColor: "text-[#ee8733]",
     badgeBg: "bg-[#fff2e6] text-[#ee8733] border-[#ee8733]/30",
-    headline: "$14.2M High-Intent Pipeline Generated with Autonomous Qualification",
+    headline: "$14.2M High-Intent Pipeline Generated with Autonomous WhatsApp Qualification",
     summary:
       "Engineered a closed-loop Meta CAPI acquisition pipeline paired with an autonomous 24/7 conversational AI agent that pre-qualified luxury property buyers before booking in-person viewings.",
+    problem: "Previous agency generated high lead volume, but 80%+ were unqualified tire-kickers wasting broker time with low viewing attendance.",
+    solution: "Deployed Meta CAPI offline conversion signals back to Meta, paired with an autonomous WhatsApp SDR that filtered buyers by liquidity.",
     metrics: [
       { label: "Pipeline Value", value: "$14.2M", sub: "Verified sales contracts" },
-      { label: "Blended ROAS", value: "6.2x", sub: "Across Meta & Paid Search" },
+      { label: "Blended ROAS", value: "6.2x", sub: "Meta CAPI & Paid Search" },
       { label: "Tour Booking CPA", value: "-54%", sub: "Drop in acquisition cost" },
     ],
     strategy: [
@@ -36,17 +46,20 @@ const CASE_STUDIES = [
       "Autonomous WhatsApp AI bot verifying proof of liquidity and auto-scheduling tours",
     ],
     techStack: ["Meta Ads", "Google Search", "Meta CAPI", "WhatsApp AI Agent", "HubSpot CRM"],
+    quote: "Kunal eliminated tire-kickers entirely. Our sales directors only meet buyers who have passed algorithmic liquidity checks.",
   },
   {
     id: "ecommerce",
-    category: "D2C Apparel & Wellness",
+    category: "D2C Apparel & Lifestyle",
     client: "Aura Botanicals & Lifestyle",
     icon: ShoppingBag,
     accentColor: "text-[#0c0a09]",
     badgeBg: "bg-[#fcf2e8] text-[#0c0a09] border-[#eaddcf]",
     headline: "Scaled Revenue from $180k/mo to $650k/mo at 4.4x Blended ROAS",
     summary:
-      "Implemented a rapid-iteration creative testing matrix rooted in behavioral consumer psychology, unlocking viral UGC angles and sub-second checkout conversion rates.",
+      "Implemented a rapid-iteration creative testing matrix rooted in behavioral consumer psychology, unlocking viral UGC angles and sub-second mobile checkout conversion rates.",
+    problem: "Ad fatigue throttled scale at $180k/mo. Increasing ad spend compressed ROAS below breakeven due to repetitive creative hooks.",
+    solution: "Built a 30-angle weekly UGC testing matrix targeting 4 distinct psychological buyer archetypes with 1-click mobile upsells.",
     metrics: [
       { label: "Monthly Revenue", value: "3.6x", sub: "$180k/mo to $650k/mo" },
       { label: "Blended ROAS", value: "4.4x", sub: "Maintained at 4x spend" },
@@ -58,6 +71,7 @@ const CASE_STUDIES = [
       "Full mobile CRO redesign with friction-free one-click upsells",
     ],
     techStack: ["Meta Ads", "TikTok Ads", "Shopify Plus", "Creative Matrix", "Klaviyo"],
+    quote: "Our blended ROAS held steady at 4.4x even as we quadrupled monthly spend. The creative matrix framework solved our ad fatigue.",
   },
   {
     id: "b2b-saas",
@@ -69,6 +83,8 @@ const CASE_STUDIES = [
     headline: "-68% Demo CPA with High-Intent Commercial Search Dominance",
     summary:
       "Captured high-intent search traffic targeting enterprise engineering leaders and converted prospects through personalized, interactive pipeline funnels.",
+    problem: "Enterprise demo costs averaged $320/demo with high drop-off on static lead capture forms.",
+    solution: "Redesigned acquisition around high-intent long-tail keywords and replaced static forms with an interactive ROI calculator.",
     metrics: [
       { label: "Demo CPA Reduction", value: "-68%", sub: "From $320 to $102/demo" },
       { label: "Booked Demos", value: "380+", sub: "Direct calendar meetings" },
@@ -80,6 +96,7 @@ const CASE_STUDIES = [
       "Automated lead enrichment & routing directly into executive SDR calendars",
     ],
     techStack: ["Google Ads", "YouTube Ads", "Next.js Lander", "Clearbit", "Salesforce"],
+    quote: "Kunal cut our cost per qualified enterprise demo by more than two-thirds within the first 60 days of taking over paid search.",
   },
 ];
 
@@ -91,49 +108,44 @@ export default function CaseStudies() {
   return (
     <section
       id="case-studies"
-      className="relative w-full max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-28"
+      className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-20 lg:py-28"
     >
-      {/* Background ambient light */}
+      {/* Background ambient lighting */}
       <div className="pointer-events-none absolute top-1/2 left-1/3 w-[600px] h-[300px] bg-[#ee8733]/8 blur-[140px] rounded-full -z-10" />
 
       {/* Header with Black + Orange Font Pair */}
-      <div className="flex flex-col items-center text-center mb-14">
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffffff] text-[#0c0a09] border-2 border-[#ee8733] font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-          <BarChart className="w-3.5 h-3.5 text-[#ee8733]" />
-          Verified Empirical Case Studies
+      <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffffff] border-2 border-[#ee8733] text-[#0c0a09] font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+          <Sparkles className="w-3.5 h-3.5 text-[#ee8733]" />
+          <span>PROVEN IMPACT &bull; AUDITED PORTFOLIO RESULTS</span>
         </div>
-        <h2 className="font-['Space_Grotesk'] text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#0c0a09] tracking-tight max-w-3xl leading-[1.1]">
-          ALGORITHMIC EXECUTION. <br />
-          <span className="text-[#ee8733]">PREDICTABLE RETURNS.</span>
+        <h2 className="font-['Space_Grotesk'] text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#0c0a09] tracking-tight leading-[1.1]">
+          SYSTEMIC BREAKTHROUGHS. <br />
+          <span className="text-[#ee8733]">VERIFIED ATTRIBUTION.</span>
         </h2>
-        <p className="font-['Inter'] text-base sm:text-lg font-medium text-[#57534e] max-w-2xl mt-4 leading-relaxed">
-          Detailed breakdowns of real client engagements where empirical attribution and AI systems drove non-linear scale.
+        <p className="font-['Inter'] text-sm sm:text-base text-[#57534e] max-w-2xl mt-4">
+          Real client engagements with deterministic attribution, rigorous unit economics, and custom AI systems.
         </p>
-
-        {/* Tab Selectors */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-10">
-          {CASE_STUDIES.map((study, idx) => {
-            const TabIcon = study.icon;
-            const isActive = activeTab === idx;
-            return (
-              <button
-                key={study.id}
-                onClick={() => setActiveTab(idx)}
-                className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold transition-all duration-200 border ${
-                  isActive
-                    ? "bg-[#ee8733] text-white border-[#ee8733] shadow-[0_4px_16px_rgba(238,135,51,0.3)]"
-                    : "bg-[#ffffff] text-[#0c0a09] border-[#eaddcf] hover:border-[#ee8733] hover:text-[#ee8733]"
-                }`}
-              >
-                <TabIcon className="w-4 h-4" />
-                <span>{study.category}</span>
-              </button>
-            );
-          })}
-        </div>
       </div>
 
-      {/* Active Case Study Detail Card */}
+      {/* Case Study Vertical Selector Tabs (Page UI Showcase Tabs) */}
+      <div className="flex flex-wrap items-center justify-center gap-2.5 mb-10">
+        {CASE_STUDIES.map((study, idx) => (
+          <button
+            key={study.id}
+            onClick={() => setActiveTab(idx)}
+            className={`px-5 py-2.5 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold transition-all duration-200 border flex items-center gap-2 ${
+              activeTab === idx
+                ? "bg-[#ee8733] text-white border-[#ee8733] orange-glow-sm shadow-xs"
+                : "bg-[#ffffff] text-[#57534e] border-[#eaddcf] hover:border-[#ee8733] hover:text-[#0c0a09]"
+            }`}
+          >
+            <span>{study.category}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Active Case Study Showcase (Page UI Showcase Layout: Split 2 Columns) */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeStudy.id}
@@ -141,105 +153,120 @@ export default function CaseStudies() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.35 }}
-          className="p-8 sm:p-12 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-md relative overflow-hidden"
+          className="p-8 sm:p-12 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-xs"
         >
-          {/* Top Accent Line */}
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#ee8733]" />
-
-          {/* Header Row */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#eaddcf]">
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-[#fff2e6] text-[#ee8733]">
-                <Icon className="w-6 h-6" />
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            {/* Left Column: Problem, Solution & Metrics */}
+            <div className="lg:col-span-7 flex flex-col justify-between">
               <div>
-                <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider text-[#78716c] block">
-                  Client Partner
-                </span>
-                <span className="font-['Space_Grotesk'] text-lg font-bold text-[#0c0a09]">
-                  {activeStudy.client}
-                </span>
-              </div>
-            </div>
-            <span
-              className={`px-3.5 py-1 rounded-full text-xs font-['Plus_Jakarta_Sans'] font-bold uppercase tracking-wider border ${activeStudy.badgeBg}`}
-            >
-              {activeStudy.category}
-            </span>
-          </div>
-
-          {/* Headline & Summary */}
-          <div className="my-8">
-            <h3 className="font-['Space_Grotesk'] text-2xl sm:text-3xl font-extrabold text-[#0c0a09] tracking-tight leading-tight mb-4">
-              {activeStudy.headline}
-            </h3>
-            <p className="font-['Inter'] text-sm sm:text-base text-[#57534e] leading-relaxed max-w-4xl">
-              {activeStudy.summary}
-            </p>
-          </div>
-
-          {/* 3 Metrics Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
-            {activeStudy.metrics.map((m) => (
-              <div
-                key={m.label}
-                className="p-6 rounded-2xl bg-[#fcf2e8] border border-[#eaddcf] flex flex-col gap-1 shadow-xs"
-              >
-                <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#78716c] uppercase tracking-wider">
-                  {m.label}
-                </span>
-                <div
-                  className={`font-['Space_Grotesk'] text-3xl sm:text-4xl font-extrabold ${m.label === "Blended ROAS" ? "text-[#0c0a09]" : "text-[#ee8733]"} tracking-tight mt-1`}
-                >
-                  {m.value}
-                </div>
-                <span className="font-['Inter'] text-xs font-medium text-[#57534e] mt-1">{m.sub}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Strategy Checklist */}
-          <div className="mb-10">
-            <span className="font-['Plus_Jakarta_Sans'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-4">
-              ENGINEERED IMPLEMENTATION TACTICS
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {activeStudy.strategy.map((strat, sIdx) => (
-                <div
-                  key={sIdx}
-                  className="p-5 rounded-2xl bg-[#fcf2e8]/70 border border-[#eaddcf] flex items-start gap-3"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-[#ee8733] mt-0.5 shrink-0" />
-                  <span className="font-['Inter'] text-xs sm:text-sm font-semibold text-[#1c1917] leading-relaxed">
-                    {strat}
+                {/* Meta Badge */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 rounded-xl bg-[#fcf2e8] text-[#ee8733] border border-[#eaddcf]">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className={`px-3 py-1 rounded-full text-xs font-['Plus_Jakarta_Sans'] font-bold uppercase tracking-wider border ${activeStudy.badgeBg}`}>
+                    {activeStudy.client}
                   </span>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Tech Stack & CTA */}
-          <div className="pt-6 border-t border-[#eaddcf] flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#78716c] uppercase mr-2">
-                Tech Stack:
-              </span>
-              {activeStudy.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1 rounded-full bg-[#fcf2e8] border border-[#eaddcf] text-xs font-['Plus_Jakarta_Sans'] font-bold text-[#0c0a09]"
-                >
-                  {tech}
-                </span>
-              ))}
+                <h3 className="font-['Space_Grotesk'] text-2xl sm:text-3xl font-extrabold text-[#0c0a09] leading-tight mb-4">
+                  {activeStudy.headline}
+                </h3>
+
+                <p className="font-['Inter'] text-sm sm:text-base text-[#57534e] leading-relaxed mb-6">
+                  {activeStudy.summary}
+                </p>
+
+                {/* Problem vs Solution Callout */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  <div className="p-4 rounded-2xl bg-[#fcf2e8]/70 border border-[#eaddcf]">
+                    <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#c86314] uppercase block mb-1">
+                      The Bottleneck
+                    </span>
+                    <p className="font-['Inter'] text-xs text-[#57534e] leading-relaxed">
+                      {activeStudy.problem}
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-[#fff2e6] border border-[#ee8733]/30">
+                    <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733] uppercase block mb-1">
+                      Engineering Solution
+                    </span>
+                    <p className="font-['Inter'] text-xs text-[#1c1917] font-medium leading-relaxed">
+                      {activeStudy.solution}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3 Metric Badges */}
+              <div className="grid grid-cols-3 gap-3 pt-6 border-t border-[#eaddcf]">
+                {activeStudy.metrics.map((metric, mIdx) => (
+                  <div key={mIdx} className="p-3.5 rounded-2xl bg-[#fcf2e8]/50 border border-[#eaddcf] text-center">
+                    <div className="font-['Space_Grotesk'] text-2xl sm:text-3xl font-extrabold text-[#ee8733] leading-none mb-1">
+                      {metric.value}
+                    </div>
+                    <div className="font-['Plus_Jakarta_Sans'] text-[11px] font-bold text-[#0c0a09]">
+                      {metric.label}
+                    </div>
+                    <div className="font-['Inter'] text-[10px] text-[#78716c] mt-0.5">
+                      {metric.sub}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <a
-              href="#audit-form"
-              className="inline-flex items-center gap-1.5 font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold text-[#ee8733] hover:text-[#ff6a1a] transition-colors"
-            >
-              <span>Replicate these results for your brand</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
+
+            {/* Right Column: Execution Checklist, Tech Stack & Testimonial */}
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-6 bg-[#fcf2e8]/40 p-6 sm:p-8 rounded-2xl border border-[#eaddcf]">
+              <div>
+                <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733] uppercase tracking-wider block mb-3">
+                  Architectural Execution Plan:
+                </span>
+                <ul className="space-y-3 font-['Inter'] text-xs text-[#1c1917] font-semibold mb-6">
+                  {activeStudy.strategy.map((item, sIdx) => (
+                    <li key={sIdx} className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-[#ee8733] shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#78716c] uppercase tracking-wider block mb-2">
+                  Integrated Stack:
+                </span>
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  {activeStudy.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 rounded-lg bg-[#ffffff] border border-[#eaddcf] text-[11px] font-['Plus_Jakarta_Sans'] font-semibold text-[#57534e]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Testimonial Quote */}
+              <div className="p-4 rounded-xl bg-[#ffffff] border border-[#eaddcf] shadow-2xs">
+                <Quote className="w-4 h-4 text-[#ee8733] mb-1.5" />
+                <p className="font-['Inter'] text-xs text-[#57534e] italic mb-2 leading-relaxed">
+                  &ldquo;{activeStudy.quote}&rdquo;
+                </p>
+                <span className="font-['Plus_Jakarta_Sans'] text-[11px] font-bold text-[#0c0a09]">
+                  Verified Client Executive &bull; {activeStudy.category}
+                </span>
+              </div>
+
+              <a
+                href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ffffff] bg-[#ee8733] orange-glow hover:bg-[#ff6a1a] transition-all shadow-sm"
+              >
+                <span>Book Similar Strategy Architecture</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>

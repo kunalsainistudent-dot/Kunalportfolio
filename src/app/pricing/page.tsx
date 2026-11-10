@@ -14,6 +14,7 @@ import {
 } from "@/data/pricingData";
 import {
   CheckCircle2,
+  CircleCheckBig,
   Sparkles,
   ArrowRight,
   ShieldCheck,
@@ -26,7 +27,15 @@ import {
   TrendingUp,
   Clock,
   ArrowUpRight,
+  Zap,
 } from "lucide-react";
+
+/**
+ * Ported & adapted from:
+ * 1. Launch UI (components/sections/pricing/default.tsx & components/ui/pricing-column.tsx)
+ * 2. awesome-landing-pages (pricing comparisons & layout architecture)
+ * Inherits brand tokens: #fcf2e8 canvas, #ffffff cards, #ee8733 accents, bold black/orange font sequence.
+ */
 
 const CATEGORIES = [
   { id: "all", label: "All Services" },
@@ -59,6 +68,7 @@ export default function PricingPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [paymentPreference, setPaymentPreference] = useState<"deposit" | "full">("deposit");
 
   const filteredServices =
     selectedCategory === "all"
@@ -81,17 +91,17 @@ export default function PricingPage() {
 
       <Navbar />
 
-      <main className="relative z-10 w-full flex-1 pt-28 sm:pt-36 pb-24">
-        {/* HERO SECTION */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-12 text-center mb-16">
+      <main className="relative z-10 w-full flex-1 pt-24 sm:pt-32 pb-24">
+        {/* HERO SECTION (Launch UI Section Pattern) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffffff] border-2 border-[#ee8733] text-[#0c0a09] font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-5 shadow-sm"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffffff] border-2 border-[#ee8733] text-[#0c0a09] font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-5 shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#ee8733]" />
-            OFFICIAL RATE CARD &amp; SERVICE CATALOG
+            OFFICIAL RATE CARD &bull; TRANSPARENT PRICING
           </motion.div>
 
           <motion.h1
@@ -118,36 +128,62 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 py-3 px-8 rounded-full bg-[#ffffff] border border-[#eaddcf] shadow-sm text-xs font-['Plus_Jakarta_Sans'] text-[#0c0a09] font-bold"
+            className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 py-3 px-6 sm:px-8 rounded-full bg-[#ffffff] border border-[#eaddcf] shadow-xs text-xs font-['Plus_Jakarta_Sans'] text-[#0c0a09] font-bold"
           >
             <div className="flex items-center gap-1.5">
               <CreditCard className="w-4 h-4 text-[#ee8733]" />
               <span>Razorpay Verified Gateway</span>
             </div>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ee8733]"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ee8733] hidden sm:inline-block"></span>
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-[#ee8733]" />
-              <span>Book with 10% Deposit or 100% Upfront</span>
+              <span>10% Token Deposit Option Available</span>
             </div>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ee8733]"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ee8733] hidden sm:inline-block"></span>
             <div className="flex items-center gap-1.5">
               <Clock className="w-4 h-4 text-[#ee8733]" />
-              <span>Direct Founder Engagement</span>
+              <span>Direct Founder Execution</span>
             </div>
           </motion.div>
         </section>
 
+        {/* PRICING TOGGLE BANNER (Launch UI / awesome-landing-pages pattern) */}
+        <section className="max-w-md mx-auto px-4 mb-10">
+          <div className="p-1.5 rounded-full bg-[#ffffff] border border-[#eaddcf] shadow-xs flex items-center justify-between text-xs font-['Plus_Jakarta_Sans'] font-bold">
+            <button
+              onClick={() => setPaymentPreference("deposit")}
+              className={`flex-1 py-2 px-3 rounded-full transition-all duration-200 ${
+                paymentPreference === "deposit"
+                  ? "bg-[#ee8733] text-white orange-glow-sm shadow-xs"
+                  : "text-[#57534e] hover:text-[#0c0a09]"
+              }`}
+            >
+              10% Token Deposit
+            </button>
+            <button
+              onClick={() => setPaymentPreference("full")}
+              className={`flex-1 py-2 px-3 rounded-full transition-all duration-200 ${
+                paymentPreference === "full"
+                  ? "bg-[#ee8733] text-white orange-glow-sm shadow-xs"
+                  : "text-[#57534e] hover:text-[#0c0a09]"
+              }`}
+            >
+              100% Full Upfront
+            </button>
+          </div>
+        </section>
+
         {/* CATEGORY SELECTOR TABS */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-12 mb-12">
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-12">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-6 py-2.5 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold transition-all duration-200 border ${
+                className={`px-5 py-2 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold transition-all duration-200 border ${
                   selectedCategory === cat.id
-                    ? "bg-[#ee8733] text-white border-[#ee8733] shadow-[0_4px_16px_rgba(238,135,51,0.3)]"
-                    : "bg-[#ffffff] text-[#0c0a09] border-[#eaddcf] hover:border-[#ee8733] hover:text-[#ee8733]"
+                    ? "bg-[#0c0a09] text-white border-[#0c0a09] shadow-xs"
+                    : "bg-[#ffffff] text-[#57534e] border-[#eaddcf] hover:border-[#ee8733] hover:text-[#0c0a09]"
                 }`}
               >
                 {cat.label}
@@ -156,11 +192,13 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* SERVICES CATALOG GRID */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-12 mb-24">
+        {/* SERVICES CATALOG GRID (Ported from Launch UI PricingColumn) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredServices.map((service, idx) => {
               const depositAmount = Math.round(service.basePrice * 0.1);
+              const isPopular =
+                service.id.includes("retainer") || service.id.includes("forensic");
 
               return (
                 <motion.div
@@ -168,10 +206,25 @@ export default function PricingPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="p-8 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-sm flex flex-col justify-between hover:border-[#ee8733] hover:shadow-[0_16px_40px_rgba(238,135,51,0.12)] transition-all duration-300 relative group overflow-hidden"
+                  className={`p-7 sm:p-8 rounded-3xl bg-[#ffffff] border shadow-xs flex flex-col justify-between transition-all duration-300 relative group overflow-hidden ${
+                    isPopular
+                      ? "border-2 border-[#ee8733] shadow-[0_16px_40px_rgba(238,135,51,0.14)]"
+                      : "border-[#eaddcf] hover:border-[#ee8733] hover:shadow-[0_16px_40px_rgba(238,135,51,0.1)]"
+                  }`}
                 >
-                  {/* Top accent line */}
-                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#ee8733] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {/* Popular plan indicator (Launch UI glow-brand style) */}
+                  {isPopular && (
+                    <div className="absolute top-0 right-0 bg-[#ee8733] text-white text-[10px] font-['Plus_Jakarta_Sans'] font-extrabold uppercase tracking-wider py-1 px-4 rounded-bl-xl shadow-xs">
+                      Popular for Scale
+                    </div>
+                  )}
+
+                  {/* Top hairline border */}
+                  <div
+                    className={`absolute top-0 left-0 right-0 h-[3px] bg-[#ee8733] transition-opacity ${
+                      isPopular ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                    }`}
+                  />
 
                   <div>
                     {/* Header: Title & Category */}
@@ -185,32 +238,36 @@ export default function PricingPage() {
                       {service.title}
                     </h3>
 
-                    {/* Price Tag */}
+                    {/* Price Tag with Deposit calculation */}
                     <div className="mb-4 pb-4 border-b border-[#eaddcf]">
                       <div className="flex items-baseline gap-2">
                         <span className="font-['Space_Grotesk'] text-3xl font-extrabold text-[#0c0a09]">
-                          {service.priceDisplay}
+                          {paymentPreference === "deposit"
+                            ? `₹${depositAmount.toLocaleString("en-IN")}`
+                            : service.priceDisplay}
                         </span>
-                        {service.billingPeriod && service.billingPeriod !== "one-time" && (
-                          <span className="font-['Inter'] text-sm text-[#78716c] font-semibold">
-                            {service.billingPeriod}
-                          </span>
-                        )}
+                        <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733]">
+                          {paymentPreference === "deposit"
+                            ? "(10% Kickoff Deposit)"
+                            : service.billingPeriod && service.billingPeriod !== "one-time"
+                            ? service.billingPeriod
+                            : "(Full Price)"}
+                        </span>
                       </div>
-                      <p className="font-['Inter'] text-xs text-[#57534e] mt-1.5 leading-relaxed">
+                      <p className="font-['Inter'] text-xs text-[#57534e] mt-2 leading-relaxed">
                         {service.description}
                       </p>
                     </div>
 
-                    {/* Deliverables List */}
+                    {/* Deliverables List (CircleCheckBig pattern from Launch UI) */}
                     <div className="mb-6">
                       <span className="font-['Plus_Jakarta_Sans'] text-[11px] font-bold text-[#0c0a09] uppercase tracking-wider block mb-2.5">
-                        Scope &amp; Deliverables:
+                        Deliverables &amp; Scope:
                       </span>
                       <ul className="flex flex-col gap-2 font-['Inter'] text-xs text-[#1c1917] font-semibold">
                         {service.deliverables.map((del, dIdx) => (
                           <li key={dIdx} className="flex items-start gap-2">
-                            <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-[#ee8733] shrink-0" />
+                            <CircleCheckBig className="w-3.5 h-3.5 mt-0.5 text-[#ee8733] shrink-0" />
                             <span>{del}</span>
                           </li>
                         ))}
@@ -221,9 +278,9 @@ export default function PricingPage() {
                   {/* Booking Action Footer */}
                   <div className="pt-4 border-t border-[#eaddcf] flex flex-col gap-3">
                     <div className="flex items-center justify-between text-xs font-['Inter'] text-[#57534e] font-semibold">
-                      <span>10% Kickoff Deposit:</span>
-                      <span className="font-bold text-[#ee8733] text-sm">
-                        ₹{depositAmount.toLocaleString("en-IN")}
+                      <span>Full Scope Investment:</span>
+                      <span className="font-bold text-[#0c0a09]">
+                        {service.priceDisplay}
                       </span>
                     </div>
 
@@ -231,7 +288,11 @@ export default function PricingPage() {
                       onClick={() => handleOpenBooking(service)}
                       className="w-full py-3.5 px-4 rounded-xl font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold text-[#ffffff] bg-[#ee8733] orange-glow flex items-center justify-center gap-2 hover:bg-[#ff6a1a] active:scale-[0.98] transition-all shadow-sm"
                     >
-                      <span>Book Service / Pay Deposit</span>
+                      <span>
+                        {paymentPreference === "deposit"
+                          ? `Book with 10% Deposit (₹${depositAmount.toLocaleString("en-IN")})`
+                          : `Book Full Service (${service.priceDisplay})`}
+                      </span>
                       <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                     </button>
                   </div>
@@ -242,8 +303,8 @@ export default function PricingPage() {
         </section>
 
         {/* 3-PHASE CLIENT ENGAGEMENT MODEL */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-12 mb-24">
-          <div className="p-8 sm:p-12 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-sm">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
+          <div className="p-8 sm:p-12 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-xs">
             <div className="max-w-3xl mb-10">
               <span className="font-['Plus_Jakarta_Sans'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest mb-2 block">
                 STRATEGIC ROADMAP
@@ -260,7 +321,7 @@ export default function PricingPage() {
               {THREE_PHASE_MODEL.map((phase, pIdx) => (
                 <div
                   key={phase.phase}
-                  className="p-6 rounded-2xl bg-[#fcf2e8] border border-[#eaddcf] flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-[#fcf2e8]/60 border border-[#eaddcf] flex flex-col justify-between"
                 >
                   <div>
                     <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733] tracking-wider block mb-2">
@@ -287,7 +348,7 @@ export default function PricingPage() {
         </section>
 
         {/* AD SPEND FRAMEWORK TABLE */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-12 mb-24">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="font-['Plus_Jakarta_Sans'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-2">
               RETAINER GUIDELINES
@@ -300,7 +361,7 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-[#eaddcf] bg-[#ffffff] shadow-sm">
+          <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-[#eaddcf] bg-[#ffffff] shadow-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-left font-['Inter'] text-xs sm:text-sm">
                 <thead>
@@ -329,8 +390,8 @@ export default function PricingPage() {
         </section>
 
         {/* TERMS & COMMERCIAL NOTES */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-12 mb-24">
-          <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-sm">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
+          <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-xs">
             <div className="flex items-center gap-2 mb-4">
               <FileText className="w-4 h-4 text-[#ee8733]" />
               <h3 className="font-['Space_Grotesk'] text-lg font-bold text-[#0c0a09]">
@@ -340,7 +401,7 @@ export default function PricingPage() {
             <ul className="flex flex-col gap-2.5 font-['Inter'] text-xs text-[#57534e] leading-relaxed">
               {COMMERCIAL_TERMS.map((term, tIdx) => (
                 <li key={tIdx} className="flex items-start gap-2">
-                  <span className="text-[#ee8733] font-bold">•</span>
+                  <span className="text-[#ee8733] font-bold">&bull;</span>
                   <span>{term}</span>
                 </li>
               ))}
@@ -349,7 +410,7 @@ export default function PricingPage() {
         </section>
 
         {/* FREQUENTLY ASKED QUESTIONS */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-12 mb-16">
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 mb-16">
           <div className="text-center mb-10">
             <span className="font-['Plus_Jakarta_Sans'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-2">
               COMMON INQUIRIES

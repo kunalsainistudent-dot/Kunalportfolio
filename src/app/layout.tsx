@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import MobileStickyCTA from "@/components/MobileStickyCTA";
 
 export const metadata: Metadata = {
   title: "Kunal M Saini — Performance Marketing Specialist & AI Systems Expert",
@@ -44,8 +45,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#fcf2e8] text-[#0c0a09] font-sans antialiased min-h-screen selection:bg-[#ee8733] selection:text-[#ffffff] relative overflow-x-hidden">
+      <body className="bg-[#fcf2e8] text-[#0c0a09] font-sans antialiased min-h-screen selection:bg-[#ee8733] selection:text-[#ffffff] relative overflow-x-hidden pb-14 md:pb-0">
         {children}
+        <MobileStickyCTA />
       </body>
     </html>
   );
