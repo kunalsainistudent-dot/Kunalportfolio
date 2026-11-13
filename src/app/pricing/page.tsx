@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RazorpayModal from "@/components/RazorpayModal";
+import PulseCard from "@/components/PulseCard";
+import ScrollReveal from "@/components/ScrollReveal";
 import {
   PRICING_SERVICES,
   THREE_PHASE_MODEL,
@@ -13,28 +14,24 @@ import {
   ServiceItem,
 } from "@/data/pricingData";
 import {
-  CheckCircle2,
   CircleCheckBig,
   Sparkles,
   ArrowRight,
   ShieldCheck,
   CreditCard,
-  Layers,
   HelpCircle,
   FileText,
-  Search,
-  Cpu,
-  TrendingUp,
   Clock,
-  ArrowUpRight,
   Zap,
 } from "lucide-react";
 
 /**
- * Ported & adapted from:
- * 1. Launch UI (components/sections/pricing/default.tsx & components/ui/pricing-column.tsx)
- * 2. awesome-landing-pages (pricing comparisons & layout architecture)
- * Inherits brand tokens: #171c29 canvas, #0c0e14 cards, #ee8733 accents, #ffffff/#dcdfe3 typography.
+ * Pulse Three-Tier Pricing Architecture
+ * - Feature cards with 6px lift, 40% accent border, cursor-following glow (18% orange)
+ * - Three-tier pricing with middle tier highlighted and tagged
+ * - Responsive: Under 960px cards go to 1 column
+ * - Pure brand.css variables (0 hardcoded hex colors)
+ * - Retains all services, pricing, rate card, 10% token deposit, and Razorpay details
  */
 
 const CATEGORIES = [
@@ -81,81 +78,69 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#171c29] text-[#ffffff] flex flex-col overflow-x-hidden">
-      {/* Background Ambient Luminescence */}
+    <div className="relative min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] flex flex-col overflow-x-hidden">
+      {/* Background Ambient Luminescence at 18% opacity */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-[#ee8733]/10 blur-[150px]" />
-        <div className="absolute top-1/3 -right-40 w-96 h-96 rounded-full bg-[#ee8733]/8 blur-[140px]" />
-        <div className="absolute bottom-1/4 -left-40 w-96 h-96 rounded-full bg-[#0c0e14]/50 blur-[160px]" />
+        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-[var(--color-accent)] opacity-[0.18] blur-[150px]" />
+        <div className="absolute top-1/3 -right-40 w-96 h-96 rounded-full bg-[var(--color-accent)] opacity-[0.10] blur-[140px]" />
+        <div className="absolute bottom-1/4 -left-40 w-96 h-96 rounded-full bg-[var(--color-card-surface)] opacity-[0.50] blur-[160px]" />
       </div>
 
       <Navbar />
 
-      <main className="relative z-10 w-full flex-1 pt-24 sm:pt-32 pb-24">
-        {/* HERO SECTION (Launch UI Section Pattern) */}
+      <main className="relative z-10 w-full flex-1 pt-12 sm:pt-20 pb-24">
+        {/* HERO SECTION */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center mb-12 sm:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#0c0e14] border-2 border-[#ee8733] text-[#ffffff] font-['Inter'] text-xs font-bold uppercase tracking-wider mb-5 shadow-xs"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#ee8733]" />
-            OFFICIAL RATE CARD &bull; TRANSPARENT PRICING
-          </motion.div>
+          <ScrollReveal>
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--color-card-surface)] border-2 border-[var(--color-accent)] text-[var(--color-text)] font-['Inter'] text-xs font-bold uppercase tracking-wider mb-5 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--color-accent)]" />
+              OFFICIAL RATE CARD &bull; TRANSPARENT PRICING
+            </div>
+          </ScrollReveal>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-['Inter'] text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#ffffff] max-w-4xl mx-auto leading-[1.08] mb-6"
-          >
-            EMPIRICAL ACQUISITION. <br className="hidden sm:inline" />
-            <span className="text-[#ee8733]">ZERO FLUFF PRICING.</span>
-          </motion.h1>
+          <ScrollReveal stagger={1}>
+            <h1 className="font-['Inter'] text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[var(--color-text)] max-w-4xl mx-auto leading-[1.08] mb-6">
+              EMPIRICAL ACQUISITION. <br className="hidden sm:inline" />
+              <span className="text-[var(--color-accent)]">ZERO FLUFF PRICING.</span>
+            </h1>
+          </ScrollReveal>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-['Inter'] text-base sm:text-lg font-medium text-[#dcdfe3] max-w-2xl mx-auto leading-relaxed mb-8"
-          >
-            From forensic funnel leak diagnosis and autonomous AI lead systems to high-scale paid media management across Meta and Google Ads.
-          </motion.p>
+          <ScrollReveal stagger={2}>
+            <p className="font-['Inter'] text-base sm:text-lg font-medium text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed mb-8">
+              From forensic funnel leak diagnosis and autonomous AI lead systems to high-scale paid media management across Meta and Google Ads.
+            </p>
+          </ScrollReveal>
 
           {/* Payment Guarantee Notice */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 py-3 px-6 sm:px-8 rounded-full bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs text-xs font-['Inter'] text-[#ffffff] font-bold"
-          >
-            <div className="flex items-center gap-1.5">
-              <CreditCard className="w-4 h-4 text-[#ee8733]" />
-              <span>Razorpay Verified Gateway</span>
+          <ScrollReveal stagger={3}>
+            <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 py-3 px-6 sm:px-8 rounded-full bg-[var(--color-card-surface)] border border-[var(--color-border)] shadow-xs text-xs font-['Inter'] text-[var(--color-text)] font-bold">
+              <div className="flex items-center gap-1.5">
+                <CreditCard className="w-4 h-4 text-[var(--color-accent)]" />
+                <span>Razorpay Verified Gateway</span>
+              </div>
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] hidden sm:inline-block"></span>
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-[var(--color-accent)]" />
+                <span>10% Token Deposit Option Available</span>
+              </div>
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] hidden sm:inline-block"></span>
+              <div className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-[var(--color-accent)]" />
+                <span>Direct Founder Execution</span>
+              </div>
             </div>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ee8733] hidden sm:inline-block"></span>
-            <div className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-[#ee8733]" />
-              <span>10% Token Deposit Option Available</span>
-            </div>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ee8733] hidden sm:inline-block"></span>
-            <div className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-[#ee8733]" />
-              <span>Direct Founder Execution</span>
-            </div>
-          </motion.div>
+          </ScrollReveal>
         </section>
 
-        {/* PRICING TOGGLE BANNER (Launch UI / awesome-landing-pages pattern) */}
+        {/* PRICING TOGGLE BANNER */}
         <section className="max-w-md mx-auto px-4 mb-10">
-          <div className="p-1.5 rounded-full bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs flex items-center justify-between text-xs font-['Inter'] font-bold">
+          <div className="p-1.5 rounded-full bg-[var(--color-card-surface)] border border-[var(--color-border)] shadow-xs flex items-center justify-between text-xs font-['Inter'] font-bold">
             <button
               onClick={() => setPaymentPreference("deposit")}
               className={`flex-1 py-2 px-3 rounded-full transition-all duration-200 ${
                 paymentPreference === "deposit"
-                  ? "bg-[#ee8733] text-[#171c29] orange-glow-sm shadow-xs"
-                  : "text-[#dcdfe3] hover:text-[#ffffff]"
+                  ? "bg-[var(--color-accent)] text-[var(--color-bg)] shadow-[0_4px_16px_var(--color-accent-glow)]"
+                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)]"
               }`}
             >
               10% Token Deposit
@@ -164,8 +149,8 @@ export default function PricingPage() {
               onClick={() => setPaymentPreference("full")}
               className={`flex-1 py-2 px-3 rounded-full transition-all duration-200 ${
                 paymentPreference === "full"
-                  ? "bg-[#ee8733] text-[#171c29] orange-glow-sm shadow-xs"
-                  : "text-[#dcdfe3] hover:text-[#ffffff]"
+                  ? "bg-[var(--color-accent)] text-[var(--color-bg)] shadow-[0_4px_16px_var(--color-accent-glow)]"
+                  : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)]"
               }`}
             >
               100% Full Upfront
@@ -182,8 +167,8 @@ export default function PricingPage() {
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-5 py-2 rounded-full font-['Inter'] text-xs sm:text-sm font-bold transition-all duration-200 border ${
                   selectedCategory === cat.id
-                    ? "bg-[#ee8733] text-[#171c29] border-[#ee8733] shadow-xs"
-                    : "bg-[#0c0e14] text-[#dcdfe3] border-[rgba(220,223,227,0.12)] hover:border-[#ee8733] hover:text-[#ffffff]"
+                    ? "bg-[var(--color-accent)] text-[var(--color-bg)] border-[var(--color-accent)] shadow-xs"
+                    : "bg-[var(--color-card-surface)] text-[var(--color-text-secondary)] border-[var(--color-border)] hover:border-[var(--color-accent-border-40)] hover:text-[var(--color-text)]"
                 }`}
               >
                 {cat.label}
@@ -192,111 +177,107 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* SERVICES CATALOG GRID (Ported from Launch UI PricingColumn) */}
+        {/* THREE-TIER PRICING SERVICES CATALOG (Pulse Three-Tier Specification)
+            - Responsive: under 960px 1 column, min-[960px]:grid-cols-3
+            - Middle tier highlighted and tagged
+            - Feature card 6px lift, 40% accent border, cursor-following glow
+        */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 min-[960px]:grid-cols-3 gap-6">
             {filteredServices.map((service, idx) => {
               const depositAmount = Math.round(service.basePrice * 0.1);
-              const isPopular =
-                service.id.includes("retainer") || service.id.includes("forensic");
+              // Middle tier or explicit highlight gets highlighted and tagged per Pulse spec
+              const isMiddleTier =
+                service.highlight ||
+                service.badge !== undefined ||
+                service.id.includes("growth") ||
+                service.id.includes("xray");
 
               return (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className={`p-7 sm:p-8 rounded-3xl bg-[#0c0e14] border shadow-xs flex flex-col justify-between transition-all duration-300 relative group overflow-hidden ${
-                    isPopular
-                      ? "border-2 border-[#ee8733] shadow-[0_16px_40px_rgba(238,135,51,0.14)]"
-                      : "border-[rgba(220,223,227,0.12)] hover:border-[#ee8733] hover:shadow-[0_16px_40px_rgba(238,135,51,0.1)]"
-                  }`}
-                >
-                  {/* Popular plan indicator (Launch UI glow-brand style) */}
-                  {isPopular && (
-                    <div className="absolute top-0 right-0 bg-[#ee8733] text-[#171c29] text-[10px] font-['Inter'] font-extrabold uppercase tracking-wider py-1 px-4 rounded-bl-xl shadow-xs">
-                      Popular for Scale
-                    </div>
-                  )}
+                <ScrollReveal key={service.id} stagger={((idx % 3) + 1) as 1 | 2 | 3}>
+                  <PulseCard
+                    highlight={isMiddleTier}
+                    className="p-7 sm:p-8 flex flex-col justify-between h-full relative"
+                  >
+                    {/* Middle Tier Tag / Badge (Pulse Three-Tier Specification) */}
+                    {isMiddleTier && (
+                      <div className="absolute top-0 right-0 bg-[var(--color-accent)] text-[var(--color-bg)] text-[10px] font-['Inter'] font-extrabold uppercase tracking-wider py-1 px-4 rounded-bl-xl shadow-xs">
+                        {service.badge || "Most Popular Plan"}
+                      </div>
+                    )}
 
-                  {/* Top hairline border */}
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-[3px] bg-[#ee8733] transition-opacity ${
-                      isPopular ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                    }`}
-                  />
-
-                  <div>
-                    {/* Header: Title & Category */}
-                    <div className="flex items-start justify-between gap-3 mb-4">
-                      <span className="font-['Inter'] text-[11px] font-bold text-[#ffffff] uppercase tracking-wider bg-[#171c29] px-3 py-1 rounded-full border border-[#ee8733]/40">
-                        {service.typicalEngagement || "Standard Engagement"}
-                      </span>
-                    </div>
-
-                    <h3 className="font-['Inter'] text-xl font-bold text-[#ffffff] mb-2 leading-tight">
-                      {service.title}
-                    </h3>
-
-                    {/* Price Tag with Deposit calculation */}
-                    <div className="mb-4 pb-4 border-b border-[rgba(220,223,227,0.12)]">
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-['Inter'] text-3xl font-extrabold text-[#ffffff]">
-                          {paymentPreference === "deposit"
-                            ? `₹${depositAmount.toLocaleString("en-IN")}`
-                            : service.priceDisplay}
-                        </span>
-                        <span className="font-['Inter'] text-xs font-bold text-[#ee8733]">
-                          {paymentPreference === "deposit"
-                            ? "(10% Kickoff Deposit)"
-                            : service.billingPeriod && service.billingPeriod !== "one-time"
-                            ? service.billingPeriod
-                            : "(Full Price)"}
+                    <div>
+                      {/* Header: Title & Category */}
+                      <div className="flex items-start justify-between gap-3 mb-4">
+                        <span className="font-['Inter'] text-[11px] font-bold text-[var(--color-text)] uppercase tracking-wider bg-[var(--color-bg)] px-3 py-1 rounded-full border border-[var(--color-accent-border-40)]">
+                          {service.typicalEngagement || "Standard Engagement"}
                         </span>
                       </div>
-                      <p className="font-['Inter'] text-xs text-[#dcdfe3] mt-2 leading-relaxed">
-                        {service.description}
-                      </p>
+
+                      <h3 className="font-['Inter'] text-xl font-bold text-[var(--color-text)] mb-2 leading-tight">
+                        {service.title}
+                      </h3>
+
+                      {/* Price Tag with Deposit calculation */}
+                      <div className="mb-4 pb-4 border-b border-[var(--color-border)]">
+                        <div className="flex items-baseline gap-2">
+                          <span className="font-['Inter'] text-3xl font-extrabold text-[var(--color-text)]">
+                            {paymentPreference === "deposit"
+                              ? `₹${depositAmount.toLocaleString("en-IN")}`
+                              : service.priceDisplay}
+                          </span>
+                          <span className="font-['Inter'] text-xs font-bold text-[var(--color-accent)]">
+                            {paymentPreference === "deposit"
+                              ? "(10% Kickoff Deposit)"
+                              : service.billingPeriod && service.billingPeriod !== "one-time"
+                              ? service.billingPeriod
+                              : "(Full Price)"}
+                          </span>
+                        </div>
+                        <p className="font-['Inter'] text-xs text-[var(--color-text-secondary)] mt-2 leading-relaxed">
+                          {service.description}
+                        </p>
+                      </div>
+
+                      {/* Deliverables List */}
+                      <div className="mb-6">
+                        <span className="font-['Inter'] text-[11px] font-bold text-[var(--color-text)] uppercase tracking-wider block mb-2.5">
+                          Deliverables &amp; Scope:
+                        </span>
+                        <ul className="flex flex-col gap-2 font-['Inter'] text-xs text-[var(--color-text-secondary)] font-semibold">
+                          {service.deliverables.map((del, dIdx) => (
+                            <li key={dIdx} className="flex items-start gap-2">
+                              <CircleCheckBig className="w-3.5 h-3.5 mt-0.5 text-[var(--color-accent)] shrink-0" />
+                              <span>{del}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
 
-                    {/* Deliverables List (CircleCheckBig pattern from Launch UI) */}
-                    <div className="mb-6">
-                      <span className="font-['Inter'] text-[11px] font-bold text-[#ffffff] uppercase tracking-wider block mb-2.5">
-                        Deliverables &amp; Scope:
-                      </span>
-                      <ul className="flex flex-col gap-2 font-['Inter'] text-xs text-[#dcdfe3] font-semibold">
-                        {service.deliverables.map((del, dIdx) => (
-                          <li key={dIdx} className="flex items-start gap-2">
-                            <CircleCheckBig className="w-3.5 h-3.5 mt-0.5 text-[#ee8733] shrink-0" />
-                            <span>{del}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                    {/* Booking Action Footer */}
+                    <div className="pt-4 border-t border-[var(--color-border)] flex flex-col gap-3">
+                      <div className="flex items-center justify-between text-xs font-['Inter'] text-[var(--color-text-secondary)] font-semibold">
+                        <span>Full Scope Investment:</span>
+                        <span className="font-bold text-[var(--color-text)]">
+                          {service.priceDisplay}
+                        </span>
+                      </div>
 
-                  {/* Booking Action Footer */}
-                  <div className="pt-4 border-t border-[rgba(220,223,227,0.12)] flex flex-col gap-3">
-                    <div className="flex items-center justify-between text-xs font-['Inter'] text-[#dcdfe3] font-semibold">
-                      <span>Full Scope Investment:</span>
-                      <span className="font-bold text-[#ffffff]">
-                        {service.priceDisplay}
-                      </span>
+                      <button
+                        onClick={() => handleOpenBooking(service)}
+                        className="w-full py-3.5 px-4 rounded-xl font-['Inter'] text-xs sm:text-sm font-bold text-[var(--color-bg)] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] active:scale-[0.98] transition-all shadow-[0_4px_16px_var(--color-accent-glow)] flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        <span>
+                          {paymentPreference === "deposit"
+                            ? `Book with 10% Deposit (₹${depositAmount.toLocaleString("en-IN")})`
+                            : `Book Full Service (${service.priceDisplay})`}
+                        </span>
+                        <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                      </button>
                     </div>
-
-                    <button
-                      onClick={() => handleOpenBooking(service)}
-                      className="w-full py-3.5 px-4 rounded-xl font-['Inter'] text-xs sm:text-sm font-bold text-[#171c29] bg-[#ee8733] orange-glow flex items-center justify-center gap-2 hover:bg-[#ed8532] active:scale-[0.98] transition-all shadow-sm"
-                    >
-                      <span>
-                        {paymentPreference === "deposit"
-                          ? `Book with 10% Deposit (₹${depositAmount.toLocaleString("en-IN")})`
-                          : `Book Full Service (${service.priceDisplay})`}
-                      </span>
-                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-                    </button>
-                  </div>
-                </motion.div>
+                  </PulseCard>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -304,140 +285,145 @@ export default function PricingPage() {
 
         {/* 3-PHASE CLIENT ENGAGEMENT MODEL */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
-          <div className="p-8 sm:p-12 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs">
-            <div className="max-w-3xl mb-10">
-              <span className="font-['Inter'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest mb-2 block">
-                STRATEGIC ROADMAP
-              </span>
-              <h2 className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[#ffffff]">
-                Recommended 3-Phase Client Engagement Model
-              </h2>
-              <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] mt-2">
-                For brands that need end-to-end compounding growth rather than isolated ad execution.
-              </p>
-            </div>
+          <ScrollReveal>
+            <div className="p-8 sm:p-12 rounded-3xl bg-[var(--color-card-surface)] border border-[var(--color-border)] shadow-xs">
+              <div className="max-w-3xl mb-10">
+                <span className="font-['Inter'] text-xs font-extrabold text-[var(--color-accent)] uppercase tracking-widest mb-2 block">
+                  STRATEGIC ROADMAP
+                </span>
+                <h2 className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[var(--color-text)]">
+                  Recommended 3-Phase Client Engagement Model
+                </h2>
+                <p className="font-['Inter'] text-sm sm:text-base text-[var(--color-text-secondary)] mt-2">
+                  For brands that need end-to-end compounding growth rather than isolated ad execution.
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {THREE_PHASE_MODEL.map((phase, pIdx) => (
-                <div
-                  key={phase.phase}
-                  className="p-6 rounded-2xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] flex flex-col justify-between"
-                >
-                  <div>
-                    <span className="font-['Inter'] text-xs font-bold text-[#ee8733] tracking-wider block mb-2">
-                      {phase.phase}
-                    </span>
-                    <h3 className="font-['Inter'] text-xl font-bold text-[#ffffff] mb-1">
-                      {phase.title}
-                    </h3>
-                    <div className="font-['Inter'] text-lg font-extrabold text-[#ee8733] mb-3">
-                      {phase.fee}
+              <div className="grid grid-cols-1 min-[960px]:grid-cols-3 gap-6">
+                {THREE_PHASE_MODEL.map((phase, pIdx) => (
+                  <div
+                    key={phase.phase}
+                    className="p-6 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)] flex flex-col justify-between"
+                  >
+                    <div>
+                      <span className="font-['Inter'] text-xs font-bold text-[var(--color-accent)] tracking-wider block mb-2">
+                        {phase.phase}
+                      </span>
+                      <h3 className="font-['Inter'] text-xl font-bold text-[var(--color-text)] mb-1">
+                        {phase.title}
+                      </h3>
+                      <div className="font-['Inter'] text-lg font-extrabold text-[var(--color-accent)] mb-3">
+                        {phase.fee}
+                      </div>
+                      <p className="font-['Inter'] text-xs text-[var(--color-text-secondary)] leading-relaxed">
+                        {phase.description}
+                      </p>
                     </div>
-                    <p className="font-['Inter'] text-xs text-[#dcdfe3] leading-relaxed">
-                      {phase.description}
-                    </p>
+                    <div className="mt-5 pt-3 border-t border-[var(--color-border)] flex items-center gap-1.5 text-[11px] text-[var(--color-accent)] font-bold">
+                      <span>Phase Step 0{pIdx + 1}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </div>
                   </div>
-                  <div className="mt-5 pt-3 border-t border-[rgba(220,223,227,0.12)] flex items-center gap-1.5 text-[11px] text-[#ee8733] font-bold">
-                    <span>Phase Step 0{pIdx + 1}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </section>
 
         {/* AD SPEND FRAMEWORK TABLE */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="font-['Inter'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-2">
-              RETAINER GUIDELINES
-            </span>
-            <h2 className="font-['Inter'] text-3xl font-extrabold text-[#ffffff]">
-              Suggested Ad-Spend Framework
-            </h2>
-            <p className="font-['Inter'] text-xs sm:text-sm text-[#dcdfe3] mt-2">
-              For smaller accounts, a fixed monthly retainer is recommended rather than a pure percentage-of-spend. For larger accounts, a hybrid structure applies.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-[rgba(220,223,227,0.12)] bg-[#0c0e14] shadow-xs">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left font-['Inter'] text-xs sm:text-sm">
-                <thead>
-                  <tr className="bg-[#171c29] border-b border-[rgba(220,223,227,0.12)] text-[#ffffff] font-['Inter'] uppercase tracking-wider text-xs font-bold">
-                    <th className="py-4 px-6">Approx. Monthly Ad Spend</th>
-                    <th className="py-4 px-6">Suggested Management Model</th>
-                    <th className="py-4 px-6">Strategic Focus</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[rgba(220,223,227,0.12)] text-[#dcdfe3]">
-                  {AD_SPEND_FRAMEWORK.map((row) => (
-                    <tr key={row.spendTier} className="hover:bg-[#171c29]/50 transition-colors">
-                      <td className="py-4 px-6 font-bold text-[#ffffff]">
-                        {row.spendTier}
-                      </td>
-                      <td className="py-4 px-6 text-[#ee8733] font-bold">
-                        {row.model}
-                      </td>
-                      <td className="py-4 px-6 font-medium">{row.suitability}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <ScrollReveal>
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="font-['Inter'] text-xs font-extrabold text-[var(--color-accent)] uppercase tracking-widest block mb-2">
+                RETAINER GUIDELINES
+              </span>
+              <h2 className="font-['Inter'] text-3xl font-extrabold text-[var(--color-text)]">
+                Suggested Ad-Spend Framework
+              </h2>
+              <p className="font-['Inter'] text-xs sm:text-sm text-[var(--color-text-secondary)] mt-2">
+                For smaller accounts, a fixed monthly retainer is recommended rather than a pure percentage-of-spend. For larger accounts, a hybrid structure applies.
+              </p>
             </div>
-          </div>
+
+            <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-card-surface)] shadow-xs">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left font-['Inter'] text-xs sm:text-sm">
+                  <thead>
+                    <tr className="bg-[var(--color-bg)] border-b border-[var(--color-border)] text-[var(--color-text)] font-['Inter'] uppercase tracking-wider text-xs font-bold">
+                      <th className="py-4 px-6">Approx. Monthly Ad Spend</th>
+                      <th className="py-4 px-6">Suggested Management Model</th>
+                      <th className="py-4 px-6">Strategic Focus</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--color-border)] text-[var(--color-text-secondary)]">
+                    {AD_SPEND_FRAMEWORK.map((row) => (
+                      <tr key={row.spendTier} className="hover:bg-[var(--color-bg)] transition-colors">
+                        <td className="py-4 px-6 font-bold text-[var(--color-text)]">
+                          {row.spendTier}
+                        </td>
+                        <td className="py-4 px-6 text-[var(--color-accent)] font-bold">
+                          {row.model}
+                        </td>
+                        <td className="py-4 px-6 font-medium">{row.suitability}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ScrollReveal>
         </section>
 
         {/* TERMS & COMMERCIAL NOTES */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
-          <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs">
-            <div className="flex items-center gap-2 mb-4">
-              <FileText className="w-4 h-4 text-[#ee8733]" />
-              <h3 className="font-['Inter'] text-lg font-bold text-[#ffffff]">
-                Terms &amp; Commercial Notes
-              </h3>
+          <ScrollReveal>
+            <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-[var(--color-card-surface)] border border-[var(--color-border)] shadow-xs">
+              <div className="flex items-center gap-2 mb-4">
+                <FileText className="w-4 h-4 text-[var(--color-accent)]" />
+                <h3 className="font-['Inter'] text-lg font-bold text-[var(--color-text)]">
+                  Terms &amp; Commercial Notes
+                </h3>
+              </div>
+              <ul className="flex flex-col gap-2.5 font-['Inter'] text-xs text-[var(--color-text-secondary)] leading-relaxed">
+                {COMMERCIAL_TERMS.map((term, tIdx) => (
+                  <li key={tIdx} className="flex items-start gap-2">
+                    <span className="text-[var(--color-accent)] font-bold">&bull;</span>
+                    <span>{term}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="flex flex-col gap-2.5 font-['Inter'] text-xs text-[#dcdfe3] leading-relaxed">
-              {COMMERCIAL_TERMS.map((term, tIdx) => (
-                <li key={tIdx} className="flex items-start gap-2">
-                  <span className="text-[#ee8733] font-bold">&bull;</span>
-                  <span>{term}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </ScrollReveal>
         </section>
 
         {/* FREQUENTLY ASKED QUESTIONS */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 mb-16">
-          <div className="text-center mb-10">
-            <span className="font-['Inter'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-2">
+          <ScrollReveal className="text-center mb-10">
+            <span className="font-['Inter'] text-xs font-extrabold text-[var(--color-accent)] uppercase tracking-widest block mb-2">
               COMMON INQUIRIES
             </span>
-            <h2 className="font-['Inter'] text-3xl font-extrabold text-[#ffffff]">
+            <h2 className="font-['Inter'] text-3xl font-extrabold text-[var(--color-text)]">
               Frequently Asked Questions
             </h2>
-          </div>
+          </ScrollReveal>
 
           <div className="flex flex-col gap-4">
             {FAQS.map((faq, fIdx) => (
-              <div
-                key={fIdx}
-                className="p-6 rounded-2xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs"
-              >
-                <div className="flex items-start gap-3">
-                  <HelpCircle className="w-4 h-4 text-[#ee8733] shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-['Inter'] text-base font-bold text-[#ffffff] mb-1.5">
-                      {faq.q}
-                    </h4>
-                    <p className="font-['Inter'] text-xs sm:text-sm text-[#dcdfe3] leading-relaxed">
-                      {faq.a}
-                    </p>
+              <ScrollReveal key={fIdx} stagger={((fIdx % 4) + 1) as 1 | 2 | 3 | 4}>
+                <div className="p-6 rounded-2xl bg-[var(--color-card-surface)] border border-[var(--color-border)] shadow-xs">
+                  <div className="flex items-start gap-3">
+                    <HelpCircle className="w-4 h-4 text-[var(--color-accent)] shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-['Inter'] text-base font-bold text-[var(--color-text)] mb-1.5">
+                        {faq.q}
+                      </h4>
+                      <p className="font-['Inter'] text-xs sm:text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                        {faq.a}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </section>

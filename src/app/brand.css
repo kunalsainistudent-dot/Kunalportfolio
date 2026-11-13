@@ -1,25 +1,54 @@
 :root {
-  /* Brand Sheet Palette */
+  /* Brand Canvas & Surface Tokens (Mapped from Pulse: #0B0B0C -> #171c29, #141416 -> #0c0e14) */
   --color-bg: #171c29;
   --color-bg-deep: #0c0e14;
   --color-bg-darkest: #08090d;
+  --color-card-surface: #0c0e14;
+  --color-card-surface-subtle: rgba(12, 14, 20, 0.75);
+  --color-card-hover: #10141e;
+  --color-glass-window: rgba(12, 14, 20, 0.85);
 
   /* Text Colors */
   --color-text: #ffffff;
   --color-text-secondary: #dcdfe3;
+  --color-text-muted: #9da6b3;
 
-  /* Accent Colors */
+  /* Accent Colors (Mapped from Pulse Lime #C6F432 -> #ee8733) */
   --color-accent: #ee8733;
   --color-accent-hover: #ed8532;
+  --color-accent-subtle: rgba(238, 135, 51, 0.15);
+  --color-accent-subtle-10: rgba(238, 135, 51, 0.10);
 
-  /* Links & Trust Markers */
+  /* Border turning accent at 40% (Pulse feature card requirement) */
+  --color-accent-border-40: rgba(238, 135, 51, 0.40);
+
+  /* Orange glows at 18% opacity (Pulse requirement) */
+  --color-accent-glow: rgba(238, 135, 51, 0.18);
+  --color-accent-glow-sm: rgba(238, 135, 51, 0.12);
+  --color-accent-glow-strong: rgba(238, 135, 51, 0.28);
+
+  /* Links & Trust */
   --color-link: #367cf1;
   --color-trust: #367cf1;
+  --color-link-subtle: rgba(54, 124, 241, 0.15);
 
-  /* Border & Surface Derived Tokens */
+  /* Borders & Hairlines */
   --color-border: rgba(220, 223, 227, 0.12);
   --color-border-subtle: rgba(220, 223, 227, 0.08);
-  --color-accent-subtle: rgba(238, 135, 51, 0.15);
+  --color-border-hairline: rgba(220, 223, 227, 0.08);
+
+  /* Navigation & Chrome */
+  --color-nav-bg: rgba(23, 28, 41, 0.85);
+  --color-nav-border: rgba(220, 223, 227, 0.08);
+
+  /* Subtle Hero Grid */
+  --color-grid-line: rgba(220, 223, 227, 0.04);
+  --color-grid-dot: rgba(220, 223, 227, 0.06);
+
+  /* Lead-qualification workflow visualization */
+  --color-workflow-path: rgba(238, 135, 51, 0.25);
+  --color-workflow-path-active: #ee8733;
+  --color-workflow-node-bg: #131722;
 
   /* Typography */
   --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

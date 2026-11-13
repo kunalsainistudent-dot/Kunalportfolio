@@ -11,16 +11,16 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-[#171c29] text-[#ffffff] flex flex-col overflow-x-hidden">
-      {/* Global Background Ambient Luminescence */}
+    <div className="relative min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] flex flex-col overflow-x-hidden">
+      {/* Global Background Ambient Luminescence (Orange glows at 18% opacity per Pulse spec) */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#ee8733]/10 blur-[140px]" />
-        <div className="absolute top-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-[#ee8733]/8 blur-[140px]" />
-        <div className="absolute top-2/3 -left-40 w-[500px] h-[500px] rounded-full bg-[#ee8733]/8 blur-[150px]" />
-        <div className="absolute -bottom-40 right-1/4 w-[500px] h-[500px] rounded-full bg-[#0c0e14]/50 blur-[150px]" />
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[var(--color-accent)] opacity-[0.18] blur-[150px]" />
+        <div className="absolute top-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-[var(--color-accent)] opacity-[0.10] blur-[140px]" />
+        <div className="absolute top-2/3 -left-40 w-[500px] h-[500px] rounded-full bg-[var(--color-accent)] opacity-[0.10] blur-[150px]" />
+        <div className="absolute -bottom-40 right-1/4 w-[500px] h-[500px] rounded-full bg-[var(--color-card-surface)] opacity-[0.50] blur-[160px]" />
       </div>
 
-      {/* Navigation Header */}
+      {/* Sticky Glass Navigation Header */}
       <Navbar />
 
       {/* Main Content Sections */}
@@ -34,7 +34,7 @@ export default function Home() {
         <ContactForm />
       </main>
 
-      {/* Footer */}
+      {/* Dark Footer */}
       <Footer />
     </div>
   );

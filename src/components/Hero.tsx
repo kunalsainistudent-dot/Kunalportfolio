@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import {
   Calendar,
   Network,
@@ -9,398 +8,299 @@ import {
   TrendingUp,
   Bot,
   ArrowUp,
-  Activity,
   CheckCircle2,
-  Database,
-  CreditCard,
-  ArrowUpRight,
-  ShieldCheck,
   Sparkles,
+  ArrowUpRight,
+  CreditCard,
+  Layers,
+  Zap,
+  Activity,
+  Workflow,
+  Cpu,
 } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 /**
- * Ported & adapted from:
- * 1. Launch UI (components/sections/hero/default.tsx & components/ui/mockup.tsx)
- * 2. Vontext Webpage Templates (templates/landing/pirsch/src/components/Dashboard.tsx)
- * Inherits brand tokens: #171c29 canvas, #0c0e14 cards, #ee8733 accents, #ffffff/#dcdfe3 typography.
+ * Pulse Hero Section
+ * - Two-column layout: text left, tilted glass window right
+ * - Lead-qualification workflow with connector paths and flowing dots (HTML/CSS/SVG only)
+ * - Subtle geometric grid background
+ * - Responsive: stacks under 960px
+ * - Pure brand.css variables (0 hardcoded hex colors)
+ * - Animate only transform and opacity, respects prefers-reduced-motion
  */
 
 export default function Hero() {
-  const [activeMetricTab, setActiveMetricTab] = useState<"30d" | "7d" | "live">("30d");
-
-  // Telemetry chart bar mock data (inspired by Vontext Pirsch Dashboard chart)
-  const chartBars = [
-    { height: 42, label: "01" },
-    { height: 55, label: "02" },
-    { height: 48, label: "03" },
-    { height: 68, label: "04" },
-    { height: 62, label: "05" },
-    { height: 80, label: "06" },
-    { height: 74, label: "07" },
-    { height: 92, label: "08" },
-    { height: 85, label: "09" },
-    { height: 96, label: "10" },
-    { height: 88, label: "11" },
-    { height: 100, label: "12" },
-  ];
+  const [activeWorkflowTab, setActiveWorkflowTab] = useState<"live" | "7d" | "30d">("live");
 
   return (
-    <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-24 sm:pt-32 pb-16 sm:pb-24 flex flex-col items-center text-center">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-[#ee8733]/12 blur-[150px] rounded-full -z-10" />
-      <div className="pointer-events-none absolute top-48 left-1/2 -translate-x-1/2 w-[520px] h-[260px] bg-[#ee8733]/8 blur-[130px] rounded-full -z-10" />
+    <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 sm:pt-16 lg:pt-20 pb-16 sm:pb-24 overflow-hidden">
+      {/* 1. Subtle Grid Background Behind Hero (Pulse specification) */}
+      <div className="pointer-events-none absolute inset-0 hero-grid-bg -z-10" />
 
-      {/* Outlined Pill Badge (Launch UI Badge + Brand Slide Style) */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-[#0c0e14] border-2 border-[#ee8733] shadow-[0_4px_16px_rgba(238,135,51,0.15)] mb-6"
-      >
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ee8733] opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ee8733]"></span>
-        </span>
-        <span className="font-['Inter'] text-xs font-extrabold text-[#ffffff] tracking-wider uppercase">
-          PERFORMANCE MARKETING • CREATIVE STRATEGY
-        </span>
-      </motion.div>
+      {/* 2. Brand Ambient Glows at 18% Opacity (Pulse specification) */}
+      <div className="pointer-events-none absolute -top-20 left-1/4 w-[600px] h-[360px] bg-[var(--color-accent)] opacity-[0.18] blur-[150px] rounded-full -z-10" />
+      <div className="pointer-events-none absolute top-1/2 right-10 w-[480px] h-[300px] bg-[var(--color-accent)] opacity-[0.12] blur-[140px] rounded-full -z-10" />
 
-      {/* Main Headline (High Contrast White + Orange Sequence) */}
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="font-['Inter'] text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#ffffff] max-w-5xl leading-[1.08] mb-4 sm:mb-6"
-      >
-        STOP RUNNING BLIND. <br className="hidden sm:inline" />
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ee8733] via-[#ee8733] to-[#ed8532]">
-          SCALE WITH DATA &amp; AI.
-        </span>
-      </motion.h1>
-
-      {/* Curved Swoosh Underline Accent */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="relative -mt-2 mb-6 sm:mb-8 flex justify-center"
-      >
-        <svg
-          width="260"
-          height="16"
-          viewBox="0 0 260 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-[#ee8733] w-48 sm:w-64"
-        >
-          <path
-            d="M2 12C70 3 190 3 258 12"
-            stroke="currentColor"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
-        </svg>
-      </motion.div>
-
-      {/* Subheadline */}
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.25 }}
-        className="font-['Inter'] text-base sm:text-xl font-medium text-[#dcdfe3] max-w-3xl leading-relaxed mb-8 sm:mb-10 px-2"
-      >
-        Helping visionary founders acquire high-intent buyers and compound eCommerce
-        revenue with <span className="font-bold text-[#ffffff]">100+ algorithmic ad campaigns</span> across Meta &amp; Google.
-      </motion.p>
-
-      {/* Dual CTA Buttons (Launch UI LinkButton Pattern) */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto mb-12 sm:mb-16"
-      >
-        <a
-          href="/pricing"
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 sm:py-4 rounded-full font-['Inter'] text-base font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532] active:scale-95 transition-all duration-200 shadow-xl"
-        >
-          <span>View Pricing &amp; Book</span>
-          <CreditCard className="w-4 h-4 stroke-[2.5]" />
-        </a>
-        <a
-          href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 sm:py-4 rounded-full font-['Inter'] text-base font-bold text-[#ffffff] bg-[#0c0e14] border-2 border-[#ffffff] hover:bg-[#171c29] hover:border-[#ee8733] hover:text-[#ee8733] transition-all duration-200 shadow-xs"
-        >
-          <span>Book Strategy Call</span>
-          <Calendar className="w-4 h-4 stroke-[2.5]" />
-        </a>
-        <a
-          href="#services"
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-full font-['Inter'] text-sm sm:text-base font-semibold text-[#dcdfe3] bg-[#0c0e14]/80 border border-[rgba(220,223,227,0.12)] hover:text-[#ffffff] hover:bg-[#171c29] transition-all duration-200"
-        >
-          <span>Explore AI Workflows</span>
-          <Network className="w-4 h-4" />
-        </a>
-      </motion.div>
-
-      {/* Trust & Verification Band */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="flex flex-wrap items-center justify-center gap-y-2.5 gap-x-5 sm:gap-x-8 py-3 px-6 sm:px-8 rounded-full bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs mb-14 text-center"
-      >
-        <div className="flex items-center gap-2">
-          <BadgeCheck className="w-4 h-4 text-[#ee8733]" />
-          <span className="font-['Inter'] text-xs sm:text-sm font-bold text-[#ffffff]">
-            100+ Campaigns Managed
-          </span>
-        </div>
-        <span className="w-1.5 h-1.5 rounded-full bg-[#ee8733] hidden sm:inline-block"></span>
-        <div className="flex items-center gap-2">
-          <TrendingUp className="w-4 h-4 text-[#ee8733]" />
-          <span className="font-['Inter'] text-xs sm:text-sm font-bold text-[#ffffff]">
-            Lead Generation &amp; eCommerce
-          </span>
-        </div>
-        <span className="w-1.5 h-1.5 rounded-full bg-[#ee8733] hidden sm:inline-block"></span>
-        <div className="flex items-center gap-2">
-          <Bot className="w-4 h-4 text-[#ee8733]" />
-          <span className="font-['Inter'] text-xs sm:text-sm font-bold text-[#ffffff]">
-            Marketing Psychology &amp; AI Systems
-          </span>
-        </div>
-      </motion.div>
-
-      {/* HERO MOCKUP CONTAINER (Launch UI MockupFrame + Vontext Pirsch Dashboard) */}
-      <motion.div
-        initial={{ opacity: 0, y: 25 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.5 }}
-        className="w-full max-w-5xl rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-[0_20px_60px_rgba(0,0,0,0.6)] overflow-hidden text-left relative"
-      >
-        {/* Top Accent Orange Border */}
-        <div className="h-1 bg-gradient-to-r from-[#ee8733] via-[#ee8733] to-[#ed8532]" />
-
-        {/* Dashboard Frame Header (Vontext & Launch UI Mockup Header) */}
-        <div className="px-5 sm:px-8 py-4 bg-[#08090d]/60 border-b border-[rgba(220,223,227,0.12)] flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center space-x-2">
-            <span className="w-3 h-3 rounded-full bg-[#ee8733]/80"></span>
-            <span className="w-3 h-3 rounded-full bg-[#ed8532]/70"></span>
-            <span className="w-3 h-3 rounded-full bg-[rgba(220,223,227,0.2)]"></span>
-            <span className="ml-3 font-mono text-xs font-medium text-[#dcdfe3]">
-              telemetry.digitalkunalsaini.com/live
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#171c29] border border-[rgba(220,223,227,0.12)] shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#ee8733] animate-pulse"></span>
-              <span className="font-['Inter'] text-[11px] font-bold text-[#ffffff]">
-                Meta CAPI &bull; Google Enhanced Sync
+      {/* 3. Two-Column Layout (Responsive: Under 960px hero stacks per Pulse spec) */}
+      <div className="grid grid-cols-1 min-[960px]:grid-cols-12 gap-10 lg:gap-14 items-center">
+        {/* Left Column: Text & Content (min-[960px]:col-span-6 lg:col-span-7) */}
+        <div className="min-[960px]:col-span-6 lg:col-span-7 flex flex-col items-start text-left">
+          {/* Outlined Pill Badge */}
+          <ScrollReveal>
+            <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-[var(--color-card-surface)] border-2 border-[var(--color-accent)] shadow-[0_4px_16px_var(--color-accent-glow)] mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
+              </span>
+              <span className="font-['Inter'] text-xs font-extrabold text-[var(--color-text)] tracking-wider uppercase">
+                PERFORMANCE MARKETING • CREATIVE STRATEGY
               </span>
             </div>
-            <div className="hidden sm:flex items-center gap-1 bg-[#171c29] border border-[rgba(220,223,227,0.12)] rounded-lg p-0.5 text-xs font-['Inter'] font-semibold">
-              <button
-                onClick={() => setActiveMetricTab("30d")}
-                className={`px-2.5 py-1 rounded-md transition-all ${
-                  activeMetricTab === "30d" ? "bg-[#ee8733] text-[#171c29] font-bold" : "text-[#dcdfe3] hover:text-[#ffffff]"
-                }`}
+          </ScrollReveal>
+
+          {/* Main Headline */}
+          <ScrollReveal stagger={1}>
+            <h1 className="font-['Inter'] text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--color-text)] leading-[1.08] mb-3 sm:mb-4">
+              STOP RUNNING BLIND. <br />
+              <span className="text-[var(--color-accent)]">
+                SCALE WITH DATA &amp; AI.
+              </span>
+            </h1>
+          </ScrollReveal>
+
+          {/* Curved Swoosh Underline Accent */}
+          <ScrollReveal stagger={2}>
+            <div className="relative mb-6 sm:mb-7">
+              <svg
+                width="240"
+                height="14"
+                viewBox="0 0 240 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-[var(--color-accent)] w-44 sm:w-56"
               >
-                30D
-              </button>
-              <button
-                onClick={() => setActiveMetricTab("7d")}
-                className={`px-2.5 py-1 rounded-md transition-all ${
-                  activeMetricTab === "7d" ? "bg-[#ee8733] text-[#171c29] font-bold" : "text-[#dcdfe3] hover:text-[#ffffff]"
-                }`}
+                <path
+                  d="M2 11C65 3 175 3 238 11"
+                  stroke="currentColor"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+          </ScrollReveal>
+
+          {/* Subheadline Copy */}
+          <ScrollReveal stagger={3}>
+            <p className="font-['Inter'] text-base sm:text-lg lg:text-xl font-medium text-[var(--color-text-secondary)] leading-relaxed mb-8 max-w-2xl">
+              Helping visionary founders acquire high-intent buyers and compound eCommerce
+              revenue with <span className="font-bold text-[var(--color-text)]">100+ algorithmic ad campaigns</span> across Meta &amp; Google.
+            </p>
+          </ScrollReveal>
+
+          {/* Dual / Triple CTA Buttons */}
+          <ScrollReveal stagger={4}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-10">
+              <a
+                href="/pricing"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-['Inter'] text-sm sm:text-base font-bold text-[var(--color-bg)] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] active:scale-95 transition-all shadow-[0_4px_20px_var(--color-accent-glow)] text-center"
               >
-                7D
-              </button>
-              <button
-                onClick={() => setActiveMetricTab("live")}
-                className={`px-2.5 py-1 rounded-md transition-all ${
-                  activeMetricTab === "live" ? "bg-[#ee8733] text-[#171c29] font-bold" : "text-[#dcdfe3] hover:text-[#ffffff]"
-                }`}
+                <span>View Pricing &amp; Book</span>
+                <CreditCard className="w-4 h-4 stroke-[2.5]" />
+              </a>
+
+              <a
+                href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-['Inter'] text-sm sm:text-base font-bold text-[var(--color-text)] bg-[var(--color-card-surface)] border-2 border-[var(--color-text)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:bg-[var(--color-bg)] active:scale-95 transition-all shadow-xs text-center"
               >
-                LIVE
-              </button>
-            </div>
-          </div>
-        </div>
+                <span>Book Strategy Call</span>
+                <Calendar className="w-4 h-4 stroke-[2.5]" />
+              </a>
 
-        {/* Dashboard Inner Body */}
-        <div className="p-5 sm:p-8 space-y-6">
-          {/* 4-Stat Metric Cards Grid (Vontext Pirsch stats grid pattern) */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] shadow-2xs flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-['Inter'] text-[11px] font-bold text-[#dcdfe3] uppercase tracking-wider">
-                  Blended ROAS
-                </span>
-                <span className="text-[#ee8733] font-['Inter'] text-[11px] font-bold flex items-center bg-[#0c0e14] px-2 py-0.5 rounded-full border border-[#ee8733]/20 shadow-2xs">
-                  <ArrowUp className="w-3 h-3 mr-0.5 stroke-[3]" /> +32.4%
-                </span>
-              </div>
-              <div className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[#ee8733] tracking-tight">
-                4.8x
-              </div>
-              <p className="font-['Inter'] text-xs text-[#dcdfe3] mt-1">
-                Cross-platform attribution
-              </p>
+              <a
+                href="#services"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full font-['Inter'] text-sm font-semibold text-[var(--color-text-secondary)] bg-[var(--color-card-surface)] border border-[var(--color-border)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg)] transition-all text-center"
+              >
+                <span>Explore AI Workflows</span>
+                <Network className="w-4 h-4" />
+              </a>
             </div>
+          </ScrollReveal>
 
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] shadow-2xs flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-['Inter'] text-[11px] font-bold text-[#dcdfe3] uppercase tracking-wider">
-                  Ad Spend Scaled
-                </span>
-                <span className="text-[#367cf1] font-['Inter'] text-[11px] font-bold flex items-center bg-[#0c0e14] px-2 py-0.5 rounded-full border border-[#367cf1]/20 shadow-2xs">
-                  <Activity className="w-3 h-3 mr-0.5" /> Meta &bull; Google
-                </span>
-              </div>
-              <div className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[#ffffff] tracking-tight">
-                $2.4M+
-              </div>
-              <p className="font-['Inter'] text-xs text-[#dcdfe3] mt-1">
-                Zero budget waste
-              </p>
-            </div>
-
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] shadow-2xs flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-['Inter'] text-[11px] font-bold text-[#dcdfe3] uppercase tracking-wider">
-                  Lead Quality Index
-                </span>
-                <span className="text-[#ee8733] font-['Inter'] text-[11px] font-bold flex items-center bg-[#0c0e14] px-2 py-0.5 rounded-full border border-[#ee8733]/20 shadow-2xs">
-                  <CheckCircle2 className="w-3 h-3 mr-0.5" /> AI Scored
-                </span>
-              </div>
-              <div className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[#ee8733] tracking-tight">
-                99.4%
-              </div>
-              <p className="font-['Inter'] text-xs text-[#dcdfe3] mt-1">
-                Pre-qualified via LLM
-              </p>
-            </div>
-
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] shadow-2xs flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-2">
-                <span className="font-['Inter'] text-[11px] font-bold text-[#dcdfe3] uppercase tracking-wider">
-                  Ops Automated
-                </span>
-                <span className="text-[#ffffff] font-['Inter'] text-[11px] font-bold flex items-center bg-[#0c0e14] px-2 py-0.5 rounded-full border border-[rgba(220,223,227,0.12)] shadow-2xs">
-                  <Bot className="w-3 h-3 mr-0.5 text-[#ee8733]" /> 24/7 Agent
-                </span>
-              </div>
-              <div className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[#ffffff] tracking-tight">
-                85%
-              </div>
-              <p className="font-['Inter'] text-xs text-[#dcdfe3] mt-1">
-                Instant CRM sync
-              </p>
-            </div>
-          </div>
-
-          {/* Interactive Chart Area (Vontext Pirsch Dashboard chart bars & sparkline) */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-[#171c29]/40 border border-[rgba(220,223,227,0.12)]">
-            <div className="flex items-center justify-between mb-4">
+          {/* Trust & Verification Band */}
+          <ScrollReveal stagger={5}>
+            <div className="flex flex-wrap items-center gap-y-2.5 gap-x-4 sm:gap-x-6 py-2.5 px-4 sm:px-6 rounded-full bg-[var(--color-card-surface)] border border-[var(--color-border)] shadow-xs">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#ee8733]"></span>
-                <span className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase tracking-wider">
-                  Conversion &amp; Revenue Velocity
+                <BadgeCheck className="w-4 h-4 text-[var(--color-accent)]" />
+                <span className="font-['Inter'] text-xs sm:text-sm font-bold text-[var(--color-text)]">
+                  100+ Campaigns Managed
                 </span>
               </div>
-              <span className="text-xs text-[#dcdfe3] font-['Inter']">
-                Peak: +412% over historical baseline
-              </span>
-            </div>
-
-            {/* Chart Graphic */}
-            <div className="h-36 sm:h-44 w-full flex items-end justify-between gap-1.5 sm:gap-3 pt-4 border-b border-[rgba(220,223,227,0.12)] pb-2">
-              {chartBars.map((bar, idx) => (
-                <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
-                  <div
-                    className="w-full bg-gradient-to-t from-[#ee8733]/70 to-[#ee8733] rounded-t-md transition-all duration-300 group-hover:from-[#ed8532] group-hover:to-[#ed8532] group-hover:scale-y-105 origin-bottom relative"
-                    style={{ height: `${bar.height}%` }}
-                  >
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute -top-8 left-1/2 -translate-x-1/2 bg-[#08090d] text-[#ffffff] text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm whitespace-nowrap pointer-events-none">
-                      {bar.height * 14} conv
-                    </div>
-                  </div>
-                  <span className="text-[10px] text-[#dcdfe3] font-mono">{bar.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom Breakdown Bands (Vontext Pirsch Top Referrers & Pages pattern) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-            <div className="p-4 rounded-xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] flex flex-col justify-between">
-              <span className="font-['Inter'] text-xs font-bold text-[#dcdfe3] uppercase tracking-wider mb-2">
-                Top Media Channels
-              </span>
-              <div className="space-y-1.5 text-xs font-['Inter']">
-                <div className="flex justify-between items-center text-[#ffffff]">
-                  <span className="font-semibold">Meta Ads (CAPI Integrated)</span>
-                  <span className="font-mono font-bold text-[#ee8733]">54.2%</span>
-                </div>
-                <div className="flex justify-between items-center text-[#dcdfe3]">
-                  <span>Google High-Intent Search</span>
-                  <span className="font-mono">31.8%</span>
-                </div>
-                <div className="flex justify-between items-center text-[#dcdfe3]">
-                  <span>YouTube Video Hooks</span>
-                  <span className="font-mono">14.0%</span>
-                </div>
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] hidden sm:inline-block"></span>
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-[var(--color-accent)]" />
+                <span className="font-['Inter'] text-xs sm:text-sm font-bold text-[var(--color-text)]">
+                  Lead Generation &amp; eCommerce
+                </span>
+              </div>
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] hidden sm:inline-block"></span>
+              <div className="flex items-center gap-2">
+                <Bot className="w-4 h-4 text-[var(--color-accent)]" />
+                <span className="font-['Inter'] text-xs sm:text-sm font-bold text-[var(--color-text)]">
+                  Marketing Psychology &amp; AI Systems
+                </span>
               </div>
             </div>
-
-            <div className="p-4 rounded-xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] flex flex-col justify-between">
-              <span className="font-['Inter'] text-xs font-bold text-[#dcdfe3] uppercase tracking-wider mb-2">
-                Conversion Latency
-              </span>
-              <div className="space-y-1.5 text-xs font-['Inter']">
-                <div className="flex justify-between items-center text-[#ffffff]">
-                  <span className="font-semibold">Lead to WhatsApp Triage</span>
-                  <span className="font-mono font-bold text-[#ee8733]">&lt; 2.4s</span>
-                </div>
-                <div className="flex justify-between items-center text-[#dcdfe3]">
-                  <span>Offline CRM Signal Sync</span>
-                  <span className="font-mono">Instant (Webhooks)</span>
-                </div>
-                <div className="flex justify-between items-center text-[#dcdfe3]">
-                  <span>Checkout Drop-off Recovery</span>
-                  <span className="font-mono">92.6%</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] flex flex-col justify-between">
-              <span className="font-['Inter'] text-xs font-bold text-[#dcdfe3] uppercase tracking-wider mb-2">
-                Active Automation Stack
-              </span>
-              <div className="space-y-1.5 text-xs font-['Inter']">
-                <div className="flex justify-between items-center text-[#ffffff]">
-                  <span className="font-semibold">Autonomous SDR Agent</span>
-                  <span className="font-mono font-bold text-[#367cf1]">Online</span>
-                </div>
-                <div className="flex justify-between items-center text-[#dcdfe3]">
-                  <span>Weekly Creative Matrix</span>
-                  <span className="font-mono">30+ Angles/wk</span>
-                </div>
-                <div className="flex justify-between items-center text-[#dcdfe3]">
-                  <span>Fraud &amp; Bot Traffic Filter</span>
-                  <span className="font-mono">Active (100%)</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          </ScrollReveal>
         </div>
-      </motion.div>
+
+        {/* Right Column: Tilted Glass Window Showing Lead-Qualification Workflow (min-[960px]:col-span-6 lg:col-span-5) */}
+        <div className="min-[960px]:col-span-6 lg:col-span-5 w-full">
+          <ScrollReveal stagger={2}>
+            <div className="hero-tilted-window w-full rounded-3xl bg-[var(--color-glass-window)] backdrop-blur-2xl border border-[var(--color-border)] shadow-[0_24px_60px_rgba(0,0,0,0.65)] overflow-hidden text-left relative">
+              {/* Window Header Chrome */}
+              <div className="px-5 py-3.5 bg-[var(--color-bg-darkest)] border-b border-[var(--color-border)] flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <span className="w-3 h-3 rounded-full bg-[var(--color-accent)]"></span>
+                  <span className="w-3 h-3 rounded-full bg-[var(--color-accent-hover)] opacity-70"></span>
+                  <span className="w-3 h-3 rounded-full bg-[var(--color-border)]"></span>
+                  <span className="ml-2 font-mono text-[11px] font-medium text-[var(--color-text-secondary)]">
+                    lead-qualification.workflow
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)]">
+                  <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+                  <span className="text-[10px] font-['Inter'] font-bold text-[var(--color-text)] uppercase tracking-wider">
+                    Active Runtime
+                  </span>
+                </div>
+              </div>
+
+              {/* Window Body: Lead Qualification Workflow with Flowing Dots & Connector Paths */}
+              <div className="p-5 sm:p-6 space-y-4">
+                {/* Node 1: Inbound Lead Ingestion */}
+                <div className="relative p-3.5 sm:p-4 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-[var(--color-accent-subtle)] text-[var(--color-accent)] flex items-center justify-center">
+                        <Activity className="w-4 h-4" />
+                      </div>
+                      <span className="font-['Inter'] text-xs font-bold text-[var(--color-text)]">
+                        01. Inbound Traffic &amp; CAPI Trigger
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold text-[var(--color-accent)] bg-[var(--color-accent-subtle)] px-2 py-0.5 rounded-full border border-[var(--color-accent-border-40)]">
+                      Captured
+                    </span>
+                  </div>
+                  <p className="font-['Inter'] text-[11px] text-[var(--color-text-secondary)] pl-9">
+                    Meta Ads &bull; Google Search &bull; WhatsApp Webhook (SHA256 Encrypted)
+                  </p>
+                </div>
+
+                {/* SVG Connector Path 1 with Flowing Dot */}
+                <div className="relative h-6 flex items-center justify-center">
+                  <svg className="w-full h-6" viewBox="0 0 300 24" fill="none">
+                    <path
+                      d="M150 0 L150 24"
+                      stroke="var(--color-workflow-path)"
+                      strokeWidth="2"
+                      strokeDasharray="4 4"
+                    />
+                  </svg>
+                  {/* Flowing Animated Dot */}
+                  <div
+                    className="flowing-dot absolute w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]"
+                    style={{ "--flow-x": "0px", "--flow-y": "20px" } as React.CSSProperties}
+                  />
+                </div>
+
+                {/* Node 2: Autonomous LLM Qualification */}
+                <div className="relative p-3.5 sm:p-4 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-accent-border-40)] shadow-[0_4px_20px_var(--color-accent-glow)]">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-[var(--color-accent)] text-[var(--color-bg)] flex items-center justify-center font-bold">
+                        <Bot className="w-4 h-4" />
+                      </div>
+                      <span className="font-['Inter'] text-xs font-bold text-[var(--color-text)]">
+                        02. Autonomous LLM Intent Scoring
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold text-[var(--color-bg)] bg-[var(--color-accent)] px-2 py-0.5 rounded-full">
+                      Score: 94/100
+                    </span>
+                  </div>
+                  <div className="font-mono text-[11px] text-[var(--color-text-secondary)] pl-9 space-y-1">
+                    <div className="text-[var(--color-accent)]">&gt; Querying buyer liquidity &amp; monthly budget...</div>
+                    <div className="text-[var(--color-text)] font-semibold">&gt; Verified: Enterprise Tier ($35,000/mo)</div>
+                  </div>
+                </div>
+
+                {/* SVG Connector Path 2 with Flowing Dot */}
+                <div className="relative h-6 flex items-center justify-center">
+                  <svg className="w-full h-6" viewBox="0 0 300 24" fill="none">
+                    <path
+                      d="M150 0 L150 24"
+                      stroke="var(--color-workflow-path)"
+                      strokeWidth="2"
+                      strokeDasharray="4 4"
+                    />
+                  </svg>
+                  {/* Flowing Animated Dot */}
+                  <div
+                    className="flowing-dot absolute w-2 h-2 rounded-full bg-[var(--color-accent)] shadow-[0_0_8px_var(--color-accent)]"
+                    style={{ "--flow-x": "0px", "--flow-y": "20px", animationDelay: "1.2s" } as React.CSSProperties}
+                  />
+                </div>
+
+                {/* Node 3: Autonomous Conversion Routing */}
+                <div className="relative p-3.5 sm:p-4 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-[var(--color-link-subtle)] text-[var(--color-link)] flex items-center justify-center">
+                        <CheckCircle2 className="w-4 h-4" />
+                      </div>
+                      <span className="font-['Inter'] text-xs font-bold text-[var(--color-text)]">
+                        03. Executive Calendar &amp; CRM Sync
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold text-[var(--color-link)] bg-[var(--color-link-subtle)] px-2 py-0.5 rounded-full border border-[var(--color-link)]/30">
+                      Auto-Booked
+                    </span>
+                  </div>
+                  <p className="font-['Inter'] text-[11px] text-[var(--color-text-secondary)] pl-9">
+                    Google Calendar slot reserved &bull; HubSpot stage updated &bull; Zero human latency
+                  </p>
+                </div>
+
+                {/* Telemetry Stats Band inside Window */}
+                <div className="pt-3 border-t border-[var(--color-border)] grid grid-cols-3 gap-2 text-center">
+                  <div className="p-2 rounded-xl bg-[var(--color-card-surface)] border border-[var(--color-border)]">
+                    <span className="font-mono text-[10px] text-[var(--color-text-secondary)] block">ROAS</span>
+                    <span className="font-['Inter'] text-sm sm:text-base font-extrabold text-[var(--color-accent)]">
+                      4.8x
+                    </span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-[var(--color-card-surface)] border border-[var(--color-border)]">
+                    <span className="font-mono text-[10px] text-[var(--color-text-secondary)] block">LATENCY</span>
+                    <span className="font-['Inter'] text-sm sm:text-base font-extrabold text-[var(--color-text)]">
+                      2.4s
+                    </span>
+                  </div>
+                  <div className="p-2 rounded-xl bg-[var(--color-card-surface)] border border-[var(--color-border)]">
+                    <span className="font-mono text-[10px] text-[var(--color-text-secondary)] block">ACCURACY</span>
+                    <span className="font-['Inter'] text-sm sm:text-base font-extrabold text-[var(--color-accent)]">
+                      99.4%
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
     </section>
   );
 }

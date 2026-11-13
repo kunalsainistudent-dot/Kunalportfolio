@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Megaphone,
   Bot,
@@ -11,26 +10,25 @@ import {
   Layers,
   ArrowRight,
   Sparkles,
-  Zap,
-  Activity,
-  Cpu,
-  ShieldCheck,
-  Terminal,
-  MessageSquare,
-  BarChart3,
   Network,
+  Zap,
 } from "lucide-react";
+import PulseCard from "@/components/PulseCard";
+import ScrollReveal from "@/components/ScrollReveal";
 
 /**
- * Ported & adapted from:
- * 1. Launch UI (components/sections/items/default.tsx - Bento Grid Architecture)
- * 2. Page UI (templates/landing-page-templates/template/gnomie-ai/bricks/3-product-tour.tsx - AI Product Tour)
- * Inherits brand tokens: #171c29 canvas, #0c0e14 cards, #ee8733 accents, #ffffff/#dcdfe3 typography.
+ * Pulse Services & How It Works Architecture
+ * - Feature cards with 6px hover lift, 40% accent border, cursor-following glow (18% orange)
+ * - Horizontal "How It Works" steps joined by a line that draws on scroll
+ * - Responsive: Under 960px cards go to 1 column
+ * - Pure brand.css variables (0 hardcoded hex colors)
+ * - Animate only transform and opacity, respects prefers-reduced-motion
  */
 
 const AI_TOUR_STEPS = [
   {
     id: "step-1",
+    stepNumber: "01",
     tabTitle: "01. Autonomous Lead Triage",
     title: "Autonomous LLM Lead Qualification Agent",
     description:
@@ -49,6 +47,7 @@ const AI_TOUR_STEPS = [
   },
   {
     id: "step-2",
+    stepNumber: "02",
     tabTitle: "02. Offline Signal Sync",
     title: "Meta CAPI & Google Offline Conversion Engine",
     description:
@@ -68,6 +67,7 @@ const AI_TOUR_STEPS = [
   },
   {
     id: "step-3",
+    stepNumber: "03",
     tabTitle: "03. Creative Matrix",
     title: "Rapid-Iteration AI Creative Testing Matrix",
     description:
@@ -85,6 +85,7 @@ const AI_TOUR_STEPS = [
   },
   {
     id: "step-4",
+    stepNumber: "04",
     tabTitle: "04. Multi-Channel Recovery",
     title: "Zero-Dropoff Multi-Channel Nurture Workflows",
     description:
@@ -108,321 +109,395 @@ export default function Services() {
   const [activeTourIndex, setActiveTourIndex] = useState(0);
   const activeStep = AI_TOUR_STEPS[activeTourIndex];
 
+  // Horizontal "How It Works" line draw on scroll
+  const lineSectionRef = useRef<HTMLDivElement>(null);
+  const [isLineDrawn, setIsLineDrawn] = useState(false);
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setIsLineDrawn(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsLineDrawn(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const currentEl = lineSectionRef.current;
+    if (currentEl) {
+      observer.observe(currentEl);
+    }
+
+    return () => {
+      if (currentEl) observer.unobserve(currentEl);
+    };
+  }, []);
+
   return (
     <section
       id="services"
       className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-20 lg:py-28"
     >
-      {/* Header with White + Orange Font Pair */}
-      <div className="flex flex-col items-center text-center mb-16 sm:mb-20">
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#0c0e14] text-[#ffffff] border-2 border-[#ee8733] font-['Inter'] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
-          <Layers className="w-3.5 h-3.5 text-[#ee8733]" />
+      {/* Header */}
+      <ScrollReveal className="flex flex-col items-center text-center mb-16 sm:mb-20">
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--color-card-surface)] text-[var(--color-text)] border-2 border-[var(--color-accent)] font-['Inter'] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+          <Layers className="w-3.5 h-3.5 text-[var(--color-accent)]" />
           Full-Stack Acquisition Framework
         </div>
-        <h2 className="font-['Inter'] text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#ffffff] tracking-tight max-w-4xl leading-[1.1]">
+        <h2 className="font-['Inter'] text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--color-text)] tracking-tight max-w-4xl leading-[1.1]">
           PRECISION GROWTH ENGINES. <br />
-          <span className="text-[#ee8733]">ENGINEERED FOR SCALE.</span>
+          <span className="text-[var(--color-accent)]">ENGINEERED FOR SCALE.</span>
         </h2>
-        <p className="font-['Inter'] text-base sm:text-lg font-medium text-[#dcdfe3] max-w-2xl mt-4 leading-relaxed">
+        <p className="font-['Inter'] text-base sm:text-lg font-medium text-[var(--color-text-secondary)] max-w-2xl mt-4 leading-relaxed">
           Bespoke acquisition pipelines merging empirical media buying, behavioral
           psychology, and LLM automation.
         </p>
-      </div>
+      </ScrollReveal>
 
-      {/* 1. ASYMMETRIC SERVICES BENTO GRID (Ported from Launch UI Items & Bento Grid Pattern) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-        {/* Bento 1: Meta & Google Ads Funnels (Span 2 Columns on desktop) */}
-        <div className="md:col-span-2 p-8 sm:p-10 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs flex flex-col justify-between hover:border-[#ee8733] hover:shadow-[0_16px_40px_rgba(238,135,51,0.12)] transition-all duration-300">
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <div className="p-3.5 rounded-2xl bg-[rgba(238,135,51,0.15)] text-[#ee8733] border border-[#ee8733]/20">
-                <Megaphone className="w-6 h-6" />
-              </div>
-              <span className="px-3.5 py-1 rounded-full text-xs font-['Inter'] font-bold uppercase tracking-wider bg-[rgba(238,135,51,0.15)] text-[#ee8733] border border-[#ee8733]/30">
-                Core Engine • Scale &amp; Acquire
-              </span>
-            </div>
-
-            <h3 className="font-['Inter'] text-2xl sm:text-3xl font-extrabold text-[#ffffff] mb-3">
-              Meta &amp; Google Ads Algorithmic Funnels
-            </h3>
-            <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] leading-relaxed mb-6 max-w-2xl">
-              High-converting paid acquisition and revenue scaling for eCommerce and Lead Gen.
-              We build multi-tier retargeting architectures, Google Search intent dominance, and CAPI telemetry that feeds machine learning engines.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-6 border-t border-[rgba(220,223,227,0.12)]">
-            <div className="p-3.5 rounded-2xl bg-[#171c29]/70 border border-[rgba(220,223,227,0.12)]">
-              <span className="font-['Inter'] text-xs font-bold text-[#ee8733] uppercase block mb-1">
-                Multi-Tier Retargeting
-              </span>
-              <p className="text-xs text-[#dcdfe3]">Granular cold, warm &amp; VIP segmentation</p>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-[#171c29]/70 border border-[rgba(220,223,227,0.12)]">
-              <span className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase block mb-1">
-                Search &amp; PMax Dominance
-              </span>
-              <p className="text-xs text-[#dcdfe3]">High-intent commercial keyword capture</p>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-[#171c29]/70 border border-[rgba(220,223,227,0.12)]">
-              <span className="font-['Inter'] text-xs font-bold text-[#ee8733] uppercase block mb-1">
-                Meta CAPI &amp; Signals
-              </span>
-              <p className="text-xs text-[#dcdfe3]">Server-side sync eliminating data loss</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Bento 2: Consumer & Marketing Psychology */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs flex flex-col justify-between hover:border-[#ee8733] hover:shadow-[0_16px_40px_rgba(238,135,51,0.12)] transition-all duration-300">
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <div className="p-3.5 rounded-2xl bg-[rgba(238,135,51,0.15)] text-[#ee8733] border border-[#ee8733]/20">
-                <BrainCircuit className="w-6 h-6" />
-              </div>
-              <span className="px-3.5 py-1 rounded-full text-xs font-['Inter'] font-bold uppercase tracking-wider bg-[rgba(238,135,51,0.15)] text-[#ee8733] border border-[#ee8733]/30">
-                Creative Strategy
-              </span>
-            </div>
-
-            <h3 className="font-['Inter'] text-2xl font-extrabold text-[#ffffff] mb-3">
-              Consumer Psychology &amp; Creative Strategy
-            </h3>
-            <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] leading-relaxed mb-6">
-              Deconstructing buying behavior to craft high-CTR video angles and objection destruction frameworks that convert cold skeptics into eager buyers.
-            </p>
-          </div>
-
-          <ul className="space-y-2.5 pt-4 border-t border-[rgba(220,223,227,0.12)]">
-            <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[#ffffff]">
-              <CheckCircle2 className="w-4 h-4 text-[#ee8733] shrink-0" />
-              <span>3-second hook rate &amp; retention optimization</span>
-            </li>
-            <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[#ffffff]">
-              <CheckCircle2 className="w-4 h-4 text-[#ee8733] shrink-0" />
-              <span>Cognitive bias &amp; risk-reversal scripting</span>
-            </li>
-            <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[#ffffff]">
-              <CheckCircle2 className="w-4 h-4 text-[#ee8733] shrink-0" />
-              <span>High-velocity UGC iteration matrix</span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Bento 3: CRO & Growth Funnels */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs flex flex-col justify-between hover:border-[#ee8733] hover:shadow-[0_16px_40px_rgba(238,135,51,0.12)] transition-all duration-300">
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <div className="p-3.5 rounded-2xl bg-[rgba(238,135,51,0.15)] text-[#ee8733] border border-[#ee8733]/20">
-                <TrendingUp className="w-6 h-6" />
-              </div>
-              <span className="px-3.5 py-1 rounded-full text-xs font-['Inter'] font-bold uppercase tracking-wider bg-[rgba(238,135,51,0.15)] text-[#ee8733] border border-[#ee8733]/30">
-                ROAS Maximizer
-              </span>
-            </div>
-
-            <h3 className="font-['Inter'] text-2xl font-extrabold text-[#ffffff] mb-3">
-              CRO &amp; Frictionless Funnels
-            </h3>
-            <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] leading-relaxed mb-6">
-              Auditing every click from impression to post-purchase upsell. We eliminate drop-offs and build lightning-fast mobile checkouts.
-            </p>
-          </div>
-
-          <ul className="space-y-2.5 pt-4 border-t border-[rgba(220,223,227,0.12)]">
-            <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[#ffffff]">
-              <CheckCircle2 className="w-4 h-4 text-[#ee8733] shrink-0" />
-              <span>Heatmap &amp; drop-off diagnostic analysis</span>
-            </li>
-            <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[#ffffff]">
-              <CheckCircle2 className="w-4 h-4 text-[#ee8733] shrink-0" />
-              <span>Sub-second mobile landing page speed</span>
-            </li>
-            <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[#ffffff]">
-              <CheckCircle2 className="w-4 h-4 text-[#ee8733] shrink-0" />
-              <span>Friction-free one-click upsells &amp; downsells</span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Bento 4: Rate Card & Transparent Pricing Callout (Span 2 Columns on desktop) */}
-        <div className="md:col-span-2 p-8 sm:p-10 rounded-3xl bg-[#0c0e14] border-2 border-[#ee8733] shadow-md flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex flex-col text-center sm:text-left">
-            <span className="font-['Inter'] text-xs font-bold text-[#ee8733] uppercase tracking-wider mb-1 flex items-center gap-1.5 justify-center sm:justify-start">
-              <Sparkles className="w-3.5 h-3.5 text-[#ee8733]" />
-              Official Service Rate Card
-            </span>
-            <h4 className="font-['Inter'] text-xl sm:text-2xl font-bold text-[#ffffff]">
-              Transparent Retainer Packages &amp; Audits
-            </h4>
-            <p className="font-['Inter'] text-xs sm:text-sm text-[#dcdfe3] mt-1.5 max-w-xl">
-              Lock in your project with a flexible 10% token deposit or full Razorpay checkout. Review our complete engagement catalog.
-            </p>
-          </div>
-          <a
-            href="/pricing"
-            className="shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-['Inter'] text-sm font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532] active:scale-95 transition-all shadow-md"
-          >
-            <span>View Pricing &amp; Packages</span>
-            <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-          </a>
-        </div>
-      </div>
-
-      {/* 2. DEDICATED AI SYSTEMS TOUR (Ported directly from Page UI Gnomie AI Product Tour Pattern) */}
-      <div className="mt-16 p-8 sm:p-12 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-[0_16px_50px_rgba(0,0,0,0.5)]">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#171c29] border border-[#367cf1]/30 text-[#367cf1] font-['Inter'] text-xs font-bold uppercase tracking-wider mb-3">
-            <Bot className="w-3.5 h-3.5 text-[#367cf1]" />
-            Page UI Architectural Pattern &bull; AI Product Tour
-          </div>
-          <h3 className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[#ffffff]">
-            AUTONOMOUS REVENUE ARCHITECTURES. <br />
-            <span className="text-[#ee8733]">POWERED BY PRODUCTION LLMS.</span>
-          </h3>
-          <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] max-w-2xl mt-3">
-            Click through our 4-stage AI pipeline to see how autonomous workflows triage leads, feed closed signals back to ad platforms, and accelerate revenue without headcount.
-          </p>
-        </div>
-
-        {/* Step Selector Tabs (Page UI Product Tour Tabs) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-8">
-          {AI_TOUR_STEPS.map((step, idx) => (
-            <button
-              key={step.id}
-              onClick={() => setActiveTourIndex(idx)}
-              className={`p-3.5 rounded-2xl text-left transition-all duration-200 border ${
-                activeTourIndex === idx
-                  ? "bg-[rgba(238,135,51,0.15)] border-[#ee8733] shadow-xs text-[#ffffff]"
-                  : "bg-[#171c29]/50 border-[rgba(220,223,227,0.12)] text-[#dcdfe3] hover:bg-[#171c29] hover:border-[#ee8733]/40"
-              }`}
-            >
-              <span className={`text-[11px] font-['Inter'] font-bold uppercase block mb-1 ${
-                activeTourIndex === idx ? "text-[#ee8733]" : "text-[#dcdfe3]"
-              }`}>
-                {step.tabTitle}
-              </span>
-              <span className="text-xs sm:text-sm font-semibold line-clamp-1">
-                {step.title.split(" ")[0]} {step.title.split(" ")[1]}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        {/* Active Step Content (Split 2-Column Showcase) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4">
-          {/* Left Column: Description & Metric Badges */}
-          <div className="lg:col-span-5 space-y-5 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#171c29] border border-[rgba(220,223,227,0.12)] text-xs font-['Inter'] font-bold text-[#ee8733]">
-              <Sparkles className="w-3.5 h-3.5 text-[#ee8733]" />
-              <span>{activeStep.stats}</span>
-            </div>
-
-            <h4 className="font-['Inter'] text-2xl sm:text-3xl font-extrabold text-[#ffffff]">
-              {activeStep.title}
-            </h4>
-
-            <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] leading-relaxed">
-              {activeStep.description}
-            </p>
-
-            <div className="pt-2">
-              <a
-                href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-['Inter'] text-xs sm:text-sm font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532] transition-all shadow-sm"
-              >
-                <span>Deploy this AI System in Your Business</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Live Interactive Telemetry Preview Window */}
-          <div className="lg:col-span-7">
-            <div className="rounded-2xl bg-[#08090d] text-[#ffffff] p-5 sm:p-6 shadow-xl border border-[rgba(220,223,227,0.12)] font-mono text-xs overflow-hidden">
-              {/* Window Header */}
-              <div className="flex items-center justify-between pb-3 mb-4 border-b border-[rgba(220,223,227,0.12)]">
-                <div className="flex items-center space-x-2">
-                  <span className="w-3 h-3 rounded-full bg-[#ee8733]"></span>
-                  <span className="w-3 h-3 rounded-full bg-[#ed8532]"></span>
-                  <span className="w-3 h-3 rounded-full bg-[rgba(220,223,227,0.3)]"></span>
-                  <span className="ml-2 text-[#dcdfe3] text-[11px]">
-                    kunalsaini.ai/workflow-engine
-                  </span>
+      {/* 1. PULSE FEATURE CARDS (Under 960px: 1 column per Pulse spec) */}
+      <div className="grid grid-cols-1 min-[960px]:grid-cols-3 gap-6 mb-24">
+        {/* Feature Card 1: Meta & Google Ads Funnels (Span 2 Columns on >=960px) */}
+        <ScrollReveal stagger={1} className="min-[960px]:col-span-2">
+          <PulseCard className="p-8 sm:p-10 flex flex-col justify-between h-full">
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <div className="p-3.5 rounded-2xl bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border-40)]">
+                  <Megaphone className="w-6 h-6" />
                 </div>
-                <span className="text-[10px] text-[#ee8733] font-bold uppercase tracking-wider bg-[rgba(238,135,51,0.15)] px-2 py-0.5 rounded border border-[#ee8733]/30">
-                  Active Runtime
+                <span className="px-3.5 py-1 rounded-full text-xs font-['Inter'] font-bold uppercase tracking-wider bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border-40)]">
+                  Core Engine • Scale &amp; Acquire
                 </span>
               </div>
 
-              {/* Dynamic View based on type */}
-              {activeStep.codePreview.type === "whatsapp" && (
-                <div className="space-y-3 font-sans text-xs">
-                  {activeStep.codePreview.messages?.map((msg, mIdx) => (
+              <h3 className="font-['Inter'] text-2xl sm:text-3xl font-extrabold text-[var(--color-text)] mb-3">
+                Meta &amp; Google Ads Algorithmic Funnels
+              </h3>
+              <p className="font-['Inter'] text-sm sm:text-base text-[var(--color-text-secondary)] leading-relaxed mb-6 max-w-2xl">
+                High-converting paid acquisition and revenue scaling for eCommerce and Lead Gen.
+                We build multi-tier retargeting architectures, Google Search intent dominance, and CAPI telemetry that feeds machine learning engines.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-6 border-t border-[var(--color-border)]">
+              <div className="p-3.5 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]">
+                <span className="font-['Inter'] text-xs font-bold text-[var(--color-accent)] uppercase block mb-1">
+                  Multi-Tier Retargeting
+                </span>
+                <p className="text-xs text-[var(--color-text-secondary)]">Granular cold, warm &amp; VIP segmentation</p>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]">
+                <span className="font-['Inter'] text-xs font-bold text-[var(--color-text)] uppercase block mb-1">
+                  Search &amp; PMax Dominance
+                </span>
+                <p className="text-xs text-[var(--color-text-secondary)]">High-intent commercial keyword capture</p>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-[var(--color-bg)] border border-[var(--color-border)]">
+                <span className="font-['Inter'] text-xs font-bold text-[var(--color-accent)] uppercase block mb-1">
+                  Meta CAPI &amp; Signals
+                </span>
+                <p className="text-xs text-[var(--color-text-secondary)]">Server-side sync eliminating data loss</p>
+              </div>
+            </div>
+          </PulseCard>
+        </ScrollReveal>
+
+        {/* Feature Card 2: Consumer & Marketing Psychology */}
+        <ScrollReveal stagger={2}>
+          <PulseCard className="p-8 sm:p-10 flex flex-col justify-between h-full">
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <div className="p-3.5 rounded-2xl bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border-40)]">
+                  <BrainCircuit className="w-6 h-6" />
+                </div>
+                <span className="px-3.5 py-1 rounded-full text-xs font-['Inter'] font-bold uppercase tracking-wider bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border-40)]">
+                  Creative Strategy
+                </span>
+              </div>
+
+              <h3 className="font-['Inter'] text-2xl font-extrabold text-[var(--color-text)] mb-3">
+                Consumer Psychology &amp; Creative Strategy
+              </h3>
+              <p className="font-['Inter'] text-sm sm:text-base text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Deconstructing buying behavior to craft high-CTR video angles and objection destruction frameworks that convert cold skeptics into eager buyers.
+              </p>
+            </div>
+
+            <ul className="space-y-2.5 pt-4 border-t border-[var(--color-border)]">
+              <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[var(--color-text)]">
+                <CheckCircle2 className="w-4 h-4 text-[var(--color-accent)] shrink-0" />
+                <span>3-second hook rate &amp; retention optimization</span>
+              </li>
+              <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[var(--color-text)]">
+                <CheckCircle2 className="w-4 h-4 text-[var(--color-accent)] shrink-0" />
+                <span>Cognitive bias &amp; risk-reversal scripting</span>
+              </li>
+              <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[var(--color-text)]">
+                <CheckCircle2 className="w-4 h-4 text-[var(--color-accent)] shrink-0" />
+                <span>High-velocity UGC iteration matrix</span>
+              </li>
+            </ul>
+          </PulseCard>
+        </ScrollReveal>
+
+        {/* Feature Card 3: CRO & Growth Funnels */}
+        <ScrollReveal stagger={3}>
+          <PulseCard className="p-8 sm:p-10 flex flex-col justify-between h-full">
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <div className="p-3.5 rounded-2xl bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border-40)]">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <span className="px-3.5 py-1 rounded-full text-xs font-['Inter'] font-bold uppercase tracking-wider bg-[var(--color-accent-subtle)] text-[var(--color-accent)] border border-[var(--color-accent-border-40)]">
+                  ROAS Maximizer
+                </span>
+              </div>
+
+              <h3 className="font-['Inter'] text-2xl font-extrabold text-[var(--color-text)] mb-3">
+                CRO &amp; Frictionless Funnels
+              </h3>
+              <p className="font-['Inter'] text-sm sm:text-base text-[var(--color-text-secondary)] leading-relaxed mb-6">
+                Auditing every click from impression to post-purchase upsell. We eliminate drop-offs and build lightning-fast mobile checkouts.
+              </p>
+            </div>
+
+            <ul className="space-y-2.5 pt-4 border-t border-[var(--color-border)]">
+              <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[var(--color-text)]">
+                <CheckCircle2 className="w-4 h-4 text-[var(--color-accent)] shrink-0" />
+                <span>Heatmap &amp; drop-off diagnostic analysis</span>
+              </li>
+              <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[var(--color-text)]">
+                <CheckCircle2 className="w-4 h-4 text-[var(--color-accent)] shrink-0" />
+                <span>Sub-second mobile landing page speed</span>
+              </li>
+              <li className="flex items-center gap-2 text-xs font-['Inter'] font-semibold text-[var(--color-text)]">
+                <CheckCircle2 className="w-4 h-4 text-[var(--color-accent)] shrink-0" />
+                <span>Friction-free one-click upsells &amp; downsells</span>
+              </li>
+            </ul>
+          </PulseCard>
+        </ScrollReveal>
+
+        {/* Feature Card 4: Rate Card & Transparent Pricing Callout (Span 2 on >=960px) */}
+        <ScrollReveal stagger={4} className="min-[960px]:col-span-2">
+          <PulseCard highlight className="p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col text-center sm:text-left">
+              <span className="font-['Inter'] text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider mb-1 flex items-center gap-1.5 justify-center sm:justify-start">
+                <Sparkles className="w-3.5 h-3.5 text-[var(--color-accent)]" />
+                Official Service Rate Card
+              </span>
+              <h4 className="font-['Inter'] text-xl sm:text-2xl font-bold text-[var(--color-text)]">
+                Transparent Retainer Packages &amp; Audits
+              </h4>
+              <p className="font-['Inter'] text-xs sm:text-sm text-[var(--color-text-secondary)] mt-1.5 max-w-xl">
+                Lock in your project with a flexible 10% token deposit or full Razorpay checkout. Review our complete engagement catalog.
+              </p>
+            </div>
+            <a
+              href="/pricing"
+              className="shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-['Inter'] text-sm font-bold text-[var(--color-bg)] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] active:scale-95 transition-all shadow-[0_4px_16px_var(--color-accent-glow)]"
+            >
+              <span>View Pricing &amp; Packages</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+            </a>
+          </PulseCard>
+        </ScrollReveal>
+      </div>
+
+      {/* 2. HORIZONTAL "HOW IT WORKS" STEPS JOINED BY A LINE THAT DRAWS ON SCROLL (Pulse specification) */}
+      <div ref={lineSectionRef} className="mt-8 mb-24">
+        <ScrollReveal className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--color-card-surface)] border border-[var(--color-border)] text-xs font-['Inter'] font-bold text-[var(--color-accent)] uppercase tracking-wider mb-3">
+            <Zap className="w-3.5 h-3.5 text-[var(--color-accent)]" />
+            Execution Architecture
+          </div>
+          <h3 className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[var(--color-text)]">
+            HOW IT WORKS. <span className="text-[var(--color-accent)]">STEP BY STEP.</span>
+          </h3>
+          <p className="font-['Inter'] text-sm sm:text-base text-[var(--color-text-secondary)] max-w-2xl mx-auto mt-2">
+            The end-to-end framework transforming cold ad impressions into loyal high-LTV customers.
+          </p>
+        </ScrollReveal>
+
+        {/* Steps Container with Joining Line (Desktop: horizontal, Under 960px: responsive stack) */}
+        <div className="relative">
+          {/* Horizontal Connecting Line (Draws on scroll via scaleX) */}
+          <div className="hidden min-[960px]:block absolute top-7 left-12 right-12 h-[2px] bg-[var(--color-border)] z-0 overflow-hidden">
+            <div
+              className={`how-it-works-line h-full w-full bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent)] to-[var(--color-link)] ${
+                isLineDrawn ? "is-drawn" : ""
+              }`}
+            />
+          </div>
+
+          {/* 4 Steps Grid (1 column under 960px, 4 columns on desktop) */}
+          <div className="grid grid-cols-1 min-[960px]:grid-cols-4 gap-6 relative z-10">
+            {AI_TOUR_STEPS.map((step, idx) => (
+              <ScrollReveal key={step.id} stagger={(idx + 1) as 1 | 2 | 3 | 4}>
+                <div
+                  onClick={() => setActiveTourIndex(idx)}
+                  className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 border ${
+                    activeTourIndex === idx
+                      ? "bg-[var(--color-card-surface)] border-[var(--color-accent)] shadow-[0_12px_30px_var(--color-accent-glow)]"
+                      : "bg-[var(--color-card-surface)] border-[var(--color-border)] hover:border-[var(--color-accent-border-40)]"
+                  }`}
+                >
+                  {/* Step Header with Node Number */}
+                  <div className="flex items-center justify-between mb-4">
                     <div
-                      key={mIdx}
-                      className={`flex flex-col max-w-[85%] p-3 rounded-xl ${
-                        msg.sender === "Lead"
-                          ? "bg-[#171c29] text-[#dcdfe3] self-start"
-                          : msg.highlight
-                          ? "bg-[#ee8733] text-[#171c29] self-end font-semibold shadow-md"
-                          : "bg-[#0c0e14] text-[#ffffff] self-end border border-[rgba(220,223,227,0.12)]"
+                      className={`w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-extrabold transition-all ${
+                        activeTourIndex === idx
+                          ? "bg-[var(--color-accent)] text-[var(--color-bg)] shadow-[0_0_12px_var(--color-accent)]"
+                          : "bg-[var(--color-bg)] text-[var(--color-text)] border border-[var(--color-border)]"
                       }`}
                     >
-                      <span className="text-[10px] opacity-75 font-mono mb-1">{msg.sender}</span>
-                      <span>{msg.text}</span>
+                      {step.stepNumber}
                     </div>
-                  ))}
-                </div>
-              )}
+                    <span className="text-[11px] font-mono font-bold text-[var(--color-accent)]">
+                      Stage 0{idx + 1}
+                    </span>
+                  </div>
 
-              {activeStep.codePreview.type === "terminal" && (
-                <div className="space-y-2 text-[#dcdfe3]">
-                  {activeStep.codePreview.lines?.map((line, lIdx) => (
-                    <div key={lIdx} className="flex items-start gap-2">
-                      <span className="text-[#ee8733] select-none">&gt;</span>
-                      <span className={line.includes("Synced") || line.includes("OK") ? "text-[#367cf1]" : ""}>
-                        {line}
+                  <h4 className="font-['Inter'] text-base font-bold text-[var(--color-text)] mb-2">
+                    {step.title.split(" ")[0]} {step.title.split(" ")[1]}
+                  </h4>
+                  <p className="font-['Inter'] text-xs text-[var(--color-text-secondary)] line-clamp-3 leading-relaxed">
+                    {step.description}
+                  </p>
+
+                  <div className="mt-4 pt-3 border-t border-[var(--color-border)] flex items-center justify-between">
+                    <span className="text-[10px] font-mono text-[var(--color-accent)]">
+                      {activeTourIndex === idx ? "Active View" : "Click to Inspect"}
+                    </span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[var(--color-text-secondary)]" />
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+
+        {/* 3. DEDICATED LIVE RUNTIME PREVIEW (Inspect Active Step) */}
+        <ScrollReveal stagger={2} className="mt-10">
+          <div className="p-6 sm:p-8 rounded-3xl bg-[var(--color-card-surface)] border border-[var(--color-border)] shadow-xl">
+            <div className="grid grid-cols-1 min-[960px]:grid-cols-12 gap-8 items-center">
+              {/* Left Column: Description */}
+              <div className="min-[960px]:col-span-5 space-y-4 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] text-xs font-['Inter'] font-bold text-[var(--color-accent)]">
+                  <Sparkles className="w-3.5 h-3.5 text-[var(--color-accent)]" />
+                  <span>{activeStep.stats}</span>
+                </div>
+
+                <h4 className="font-['Inter'] text-2xl font-extrabold text-[var(--color-text)]">
+                  {activeStep.title}
+                </h4>
+
+                <p className="font-['Inter'] text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                  {activeStep.description}
+                </p>
+
+                <div className="pt-2">
+                  <a
+                    href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-['Inter'] text-xs sm:text-sm font-bold text-[var(--color-bg)] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transition-all shadow-[0_4px_16px_var(--color-accent-glow)]"
+                  >
+                    <span>Deploy this AI System in Your Business</span>
+                    <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Right Column: Live Telemetry Preview Window */}
+              <div className="min-[960px]:col-span-7">
+                <div className="rounded-2xl bg-[var(--color-bg-darkest)] text-[var(--color-text)] p-5 sm:p-6 shadow-xl border border-[var(--color-border)] font-mono text-xs overflow-hidden">
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-[var(--color-border)]">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-3 h-3 rounded-full bg-[var(--color-accent)]"></span>
+                      <span className="w-3 h-3 rounded-full bg-[var(--color-accent-hover)] opacity-70"></span>
+                      <span className="w-3 h-3 rounded-full bg-[var(--color-border)]"></span>
+                      <span className="ml-2 text-[var(--color-text-secondary)] text-[11px]">
+                        kunalsaini.ai/workflow-engine
                       </span>
                     </div>
-                  ))}
-                </div>
-              )}
+                    <span className="text-[10px] text-[var(--color-accent)] font-bold uppercase tracking-wider bg-[var(--color-accent-subtle)] px-2 py-0.5 rounded border border-[var(--color-accent-border-40)]">
+                      Active Runtime
+                    </span>
+                  </div>
 
-              {activeStep.codePreview.type === "matrix" && (
-                <div className="space-y-2.5 font-sans">
-                  {activeStep.codePreview.variants?.map((v, vIdx) => (
-                    <div
-                      key={vIdx}
-                      className="p-3 rounded-xl bg-[#171c29] border border-[rgba(220,223,227,0.12)] flex items-center justify-between text-xs"
-                    >
-                      <div>
-                        <span className="text-[#ffffff] font-medium block">{v.angle}</span>
-                        <span className="text-[#dcdfe3] text-[11px]">Hook Rate: {v.hookRate} &bull; CTR: {v.ctr}</span>
-                      </div>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[rgba(238,135,51,0.15)] text-[#ee8733] border border-[#ee8733]/40">
-                        {v.status}
-                      </span>
+                  {activeStep.codePreview.type === "whatsapp" && (
+                    <div className="space-y-3 font-sans text-xs">
+                      {activeStep.codePreview.messages?.map((msg, mIdx) => (
+                        <div
+                          key={mIdx}
+                          className={`flex flex-col max-w-[85%] p-3 rounded-xl ${
+                            msg.sender === "Lead"
+                              ? "bg-[var(--color-bg)] text-[var(--color-text-secondary)] self-start"
+                              : msg.highlight
+                              ? "bg-[var(--color-accent)] text-[var(--color-bg)] self-end font-semibold shadow-md"
+                              : "bg-[var(--color-card-surface)] text-[var(--color-text)] self-end border border-[var(--color-border)]"
+                          }`}
+                        >
+                          <span className="text-[10px] opacity-75 font-mono mb-1">{msg.sender}</span>
+                          <span>{msg.text}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              )}
+                  )}
 
-              {/* Status footer bar */}
-              <div className="mt-5 pt-3 border-t border-[rgba(220,223,227,0.12)] flex items-center justify-between text-[11px] text-[#dcdfe3]">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#367cf1] animate-pulse"></span>
-                  {activeStep.codePreview.status}
-                </span>
-                <span className="text-[#dcdfe3] font-mono">v4.2-prod</span>
+                  {activeStep.codePreview.type === "terminal" && (
+                    <div className="space-y-2 text-[var(--color-text-secondary)]">
+                      {activeStep.codePreview.lines?.map((line, lIdx) => (
+                        <div key={lIdx} className="flex items-start gap-2">
+                          <span className="text-[var(--color-accent)] select-none">&gt;</span>
+                          <span className={line.includes("Synced") || line.includes("OK") ? "text-[var(--color-link)]" : ""}>
+                            {line}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {activeStep.codePreview.type === "matrix" && (
+                    <div className="space-y-2.5 font-sans">
+                      {activeStep.codePreview.variants?.map((v, vIdx) => (
+                        <div
+                          key={vIdx}
+                          className="flex items-center justify-between p-3 rounded-xl bg-[var(--color-bg)] border border-[var(--color-border)] text-xs"
+                        >
+                          <span className="font-semibold text-[var(--color-text)]">{v.angle}</span>
+                          <div className="flex items-center gap-3">
+                            <span className="text-[var(--color-accent)] font-mono font-bold">{v.hookRate} Hook</span>
+                            <span className="px-2 py-0.5 rounded bg-[var(--color-accent-subtle)] text-[var(--color-accent)] font-bold text-[10px]">
+                              {v.status}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="mt-4 pt-3 border-t border-[var(--color-border)] flex items-center justify-between text-[11px] text-[var(--color-text-secondary)] font-sans">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[var(--color-accent)]"></span>
+                      {activeStep.codePreview.status}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

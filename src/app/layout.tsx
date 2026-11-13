@@ -46,7 +46,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#171c29] text-[#ffffff] font-sans antialiased min-h-screen selection:bg-[#ee8733] selection:text-[#171c29] relative overflow-x-hidden pb-14 md:pb-0">
+      <body className="bg-[var(--color-bg)] text-[var(--color-text)] font-sans antialiased min-h-screen selection:bg-[var(--color-accent)] selection:text-[var(--color-bg)] relative overflow-x-hidden pb-14 md:pb-0">
         {children}
         <MobileStickyCTA />
       </body>
