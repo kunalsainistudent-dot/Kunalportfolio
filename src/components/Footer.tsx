@@ -5,7 +5,7 @@ import { ArrowUpRight, ShieldCheck, Sparkles, Heart } from "lucide-react";
 
 /**
  * Ported & adapted from Launch UI (components/sections/footer/default.tsx & components/ui/footer.tsx)
- * Inherits brand tokens: #fcf2e8 canvas, #f7ece0 subtle, #ee8733 accents, bold black/orange font sequence.
+ * Inherits brand tokens: #171c29 canvas, #08090d footer, #ee8733 accents, #ffffff/#dcdfe3 typography.
  */
 
 const FOOTER_COLUMNS = [
@@ -42,10 +42,10 @@ const FOOTER_COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 w-full bg-[#f7ece0] border-t border-[#eaddcf] mt-auto">
+    <footer className="relative z-10 w-full bg-[#08090d] border-t border-[rgba(220,223,227,0.12)] mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16">
         {/* Main Footer Multi-Column Grid (Launch UI FooterContent pattern) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 pb-12 border-b border-[#eaddcf]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 pb-12 border-b border-[rgba(220,223,227,0.12)]">
           {/* Brand Identity & Mission (Col Span 2 on large screens) */}
           <div className="sm:col-span-2 flex flex-col justify-between space-y-4">
             <div>
@@ -56,23 +56,23 @@ export default function Footer() {
                   className="h-8 w-auto object-contain transition-transform group-hover:scale-105"
                 />
                 <div className="flex flex-col">
-                  <span className="font-['Space_Grotesk'] text-lg font-bold text-[#0c0a09]">
+                  <span className="font-['Inter'] text-lg font-bold text-[#ffffff]">
                     Kunal M Saini
                   </span>
-                  <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733]">
+                  <span className="font-['Inter'] text-xs font-bold text-[#ee8733]">
                     @digitalkunalsaini
                   </span>
                 </div>
               </a>
 
-              <p className="font-['Inter'] text-xs sm:text-sm text-[#57534e] max-w-sm leading-relaxed mb-4">
+              <p className="font-['Inter'] text-xs sm:text-sm text-[#dcdfe3] max-w-sm leading-relaxed mb-4">
                 Architecting hyper-scaled acquisition funnels, algorithmic ad execution, and
                 bespoke enterprise AI systems for visionary founders.
               </p>
             </div>
 
             {/* System Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#ffffff] border border-[#eaddcf] text-[11px] font-['Plus_Jakarta_Sans'] font-bold text-[#0c0a09] w-fit shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#171c29] border border-[rgba(220,223,227,0.12)] text-[11px] font-['Inter'] font-bold text-[#ffffff] w-fit shadow-2xs">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ee8733] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ee8733]"></span>
@@ -84,10 +84,10 @@ export default function Footer() {
           {/* Navigation Columns */}
           {FOOTER_COLUMNS.map((column) => (
             <div key={column.title} className="flex flex-col space-y-3">
-              <h4 className="font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider text-[#0c0a09]">
+              <h4 className="font-['Inter'] text-xs font-bold uppercase tracking-wider text-[#ffffff]">
                 {column.title}
               </h4>
-              <ul className="flex flex-col space-y-2 font-['Inter'] text-xs text-[#57534e]">
+              <ul className="flex flex-col space-y-2 font-['Inter'] text-xs text-[#dcdfe3]">
                 {column.links.map((link) => (
                   <li key={link.text}>
                     <a
@@ -107,7 +107,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Sub-Footer (Launch UI FooterBottom pattern) */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-['Inter'] text-[#78716c]">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-['Inter'] text-[#dcdfe3]">
           <div className="flex flex-wrap items-center gap-2">
             <span>&copy; {new Date().getFullYear()} Kunal M Saini. All Rights Reserved.</span>
             <span className="hidden sm:inline">&bull;</span>
@@ -123,7 +123,7 @@ export default function Footer() {
               href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#ee8733] font-bold text-[#ee8733] transition-colors"
+              className="hover:text-[#ed8532] font-bold text-[#ee8733] transition-colors"
             >
               Book Strategy Call
             </a>

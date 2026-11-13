@@ -22,7 +22,7 @@ import {
 /**
  * Ported & adapted from Page UI (website/demo/form-examples & components/shared/ui/form.tsx)
  * Implements an interactive 2-Step Diagnostic Form with Web3Forms submission and Google Calendar integration.
- * Inherits brand tokens: #fcf2e8 canvas, #ffffff cards, #ee8733 accents, bold black/orange font sequence.
+ * Inherits brand tokens: #171c29 canvas, #0c0e14 cards, #ee8733 accents, #ffffff/#dcdfe3 typography.
  */
 
 const VERTICAL_OPTIONS = [
@@ -118,21 +118,21 @@ export default function ContactForm() {
 
       {/* Section Header */}
       <div className="max-w-3xl mx-auto flex flex-col items-center text-center mb-10 sm:mb-12">
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffffff] border-2 border-[#ee8733] text-[#0c0a09] font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#0c0e14] border-2 border-[#ee8733] text-[#ffffff] font-['Inter'] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
           <Rocket className="w-3.5 h-3.5 text-[#ee8733]" />
           Accelerate Growth &bull; Diagnostic Audit
         </div>
-        <h2 className="font-['Space_Grotesk'] text-3xl sm:text-5xl font-extrabold text-[#0c0a09] tracking-tight leading-[1.1]">
+        <h2 className="font-['Inter'] text-3xl sm:text-5xl font-extrabold text-[#ffffff] tracking-tight leading-[1.1]">
           LET&apos;S SCALE YOUR ACQUISITION. <br />
           <span className="text-[#ee8733]">CLAIM YOUR AUDIT.</span>
         </h2>
-        <p className="font-['Inter'] text-base sm:text-lg font-medium text-[#57534e] mt-4 leading-relaxed">
+        <p className="font-['Inter'] text-base sm:text-lg font-medium text-[#dcdfe3] mt-4 leading-relaxed">
           Complete the 2-step diagnostic below for your forensic performance audit, or{" "}
           <a
             href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#ee8733] hover:text-[#ff6a1a] hover:underline font-bold inline-flex items-center gap-1"
+            className="text-[#367cf1] hover:underline font-bold inline-flex items-center gap-1"
           >
             book your call directly on Google Calendar &rarr;
           </a>
@@ -147,34 +147,34 @@ export default function ContactForm() {
         transition={{ duration: 0.5 }}
         className="max-w-2xl mx-auto"
       >
-        <div className="p-6 sm:p-10 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-md">
+        <div className="p-6 sm:p-10 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-md">
           {/* Stepper Progress Bar */}
           <div className="mb-8">
-            <div className="flex items-center justify-between text-xs font-['Plus_Jakarta_Sans'] font-bold text-[#78716c] uppercase mb-2">
-              <span className={step === 1 ? "text-[#ee8733]" : "text-[#0c0a09]"}>
+            <div className="flex items-center justify-between text-xs font-['Inter'] font-bold text-[#dcdfe3] uppercase mb-2">
+              <span className={step === 1 ? "text-[#ee8733]" : "text-[#ffffff]"}>
                 Step 1: Growth Profile
               </span>
-              <span className={step === 2 ? "text-[#ee8733]" : "text-[#78716c]"}>
+              <span className={step === 2 ? "text-[#ee8733]" : "text-[#dcdfe3]"}>
                 Step 2: Contact &amp; Schedule
               </span>
             </div>
-            <div className="w-full h-2 rounded-full bg-[#fcf2e8] overflow-hidden border border-[#eaddcf]">
+            <div className="w-full h-2 rounded-full bg-[#171c29] overflow-hidden border border-[rgba(220,223,227,0.12)]">
               <div
-                className="h-full bg-gradient-to-r from-[#ff5500] to-[#ee8733] transition-all duration-300 rounded-full"
+                className="h-full bg-gradient-to-r from-[#ee8733] to-[#ed8532] transition-all duration-300 rounded-full"
                 style={{ width: step === 1 ? "50%" : "100%" }}
               />
             </div>
           </div>
 
           {status === "success" ? (
-            <div className="p-8 rounded-2xl bg-[#fff2e6] border border-[#ee8733]/40 text-center space-y-4">
-              <div className="w-12 h-12 rounded-full bg-[#ee8733] text-white mx-auto flex items-center justify-center shadow-md">
+            <div className="p-8 rounded-2xl bg-[#171c29] border border-[#ee8733]/40 text-center space-y-4">
+              <div className="w-12 h-12 rounded-full bg-[#ee8733] text-[#171c29] mx-auto flex items-center justify-center shadow-md">
                 <CheckCircle2 className="w-6 h-6 stroke-[2.5]" />
               </div>
-              <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-[#0c0a09]">
+              <h3 className="font-['Inter'] text-2xl font-bold text-[#ffffff]">
                 Diagnostic Received!
               </h3>
-              <p className="font-['Inter'] text-sm text-[#57534e] max-w-md mx-auto">
+              <p className="font-['Inter'] text-sm text-[#dcdfe3] max-w-md mx-auto">
                 {result}
               </p>
               <div className="pt-4">
@@ -182,7 +182,7 @@ export default function ContactForm() {
                   href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-['Plus_Jakarta_Sans'] text-xs font-bold text-white bg-[#ee8733] orange-glow hover:bg-[#ff6a1a] transition-all shadow-sm"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-['Inter'] text-xs font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532] transition-all shadow-sm"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Lock In Calendar Slot Now</span>
@@ -203,7 +203,7 @@ export default function ContactForm() {
                 >
                   {/* Business Vertical */}
                   <div className="space-y-2">
-                    <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09] uppercase tracking-wider block">
+                    <label className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase tracking-wider block">
                       1. Primary Business Vertical
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -212,10 +212,10 @@ export default function ContactForm() {
                           key={opt}
                           type="button"
                           onClick={() => setVertical(opt)}
-                          className={`p-3 rounded-xl text-xs font-['Plus_Jakarta_Sans'] font-semibold text-left transition-all border ${
+                          className={`p-3 rounded-xl text-xs font-['Inter'] font-semibold text-left transition-all border ${
                             vertical === opt
-                              ? "bg-[#fff2e6] border-[#ee8733] text-[#0c0a09] font-bold shadow-2xs"
-                              : "bg-[#fcf2e8]/60 border-[#eaddcf] text-[#57534e] hover:bg-[#ffffff] hover:border-[#ee8733]/40"
+                              ? "bg-[rgba(238,135,51,0.15)] border-[#ee8733] text-[#ffffff] font-bold shadow-2xs"
+                              : "bg-[#171c29]/60 border-[rgba(220,223,227,0.12)] text-[#dcdfe3] hover:bg-[#171c29] hover:border-[#ee8733]/40"
                           }`}
                         >
                           {opt}
@@ -226,7 +226,7 @@ export default function ContactForm() {
 
                   {/* Monthly Ad Budget */}
                   <div className="space-y-2">
-                    <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09] uppercase tracking-wider block">
+                    <label className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase tracking-wider block">
                       2. Current Monthly Ad Budget
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -235,10 +235,10 @@ export default function ContactForm() {
                           key={opt}
                           type="button"
                           onClick={() => setBudget(opt)}
-                          className={`p-3 rounded-xl text-xs font-['Plus_Jakarta_Sans'] font-semibold text-left transition-all border ${
+                          className={`p-3 rounded-xl text-xs font-['Inter'] font-semibold text-left transition-all border ${
                             budget === opt
-                              ? "bg-[#fff2e6] border-[#ee8733] text-[#0c0a09] font-bold shadow-2xs"
-                              : "bg-[#fcf2e8]/60 border-[#eaddcf] text-[#57534e] hover:bg-[#ffffff] hover:border-[#ee8733]/40"
+                              ? "bg-[rgba(238,135,51,0.15)] border-[#ee8733] text-[#ffffff] font-bold shadow-2xs"
+                              : "bg-[#171c29]/60 border-[rgba(220,223,227,0.12)] text-[#dcdfe3] hover:bg-[#171c29] hover:border-[#ee8733]/40"
                           }`}
                         >
                           {opt}
@@ -249,7 +249,7 @@ export default function ContactForm() {
 
                   {/* Primary Growth Bottleneck */}
                   <div className="space-y-2">
-                    <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09] uppercase tracking-wider block">
+                    <label className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase tracking-wider block">
                       3. Primary Growth Bottleneck
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -258,10 +258,10 @@ export default function ContactForm() {
                           key={opt}
                           type="button"
                           onClick={() => setBottleneck(opt)}
-                          className={`p-3 rounded-xl text-xs font-['Plus_Jakarta_Sans'] font-semibold text-left transition-all border ${
+                          className={`p-3 rounded-xl text-xs font-['Inter'] font-semibold text-left transition-all border ${
                             bottleneck === opt
-                              ? "bg-[#fff2e6] border-[#ee8733] text-[#0c0a09] font-bold shadow-2xs"
-                              : "bg-[#fcf2e8]/60 border-[#eaddcf] text-[#57534e] hover:bg-[#ffffff] hover:border-[#ee8733]/40"
+                              ? "bg-[rgba(238,135,51,0.15)] border-[#ee8733] text-[#ffffff] font-bold shadow-2xs"
+                              : "bg-[#171c29]/60 border-[rgba(220,223,227,0.12)] text-[#dcdfe3] hover:bg-[#171c29] hover:border-[#ee8733]/40"
                           }`}
                         >
                           {opt}
@@ -272,7 +272,7 @@ export default function ContactForm() {
 
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-xl font-['Plus_Jakarta_Sans'] text-sm font-bold text-white bg-[#ee8733] orange-glow hover:bg-[#ff6a1a] transition-all flex items-center justify-center gap-2 shadow-sm"
+                    className="w-full py-4 rounded-xl font-['Inter'] text-sm font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532] transition-all flex items-center justify-center gap-2 shadow-sm"
                   >
                     <span>Proceed to Step 2: Contact Details</span>
                     <ArrowRight className="w-4 h-4 stroke-[2.5]" />
@@ -290,7 +290,7 @@ export default function ContactForm() {
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09] uppercase tracking-wider block">
+                      <label className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase tracking-wider block">
                         Full Name *
                       </label>
                       <input
@@ -299,12 +299,12 @@ export default function ContactForm() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g. Kunal Saini"
-                        className="w-full px-4 py-3 rounded-xl bg-[#fcf2e8]/50 border border-[#eaddcf] text-sm text-[#0c0a09] focus:outline-hidden focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-[#171c29]/50 border border-[rgba(220,223,227,0.12)] text-sm text-[#ffffff] placeholder:text-[#dcdfe3]/40 focus:outline-hidden focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] transition-all"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09] uppercase tracking-wider block">
+                      <label className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase tracking-wider block">
                         Work Email *
                       </label>
                       <input
@@ -313,14 +313,14 @@ export default function ContactForm() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-[#fcf2e8]/50 border border-[#eaddcf] text-sm text-[#0c0a09] focus:outline-hidden focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-[#171c29]/50 border border-[rgba(220,223,227,0.12)] text-sm text-[#ffffff] placeholder:text-[#dcdfe3]/40 focus:outline-hidden focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] transition-all"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09] uppercase tracking-wider block">
+                      <label className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase tracking-wider block">
                         WhatsApp Number *
                       </label>
                       <input
@@ -329,12 +329,12 @@ export default function ContactForm() {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+91 98765 43210"
-                        className="w-full px-4 py-3 rounded-xl bg-[#fcf2e8]/50 border border-[#eaddcf] text-sm text-[#0c0a09] focus:outline-hidden focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-[#171c29]/50 border border-[rgba(220,223,227,0.12)] text-sm text-[#ffffff] placeholder:text-[#dcdfe3]/40 focus:outline-hidden focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] transition-all"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09] uppercase tracking-wider block">
+                      <label className="font-['Inter'] text-xs font-bold text-[#ffffff] uppercase tracking-wider block">
                         Website / Ad Account URL
                       </label>
                       <input
@@ -342,13 +342,13 @@ export default function ContactForm() {
                         value={website}
                         onChange={(e) => setWebsite(e.target.value)}
                         placeholder="https://yourbrand.com"
-                        className="w-full px-4 py-3 rounded-xl bg-[#fcf2e8]/50 border border-[#eaddcf] text-sm text-[#0c0a09] focus:outline-hidden focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-[#171c29]/50 border border-[rgba(220,223,227,0.12)] text-sm text-[#ffffff] placeholder:text-[#dcdfe3]/40 focus:outline-hidden focus:border-[#ee8733] focus:ring-1 focus:ring-[#ee8733] transition-all"
                       />
                     </div>
                   </div>
 
                   {status === "error" && (
-                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-medium flex items-center gap-2">
+                    <div className="p-3.5 rounded-xl bg-[#171c29] border border-red-500/30 text-red-400 text-xs font-medium flex items-center gap-2">
                       <AlertCircle className="w-4 h-4 shrink-0" />
                       <span>{result}</span>
                     </div>
@@ -358,7 +358,7 @@ export default function ContactForm() {
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="py-3.5 px-5 rounded-xl font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#57534e] bg-[#fcf2e8] border border-[#eaddcf] hover:text-[#0c0a09] flex items-center justify-center gap-1.5 transition-all"
+                      className="py-3.5 px-5 rounded-xl font-['Inter'] text-xs font-bold text-[#dcdfe3] bg-[#171c29] border border-[rgba(220,223,227,0.12)] hover:text-[#ffffff] flex items-center justify-center gap-1.5 transition-all"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Back to Step 1</span>
@@ -367,11 +367,11 @@ export default function ContactForm() {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="flex-1 py-3.5 px-6 rounded-xl font-['Plus_Jakarta_Sans'] text-sm font-bold text-white bg-[#ee8733] orange-glow hover:bg-[#ff6a1a] disabled:opacity-50 transition-all flex items-center justify-center gap-2 shadow-sm"
+                      className="flex-1 py-3.5 px-6 rounded-xl font-['Inter'] text-sm font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532] disabled:opacity-50 transition-all flex items-center justify-center gap-2 shadow-sm"
                     >
                       {status === "loading" ? (
                         <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <Loader2 className="w-4 h-4 animate-spin text-[#171c29]" />
                           <span>Transmitting Telemetry...</span>
                         </>
                       ) : (
@@ -388,7 +388,7 @@ export default function ContactForm() {
           )}
 
           {/* Privacy & Fast Lane Alternative */}
-          <div className="mt-6 pt-5 border-t border-[#eaddcf] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#78716c]">
+          <div className="mt-6 pt-5 border-t border-[rgba(220,223,227,0.12)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#dcdfe3]">
             <div className="flex items-center gap-1.5">
               <Lock className="w-3.5 h-3.5 text-[#ee8733]" />
               <span>Strict NDA Confidentiality &bull; Zero Spam</span>
@@ -397,7 +397,7 @@ export default function ContactForm() {
               href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#ee8733] hover:underline font-bold inline-flex items-center gap-1"
+              className="text-[#367cf1] hover:underline font-bold inline-flex items-center gap-1"
             >
               <span>Instant Google Calendar Booking &rarr;</span>
             </a>

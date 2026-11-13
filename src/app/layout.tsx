@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import "./brand.css";
 import "./globals.css";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#fcf2e8",
+  themeColor: "#171c29",
 };
 
 export default function RootLayout({
@@ -41,11 +42,11 @@ export default function RootLayout({
           crossOrigin=""
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Poppins:wght@600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#fcf2e8] text-[#0c0a09] font-sans antialiased min-h-screen selection:bg-[#ee8733] selection:text-[#ffffff] relative overflow-x-hidden pb-14 md:pb-0">
+      <body className="bg-[#171c29] text-[#ffffff] font-sans antialiased min-h-screen selection:bg-[#ee8733] selection:text-[#171c29] relative overflow-x-hidden pb-14 md:pb-0">
         {children}
         <MobileStickyCTA />
       </body>

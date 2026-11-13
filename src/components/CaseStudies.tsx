@@ -19,7 +19,7 @@ import {
 
 /**
  * Ported & adapted from Page UI (components/landing/showcase/LandingShowcase.tsx & LandingProductProblemSolution.tsx)
- * Inherits brand tokens: #fcf2e8 canvas, #ffffff cards, #ee8733 accents, bold black/orange font sequence.
+ * Inherits brand tokens: #171c29 canvas, #0c0e14 cards, #ee8733 accents, #ffffff/#dcdfe3 typography.
  */
 
 const CASE_STUDIES = [
@@ -29,7 +29,7 @@ const CASE_STUDIES = [
     client: "PrimeEstates Luxury Living",
     icon: Building,
     accentColor: "text-[#ee8733]",
-    badgeBg: "bg-[#fff2e6] text-[#ee8733] border-[#ee8733]/30",
+    badgeBg: "bg-[rgba(238,135,51,0.15)] text-[#ee8733] border-[#ee8733]/30",
     headline: "$14.2M High-Intent Pipeline Generated with Autonomous WhatsApp Qualification",
     summary:
       "Engineered a closed-loop Meta CAPI acquisition pipeline paired with an autonomous 24/7 conversational AI agent that pre-qualified luxury property buyers before booking in-person viewings.",
@@ -53,8 +53,8 @@ const CASE_STUDIES = [
     category: "D2C Apparel & Lifestyle",
     client: "Aura Botanicals & Lifestyle",
     icon: ShoppingBag,
-    accentColor: "text-[#0c0a09]",
-    badgeBg: "bg-[#fcf2e8] text-[#0c0a09] border-[#eaddcf]",
+    accentColor: "text-[#ffffff]",
+    badgeBg: "bg-[#171c29] text-[#ffffff] border-[rgba(220,223,227,0.12)]",
     headline: "Scaled Revenue from $180k/mo to $650k/mo at 4.4x Blended ROAS",
     summary:
       "Implemented a rapid-iteration creative testing matrix rooted in behavioral consumer psychology, unlocking viral UGC angles and sub-second mobile checkout conversion rates.",
@@ -78,8 +78,8 @@ const CASE_STUDIES = [
     category: "B2B Enterprise SaaS",
     client: "NeuralScale AI Infrastructure",
     icon: Cpu,
-    accentColor: "text-[#ee8733]",
-    badgeBg: "bg-[#f0f4ff] text-[#2563eb] border-[#2563eb]/30",
+    accentColor: "text-[#367cf1]",
+    badgeBg: "bg-[rgba(54,124,241,0.15)] text-[#367cf1] border-[#367cf1]/30",
     headline: "-68% Demo CPA with High-Intent Commercial Search Dominance",
     summary:
       "Captured high-intent search traffic targeting enterprise engineering leaders and converted prospects through personalized, interactive pipeline funnels.",
@@ -113,17 +113,17 @@ export default function CaseStudies() {
       {/* Background ambient lighting */}
       <div className="pointer-events-none absolute top-1/2 left-1/3 w-[600px] h-[300px] bg-[#ee8733]/8 blur-[140px] rounded-full -z-10" />
 
-      {/* Header with Black + Orange Font Pair */}
+      {/* Header with White + Orange Font Pair */}
       <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffffff] border-2 border-[#ee8733] text-[#0c0a09] font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#0c0e14] border-2 border-[#ee8733] text-[#ffffff] font-['Inter'] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-[#ee8733]" />
           <span>PROVEN IMPACT &bull; AUDITED PORTFOLIO RESULTS</span>
         </div>
-        <h2 className="font-['Space_Grotesk'] text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#0c0a09] tracking-tight leading-[1.1]">
+        <h2 className="font-['Inter'] text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#ffffff] tracking-tight leading-[1.1]">
           SYSTEMIC BREAKTHROUGHS. <br />
           <span className="text-[#ee8733]">VERIFIED ATTRIBUTION.</span>
         </h2>
-        <p className="font-['Inter'] text-sm sm:text-base text-[#57534e] max-w-2xl mt-4">
+        <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] max-w-2xl mt-4">
           Real client engagements with deterministic attribution, rigorous unit economics, and custom AI systems.
         </p>
       </div>
@@ -134,10 +134,10 @@ export default function CaseStudies() {
           <button
             key={study.id}
             onClick={() => setActiveTab(idx)}
-            className={`px-5 py-2.5 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold transition-all duration-200 border flex items-center gap-2 ${
+            className={`px-5 py-2.5 rounded-full font-['Inter'] text-xs sm:text-sm font-bold transition-all duration-200 border flex items-center gap-2 ${
               activeTab === idx
-                ? "bg-[#ee8733] text-white border-[#ee8733] orange-glow-sm shadow-xs"
-                : "bg-[#ffffff] text-[#57534e] border-[#eaddcf] hover:border-[#ee8733] hover:text-[#0c0a09]"
+                ? "bg-[#ee8733] text-[#171c29] border-[#ee8733] orange-glow-sm shadow-xs"
+                : "bg-[#0c0e14] text-[#dcdfe3] border-[rgba(220,223,227,0.12)] hover:border-[#ee8733] hover:text-[#ffffff]"
             }`}
           >
             <span>{study.category}</span>
@@ -153,7 +153,7 @@ export default function CaseStudies() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.35 }}
-          className="p-8 sm:p-12 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-xs"
+          className="p-8 sm:p-12 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Left Column: Problem, Solution & Metrics */}
@@ -161,37 +161,37 @@ export default function CaseStudies() {
               <div>
                 {/* Meta Badge */}
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-xl bg-[#fcf2e8] text-[#ee8733] border border-[#eaddcf]">
+                  <div className="p-2 rounded-xl bg-[#171c29] text-[#ee8733] border border-[rgba(220,223,227,0.12)]">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-['Plus_Jakarta_Sans'] font-bold uppercase tracking-wider border ${activeStudy.badgeBg}`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-['Inter'] font-bold uppercase tracking-wider border ${activeStudy.badgeBg}`}>
                     {activeStudy.client}
                   </span>
                 </div>
 
-                <h3 className="font-['Space_Grotesk'] text-2xl sm:text-3xl font-extrabold text-[#0c0a09] leading-tight mb-4">
+                <h3 className="font-['Inter'] text-2xl sm:text-3xl font-extrabold text-[#ffffff] leading-tight mb-4">
                   {activeStudy.headline}
                 </h3>
 
-                <p className="font-['Inter'] text-sm sm:text-base text-[#57534e] leading-relaxed mb-6">
+                <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] leading-relaxed mb-6">
                   {activeStudy.summary}
                 </p>
 
                 {/* Problem vs Solution Callout */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                  <div className="p-4 rounded-2xl bg-[#fcf2e8]/70 border border-[#eaddcf]">
-                    <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#c86314] uppercase block mb-1">
+                  <div className="p-4 rounded-2xl bg-[#171c29]/70 border border-[rgba(220,223,227,0.12)]">
+                    <span className="font-['Inter'] text-xs font-bold text-[#ee8733] uppercase block mb-1">
                       The Bottleneck
                     </span>
-                    <p className="font-['Inter'] text-xs text-[#57534e] leading-relaxed">
+                    <p className="font-['Inter'] text-xs text-[#dcdfe3] leading-relaxed">
                       {activeStudy.problem}
                     </p>
                   </div>
-                  <div className="p-4 rounded-2xl bg-[#fff2e6] border border-[#ee8733]/30">
-                    <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733] uppercase block mb-1">
+                  <div className="p-4 rounded-2xl bg-[rgba(238,135,51,0.1)] border border-[#ee8733]/30">
+                    <span className="font-['Inter'] text-xs font-bold text-[#ee8733] uppercase block mb-1">
                       Engineering Solution
                     </span>
-                    <p className="font-['Inter'] text-xs text-[#1c1917] font-medium leading-relaxed">
+                    <p className="font-['Inter'] text-xs text-[#ffffff] font-medium leading-relaxed">
                       {activeStudy.solution}
                     </p>
                   </div>
@@ -199,16 +199,16 @@ export default function CaseStudies() {
               </div>
 
               {/* 3 Metric Badges */}
-              <div className="grid grid-cols-3 gap-3 pt-6 border-t border-[#eaddcf]">
+              <div className="grid grid-cols-3 gap-3 pt-6 border-t border-[rgba(220,223,227,0.12)]">
                 {activeStudy.metrics.map((metric, mIdx) => (
-                  <div key={mIdx} className="p-3.5 rounded-2xl bg-[#fcf2e8]/50 border border-[#eaddcf] text-center">
-                    <div className="font-['Space_Grotesk'] text-2xl sm:text-3xl font-extrabold text-[#ee8733] leading-none mb-1">
+                  <div key={mIdx} className="p-3.5 rounded-2xl bg-[#171c29]/50 border border-[rgba(220,223,227,0.12)] text-center">
+                    <div className="font-['Inter'] text-2xl sm:text-3xl font-extrabold text-[#ee8733] leading-none mb-1">
                       {metric.value}
                     </div>
-                    <div className="font-['Plus_Jakarta_Sans'] text-[11px] font-bold text-[#0c0a09]">
+                    <div className="font-['Inter'] text-[11px] font-bold text-[#ffffff]">
                       {metric.label}
                     </div>
-                    <div className="font-['Inter'] text-[10px] text-[#78716c] mt-0.5">
+                    <div className="font-['Inter'] text-[10px] text-[#dcdfe3] mt-0.5">
                       {metric.sub}
                     </div>
                   </div>
@@ -217,12 +217,12 @@ export default function CaseStudies() {
             </div>
 
             {/* Right Column: Execution Checklist, Tech Stack & Testimonial */}
-            <div className="lg:col-span-5 flex flex-col justify-between space-y-6 bg-[#fcf2e8]/40 p-6 sm:p-8 rounded-2xl border border-[#eaddcf]">
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-6 bg-[#171c29]/40 p-6 sm:p-8 rounded-2xl border border-[rgba(220,223,227,0.12)]">
               <div>
-                <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733] uppercase tracking-wider block mb-3">
+                <span className="font-['Inter'] text-xs font-bold text-[#ee8733] uppercase tracking-wider block mb-3">
                   Architectural Execution Plan:
                 </span>
-                <ul className="space-y-3 font-['Inter'] text-xs text-[#1c1917] font-semibold mb-6">
+                <ul className="space-y-3 font-['Inter'] text-xs text-[#ffffff] font-semibold mb-6">
                   {activeStudy.strategy.map((item, sIdx) => (
                     <li key={sIdx} className="flex items-start gap-2.5">
                       <CheckCircle2 className="w-4 h-4 text-[#ee8733] shrink-0 mt-0.5" />
@@ -231,14 +231,14 @@ export default function CaseStudies() {
                   ))}
                 </ul>
 
-                <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#78716c] uppercase tracking-wider block mb-2">
+                <span className="font-['Inter'] text-xs font-bold text-[#dcdfe3] uppercase tracking-wider block mb-2">
                   Integrated Stack:
                 </span>
                 <div className="flex flex-wrap gap-1.5 mb-6">
                   {activeStudy.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-lg bg-[#ffffff] border border-[#eaddcf] text-[11px] font-['Plus_Jakarta_Sans'] font-semibold text-[#57534e]"
+                      className="px-2.5 py-1 rounded-lg bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] text-[11px] font-['Inter'] font-semibold text-[#dcdfe3]"
                     >
                       {tech}
                     </span>
@@ -247,12 +247,12 @@ export default function CaseStudies() {
               </div>
 
               {/* Testimonial Quote */}
-              <div className="p-4 rounded-xl bg-[#ffffff] border border-[#eaddcf] shadow-2xs">
+              <div className="p-4 rounded-xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-2xs">
                 <Quote className="w-4 h-4 text-[#ee8733] mb-1.5" />
-                <p className="font-['Inter'] text-xs text-[#57534e] italic mb-2 leading-relaxed">
+                <p className="font-['Inter'] text-xs text-[#dcdfe3] italic mb-2 leading-relaxed">
                   &ldquo;{activeStudy.quote}&rdquo;
                 </p>
-                <span className="font-['Plus_Jakarta_Sans'] text-[11px] font-bold text-[#0c0a09]">
+                <span className="font-['Inter'] text-[11px] font-bold text-[#ffffff]">
                   Verified Client Executive &bull; {activeStudy.category}
                 </span>
               </div>
@@ -261,7 +261,7 @@ export default function CaseStudies() {
                 href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ffffff] bg-[#ee8733] orange-glow hover:bg-[#ff6a1a] transition-all shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-['Inter'] text-xs font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532] transition-all shadow-sm"
               >
                 <span>Book Similar Strategy Architecture</span>
                 <ArrowRight className="w-4 h-4" />

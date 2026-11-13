@@ -1,0 +1,26 @@
+:root {
+  /* Brand Sheet Palette */
+  --color-bg: #171c29;
+  --color-bg-deep: #0c0e14;
+  --color-bg-darkest: #08090d;
+
+  /* Text Colors */
+  --color-text: #ffffff;
+  --color-text-secondary: #dcdfe3;
+
+  /* Accent Colors */
+  --color-accent: #ee8733;
+  --color-accent-hover: #ed8532;
+
+  /* Links & Trust Markers */
+  --color-link: #367cf1;
+  --color-trust: #367cf1;
+
+  /* Border & Surface Derived Tokens */
+  --color-border: rgba(220, 223, 227, 0.12);
+  --color-border-subtle: rgba(220, 223, 227, 0.08);
+  --color-accent-subtle: rgba(238, 135, 51, 0.15);
+
+  /* Typography */
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}

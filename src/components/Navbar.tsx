@@ -6,7 +6,7 @@ import { Menu, X, ArrowUpRight, Calendar, Sparkles } from "lucide-react";
 
 /**
  * Ported & adapted from Launch UI (components/sections/navbar/default.tsx & components/ui/navbar.tsx)
- * Inherits brand tokens: #fcf2e8 canvas, #ffffff glass pill, #ee8733 accents, bold black typography.
+ * Inherits brand tokens: #171c29 canvas, #0c0e14 card/pill, #ee8733 accents, #ffffff/#dcdfe3 typography.
  */
 
 const NAV_LINKS = [
@@ -33,7 +33,7 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 w-full ${
         scrolled
-          ? "bg-[#fcf2e8]/92 backdrop-blur-xl border-b border-[#eaddcf] shadow-[0_4px_25px_rgba(12,10,9,0.04)] py-3"
+          ? "bg-[#171c29]/92 backdrop-blur-xl border-b border-[rgba(220,223,227,0.12)] shadow-[0_4px_25px_rgba(0,0,0,0.5)] py-3"
           : "bg-transparent py-4 sm:py-5"
       }`}
     >
@@ -47,13 +47,13 @@ export default function Navbar() {
                 alt="Kunal M Saini Logo"
                 className="h-8 sm:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
-              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#ee8733] ring-2 ring-[#fcf2e8] shadow-[0_0_8px_#ee8733]"></span>
+              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#ee8733] ring-2 ring-[#171c29] shadow-[0_0_8px_#ee8733]"></span>
             </div>
             <div className="flex flex-col">
-              <span className="font-['Space_Grotesk'] text-base sm:text-lg font-bold text-[#0c0a09] tracking-tight group-hover:text-[#ee8733] transition-colors">
+              <span className="font-['Inter'] text-base sm:text-lg font-bold text-[#ffffff] tracking-tight group-hover:text-[#ee8733] transition-colors">
                 Kunal M Saini
               </span>
-              <span className="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold tracking-wider uppercase text-[#57534e] flex items-center gap-1.5">
+              <span className="font-['Inter'] text-[11px] font-semibold tracking-wider uppercase text-[#dcdfe3] flex items-center gap-1.5">
                 <span>Performance &amp; AI</span>
                 <span className="w-1 h-1 rounded-full bg-[#ee8733]"></span>
                 <span className="text-[#ee8733] font-bold">@digitalkunalsaini</span>
@@ -63,12 +63,12 @@ export default function Navbar() {
         </div>
 
         {/* Center: Desktop Navigation Bar (Launch UI Navigation pill) */}
-        <nav className="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#ffffff]/90 border border-[#eaddcf] backdrop-blur-xl shadow-xs">
+        <nav className="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#0c0e14]/90 border border-[rgba(220,223,227,0.12)] backdrop-blur-xl shadow-xs">
           {NAV_LINKS.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="px-3.5 py-1.5 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-semibold text-[#57534e] hover:text-[#0c0a09] hover:bg-[#f7ece0] transition-all duration-200"
+              className="px-3.5 py-1.5 rounded-full font-['Inter'] text-xs sm:text-sm font-semibold text-[#dcdfe3] hover:text-[#ffffff] hover:bg-[#171c29] transition-all duration-200"
             >
               {link.name}
             </a>
@@ -79,7 +79,7 @@ export default function Navbar() {
         <div className="hidden sm:flex items-center gap-3">
           <a
             href="/pricing"
-            className="px-4 py-2 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold text-[#0c0a09] bg-[#ffffff] border border-[#eaddcf] hover:border-[#ee8733] hover:text-[#ee8733] transition-all duration-200 shadow-xs"
+            className="px-4 py-2 rounded-full font-['Inter'] text-xs sm:text-sm font-bold text-[#ffffff] bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] hover:border-[#ee8733] hover:text-[#ee8733] transition-all duration-200 shadow-xs"
           >
             <span>Rate Card</span>
           </a>
@@ -87,7 +87,7 @@ export default function Navbar() {
             href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold text-[#ffffff] bg-[#ee8733] orange-glow hover:bg-[#ff6a1a] active:scale-95 transition-all duration-200 shadow-sm"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-['Inter'] text-xs sm:text-sm font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532] active:scale-95 transition-all duration-200 shadow-sm"
           >
             <span>Book Strategy Call</span>
             <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
@@ -111,13 +111,13 @@ export default function Navbar() {
             href="https://calendar.app.google/gAb9osZfSYNnnoLa8"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3.5 py-1.5 rounded-full font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ffffff] bg-[#ee8733] orange-glow"
+            className="px-3.5 py-1.5 rounded-full font-['Inter'] text-xs font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532]"
           >
             Book Call
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl bg-[#ffffff] text-[#0c0a09] hover:text-[#ee8733] border border-[#eaddcf] shadow-xs"
+            className="p-2 rounded-xl bg-[#0c0e14] text-[#ffffff] hover:text-[#ee8733] border border-[rgba(220,223,227,0.12)] shadow-xs"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -133,7 +133,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="sm:hidden px-6 pt-3 pb-6 bg-[#fcf2e8]/98 backdrop-blur-2xl border-b border-[#eaddcf] shadow-xl"
+            className="sm:hidden px-6 pt-3 pb-6 bg-[#0c0e14]/98 backdrop-blur-2xl border-b border-[rgba(220,223,227,0.12)] shadow-xl"
           >
             <nav className="flex flex-col gap-1.5">
               {NAV_LINKS.map((link) => (
@@ -141,16 +141,16 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#57534e] hover:bg-[#ffffff] hover:text-[#0c0a09] transition-colors"
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold text-[#dcdfe3] hover:bg-[#171c29] hover:text-[#ffffff] transition-colors"
                 >
                   {link.name}
                 </a>
               ))}
-              <div className="pt-2 mt-2 border-t border-[#eaddcf] flex flex-col gap-2">
+              <div className="pt-2 mt-2 border-t border-[rgba(220,223,227,0.12)] flex flex-col gap-2">
                 <a
                   href="/pricing"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 py-2.5 rounded-full font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#0c0a09] bg-[#ffffff] border border-[#eaddcf]"
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-full font-['Inter'] text-xs font-bold text-[#ffffff] bg-[#171c29] border border-[rgba(220,223,227,0.12)]"
                 >
                   <span>View Rates &amp; Packages</span>
                 </a>
@@ -159,7 +159,7 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 py-3 rounded-full font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#ffffff] bg-[#ee8733] orange-glow"
+                  className="flex items-center justify-center gap-2 py-3 rounded-full font-['Inter'] text-sm font-bold text-[#171c29] bg-[#ee8733] orange-glow hover:bg-[#ed8532]"
                 >
                   <span>Book Strategy Call</span>
                   <Calendar className="w-4 h-4" />

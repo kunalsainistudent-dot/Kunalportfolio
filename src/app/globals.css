@@ -1,58 +1,68 @@
+@import "./brand.css";
 @import "tailwindcss";
 
 @theme {
-  /* Warm Cream & White Palette */
-  --color-cream-bg: #fcf2e8;
-  --color-cream-subtle: #f7ece0;
-  --color-cream-muted: #f0e2d3;
-  --color-card-white: #ffffff;
-  --color-border-warm: #eaddcf;
-  
-  /* Text & Contrast */
-  --color-text-black: #0c0a09;
-  --color-text-dark: #1c1917;
-  --color-text-muted: #57534e;
-  --color-text-subtle: #78716c;
+  /* Brand Sheet Palette Tokens */
+  --color-bg-brand: #171c29;
+  --color-bg-deep: #0c0e14;
+  --color-bg-darkest: #08090d;
 
-  /* Signature Brand Orange (#ee8733 / #ff5500) */
+  --color-text-main: #ffffff;
+  --color-text-secondary: #dcdfe3;
+
+  --color-accent: #ee8733;
+  --color-accent-hover: #ed8532;
+  --color-link: #367cf1;
+
+  /* Backward Compatibility Theme Mappings */
+  --color-cream-bg: #171c29;
+  --color-cream-subtle: #0c0e14;
+  --color-cream-muted: #08090d;
+  --color-card-white: #0c0e14;
+  --color-border-warm: rgba(220, 223, 227, 0.12);
+  
+  --color-text-black: #ffffff;
+  --color-text-dark: #ffffff;
+  --color-text-muted: #dcdfe3;
+  --color-text-subtle: #dcdfe3;
+
   --color-orange-accent: #ee8733;
-  --color-orange-vibrant: #ff5500;
-  --color-orange-hover: #ff6a1a;
-  --color-orange-deep: #c86314;
-  --color-orange-light: #fff2e6;
+  --color-orange-vibrant: #ee8733;
+  --color-orange-hover: #ed8532;
+  --color-orange-deep: #ee8733;
+  --color-orange-light: rgba(238, 135, 51, 0.15);
   --color-orange-border: rgba(238, 135, 51, 0.3);
 
-  /* Tech Blue Accent */
-  --color-blue-accent: #2563eb;
-  --color-blue-light: #f0f4ff;
+  --color-blue-accent: #367cf1;
+  --color-blue-light: rgba(54, 124, 241, 0.12);
 
-  /* Typography */
-  --font-display: 'Space Grotesk', 'Poppins', system-ui, -apple-system, sans-serif;
-  --font-headline: 'Space Grotesk', 'Poppins', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-label: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  /* Typography: Inter for All Headings, Labels, and Body */
+  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-headline: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-label: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Spacing */
   --spacing-container: 80rem;
 }
 
 :root {
-  --background: #fcf2e8;
-  --foreground: #0c0a09;
-  --border: #eaddcf;
-  color-scheme: light;
+  --background: #171c29;
+  --foreground: #ffffff;
+  --border: rgba(220, 223, 227, 0.12);
+  color-scheme: dark;
 }
 
 body {
-  background-color: #fcf2e8;
-  color: #0c0a09;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #171c29;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
 }
 
 ::selection {
   background: #ee8733;
-  color: #ffffff;
+  color: #171c29;
 }
 
 /* Container Utility (from Launch UI) */
@@ -62,7 +72,7 @@ body {
   margin-right: auto;
 }
 
-/* Fade mask utilities (from Launch UI) */
+/* Fade mask utilities */
 .fade-bottom {
   mask-image: linear-gradient(to top, transparent 0%, black 28%);
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 28%);
@@ -80,26 +90,26 @@ body {
 
 /* Glass panel helpers */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(12, 14, 20, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid #eaddcf;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(220, 223, 227, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .glass-panel-interactive {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(12, 14, 20, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid #eaddcf;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(220, 223, 227, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-interactive:hover {
-  background: #ffffff;
+  background: #0c0e14;
   border-color: rgba(238, 135, 51, 0.45);
-  box-shadow: 0 14px 40px rgba(238, 135, 51, 0.12), inset 0 0 12px rgba(238, 135, 51, 0.03);
+  box-shadow: 0 14px 40px rgba(238, 135, 51, 0.15), inset 0 0 12px rgba(238, 135, 51, 0.05);
   transform: translateY(-2px);
 }
 
@@ -116,25 +126,25 @@ body {
   box-shadow: 0 4px 15px rgba(238, 135, 51, 0.25);
 }
 
-/* Mockup Frame (from Launch UI) */
+/* Mockup Frame */
 .mockup-frame {
-  background: #ffffff;
-  border: 1px solid #eaddcf;
+  background: #0c0e14;
+  border: 1px solid rgba(220, 223, 227, 0.12);
   border-radius: 1.5rem;
-  box-shadow: 0 20px 50px rgba(12, 10, 9, 0.06), 0 1px 3px rgba(12, 10, 9, 0.04);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Custom subtle scrollbar */
+/* Custom subtle dark scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #fcf2e8;
+  background: #08090d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e7d7c7;
+  background: #232938;
   border-radius: 9999px;
 }
 

@@ -34,7 +34,7 @@ import {
  * Ported & adapted from:
  * 1. Launch UI (components/sections/pricing/default.tsx & components/ui/pricing-column.tsx)
  * 2. awesome-landing-pages (pricing comparisons & layout architecture)
- * Inherits brand tokens: #fcf2e8 canvas, #ffffff cards, #ee8733 accents, bold black/orange font sequence.
+ * Inherits brand tokens: #171c29 canvas, #0c0e14 cards, #ee8733 accents, #ffffff/#dcdfe3 typography.
  */
 
 const CATEGORIES = [
@@ -81,12 +81,12 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#fcf2e8] text-[#0c0a09] flex flex-col overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#171c29] text-[#ffffff] flex flex-col overflow-x-hidden">
       {/* Background Ambient Luminescence */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-[#ee8733]/10 blur-[150px]" />
-        <div className="absolute top-1/3 -right-40 w-96 h-96 rounded-full bg-[#ff7a1a]/8 blur-[140px]" />
-        <div className="absolute bottom-1/4 -left-40 w-96 h-96 rounded-full bg-[#f5d9bf]/30 blur-[160px]" />
+        <div className="absolute top-1/3 -right-40 w-96 h-96 rounded-full bg-[#ee8733]/8 blur-[140px]" />
+        <div className="absolute bottom-1/4 -left-40 w-96 h-96 rounded-full bg-[#0c0e14]/50 blur-[160px]" />
       </div>
 
       <Navbar />
@@ -98,7 +98,7 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#ffffff] border-2 border-[#ee8733] text-[#0c0a09] font-['Plus_Jakarta_Sans'] text-xs font-bold uppercase tracking-wider mb-5 shadow-xs"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#0c0e14] border-2 border-[#ee8733] text-[#ffffff] font-['Inter'] text-xs font-bold uppercase tracking-wider mb-5 shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#ee8733]" />
             OFFICIAL RATE CARD &bull; TRANSPARENT PRICING
@@ -108,7 +108,7 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-['Space_Grotesk'] text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#0c0a09] max-w-4xl mx-auto leading-[1.08] mb-6"
+            className="font-['Inter'] text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#ffffff] max-w-4xl mx-auto leading-[1.08] mb-6"
           >
             EMPIRICAL ACQUISITION. <br className="hidden sm:inline" />
             <span className="text-[#ee8733]">ZERO FLUFF PRICING.</span>
@@ -118,7 +118,7 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-['Inter'] text-base sm:text-lg font-medium text-[#57534e] max-w-2xl mx-auto leading-relaxed mb-8"
+            className="font-['Inter'] text-base sm:text-lg font-medium text-[#dcdfe3] max-w-2xl mx-auto leading-relaxed mb-8"
           >
             From forensic funnel leak diagnosis and autonomous AI lead systems to high-scale paid media management across Meta and Google Ads.
           </motion.p>
@@ -128,7 +128,7 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 py-3 px-6 sm:px-8 rounded-full bg-[#ffffff] border border-[#eaddcf] shadow-xs text-xs font-['Plus_Jakarta_Sans'] text-[#0c0a09] font-bold"
+            className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 py-3 px-6 sm:px-8 rounded-full bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs text-xs font-['Inter'] text-[#ffffff] font-bold"
           >
             <div className="flex items-center gap-1.5">
               <CreditCard className="w-4 h-4 text-[#ee8733]" />
@@ -149,13 +149,13 @@ export default function PricingPage() {
 
         {/* PRICING TOGGLE BANNER (Launch UI / awesome-landing-pages pattern) */}
         <section className="max-w-md mx-auto px-4 mb-10">
-          <div className="p-1.5 rounded-full bg-[#ffffff] border border-[#eaddcf] shadow-xs flex items-center justify-between text-xs font-['Plus_Jakarta_Sans'] font-bold">
+          <div className="p-1.5 rounded-full bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs flex items-center justify-between text-xs font-['Inter'] font-bold">
             <button
               onClick={() => setPaymentPreference("deposit")}
               className={`flex-1 py-2 px-3 rounded-full transition-all duration-200 ${
                 paymentPreference === "deposit"
-                  ? "bg-[#ee8733] text-white orange-glow-sm shadow-xs"
-                  : "text-[#57534e] hover:text-[#0c0a09]"
+                  ? "bg-[#ee8733] text-[#171c29] orange-glow-sm shadow-xs"
+                  : "text-[#dcdfe3] hover:text-[#ffffff]"
               }`}
             >
               10% Token Deposit
@@ -164,8 +164,8 @@ export default function PricingPage() {
               onClick={() => setPaymentPreference("full")}
               className={`flex-1 py-2 px-3 rounded-full transition-all duration-200 ${
                 paymentPreference === "full"
-                  ? "bg-[#ee8733] text-white orange-glow-sm shadow-xs"
-                  : "text-[#57534e] hover:text-[#0c0a09]"
+                  ? "bg-[#ee8733] text-[#171c29] orange-glow-sm shadow-xs"
+                  : "text-[#dcdfe3] hover:text-[#ffffff]"
               }`}
             >
               100% Full Upfront
@@ -180,10 +180,10 @@ export default function PricingPage() {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-5 py-2 rounded-full font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold transition-all duration-200 border ${
+                className={`px-5 py-2 rounded-full font-['Inter'] text-xs sm:text-sm font-bold transition-all duration-200 border ${
                   selectedCategory === cat.id
-                    ? "bg-[#0c0a09] text-white border-[#0c0a09] shadow-xs"
-                    : "bg-[#ffffff] text-[#57534e] border-[#eaddcf] hover:border-[#ee8733] hover:text-[#0c0a09]"
+                    ? "bg-[#ee8733] text-[#171c29] border-[#ee8733] shadow-xs"
+                    : "bg-[#0c0e14] text-[#dcdfe3] border-[rgba(220,223,227,0.12)] hover:border-[#ee8733] hover:text-[#ffffff]"
                 }`}
               >
                 {cat.label}
@@ -206,15 +206,15 @@ export default function PricingPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className={`p-7 sm:p-8 rounded-3xl bg-[#ffffff] border shadow-xs flex flex-col justify-between transition-all duration-300 relative group overflow-hidden ${
+                  className={`p-7 sm:p-8 rounded-3xl bg-[#0c0e14] border shadow-xs flex flex-col justify-between transition-all duration-300 relative group overflow-hidden ${
                     isPopular
                       ? "border-2 border-[#ee8733] shadow-[0_16px_40px_rgba(238,135,51,0.14)]"
-                      : "border-[#eaddcf] hover:border-[#ee8733] hover:shadow-[0_16px_40px_rgba(238,135,51,0.1)]"
+                      : "border-[rgba(220,223,227,0.12)] hover:border-[#ee8733] hover:shadow-[0_16px_40px_rgba(238,135,51,0.1)]"
                   }`}
                 >
                   {/* Popular plan indicator (Launch UI glow-brand style) */}
                   {isPopular && (
-                    <div className="absolute top-0 right-0 bg-[#ee8733] text-white text-[10px] font-['Plus_Jakarta_Sans'] font-extrabold uppercase tracking-wider py-1 px-4 rounded-bl-xl shadow-xs">
+                    <div className="absolute top-0 right-0 bg-[#ee8733] text-[#171c29] text-[10px] font-['Inter'] font-extrabold uppercase tracking-wider py-1 px-4 rounded-bl-xl shadow-xs">
                       Popular for Scale
                     </div>
                   )}
@@ -229,24 +229,24 @@ export default function PricingPage() {
                   <div>
                     {/* Header: Title & Category */}
                     <div className="flex items-start justify-between gap-3 mb-4">
-                      <span className="font-['Plus_Jakarta_Sans'] text-[11px] font-bold text-[#0c0a09] uppercase tracking-wider bg-[#fcf2e8] px-3 py-1 rounded-full border border-[#ee8733]/40">
+                      <span className="font-['Inter'] text-[11px] font-bold text-[#ffffff] uppercase tracking-wider bg-[#171c29] px-3 py-1 rounded-full border border-[#ee8733]/40">
                         {service.typicalEngagement || "Standard Engagement"}
                       </span>
                     </div>
 
-                    <h3 className="font-['Space_Grotesk'] text-xl font-bold text-[#0c0a09] mb-2 leading-tight">
+                    <h3 className="font-['Inter'] text-xl font-bold text-[#ffffff] mb-2 leading-tight">
                       {service.title}
                     </h3>
 
                     {/* Price Tag with Deposit calculation */}
-                    <div className="mb-4 pb-4 border-b border-[#eaddcf]">
+                    <div className="mb-4 pb-4 border-b border-[rgba(220,223,227,0.12)]">
                       <div className="flex items-baseline gap-2">
-                        <span className="font-['Space_Grotesk'] text-3xl font-extrabold text-[#0c0a09]">
+                        <span className="font-['Inter'] text-3xl font-extrabold text-[#ffffff]">
                           {paymentPreference === "deposit"
                             ? `₹${depositAmount.toLocaleString("en-IN")}`
                             : service.priceDisplay}
                         </span>
-                        <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733]">
+                        <span className="font-['Inter'] text-xs font-bold text-[#ee8733]">
                           {paymentPreference === "deposit"
                             ? "(10% Kickoff Deposit)"
                             : service.billingPeriod && service.billingPeriod !== "one-time"
@@ -254,17 +254,17 @@ export default function PricingPage() {
                             : "(Full Price)"}
                         </span>
                       </div>
-                      <p className="font-['Inter'] text-xs text-[#57534e] mt-2 leading-relaxed">
+                      <p className="font-['Inter'] text-xs text-[#dcdfe3] mt-2 leading-relaxed">
                         {service.description}
                       </p>
                     </div>
 
                     {/* Deliverables List (CircleCheckBig pattern from Launch UI) */}
                     <div className="mb-6">
-                      <span className="font-['Plus_Jakarta_Sans'] text-[11px] font-bold text-[#0c0a09] uppercase tracking-wider block mb-2.5">
+                      <span className="font-['Inter'] text-[11px] font-bold text-[#ffffff] uppercase tracking-wider block mb-2.5">
                         Deliverables &amp; Scope:
                       </span>
-                      <ul className="flex flex-col gap-2 font-['Inter'] text-xs text-[#1c1917] font-semibold">
+                      <ul className="flex flex-col gap-2 font-['Inter'] text-xs text-[#dcdfe3] font-semibold">
                         {service.deliverables.map((del, dIdx) => (
                           <li key={dIdx} className="flex items-start gap-2">
                             <CircleCheckBig className="w-3.5 h-3.5 mt-0.5 text-[#ee8733] shrink-0" />
@@ -276,17 +276,17 @@ export default function PricingPage() {
                   </div>
 
                   {/* Booking Action Footer */}
-                  <div className="pt-4 border-t border-[#eaddcf] flex flex-col gap-3">
-                    <div className="flex items-center justify-between text-xs font-['Inter'] text-[#57534e] font-semibold">
+                  <div className="pt-4 border-t border-[rgba(220,223,227,0.12)] flex flex-col gap-3">
+                    <div className="flex items-center justify-between text-xs font-['Inter'] text-[#dcdfe3] font-semibold">
                       <span>Full Scope Investment:</span>
-                      <span className="font-bold text-[#0c0a09]">
+                      <span className="font-bold text-[#ffffff]">
                         {service.priceDisplay}
                       </span>
                     </div>
 
                     <button
                       onClick={() => handleOpenBooking(service)}
-                      className="w-full py-3.5 px-4 rounded-xl font-['Plus_Jakarta_Sans'] text-xs sm:text-sm font-bold text-[#ffffff] bg-[#ee8733] orange-glow flex items-center justify-center gap-2 hover:bg-[#ff6a1a] active:scale-[0.98] transition-all shadow-sm"
+                      className="w-full py-3.5 px-4 rounded-xl font-['Inter'] text-xs sm:text-sm font-bold text-[#171c29] bg-[#ee8733] orange-glow flex items-center justify-center gap-2 hover:bg-[#ed8532] active:scale-[0.98] transition-all shadow-sm"
                     >
                       <span>
                         {paymentPreference === "deposit"
@@ -304,15 +304,15 @@ export default function PricingPage() {
 
         {/* 3-PHASE CLIENT ENGAGEMENT MODEL */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
-          <div className="p-8 sm:p-12 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-xs">
+          <div className="p-8 sm:p-12 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs">
             <div className="max-w-3xl mb-10">
-              <span className="font-['Plus_Jakarta_Sans'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest mb-2 block">
+              <span className="font-['Inter'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest mb-2 block">
                 STRATEGIC ROADMAP
               </span>
-              <h2 className="font-['Space_Grotesk'] text-3xl sm:text-4xl font-extrabold text-[#0c0a09]">
+              <h2 className="font-['Inter'] text-3xl sm:text-4xl font-extrabold text-[#ffffff]">
                 Recommended 3-Phase Client Engagement Model
               </h2>
-              <p className="font-['Inter'] text-sm sm:text-base text-[#57534e] mt-2">
+              <p className="font-['Inter'] text-sm sm:text-base text-[#dcdfe3] mt-2">
                 For brands that need end-to-end compounding growth rather than isolated ad execution.
               </p>
             </div>
@@ -321,23 +321,23 @@ export default function PricingPage() {
               {THREE_PHASE_MODEL.map((phase, pIdx) => (
                 <div
                   key={phase.phase}
-                  className="p-6 rounded-2xl bg-[#fcf2e8]/60 border border-[#eaddcf] flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-[#171c29]/60 border border-[rgba(220,223,227,0.12)] flex flex-col justify-between"
                 >
                   <div>
-                    <span className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#ee8733] tracking-wider block mb-2">
+                    <span className="font-['Inter'] text-xs font-bold text-[#ee8733] tracking-wider block mb-2">
                       {phase.phase}
                     </span>
-                    <h3 className="font-['Space_Grotesk'] text-xl font-bold text-[#0c0a09] mb-1">
+                    <h3 className="font-['Inter'] text-xl font-bold text-[#ffffff] mb-1">
                       {phase.title}
                     </h3>
-                    <div className="font-['Space_Grotesk'] text-lg font-extrabold text-[#ee8733] mb-3">
+                    <div className="font-['Inter'] text-lg font-extrabold text-[#ee8733] mb-3">
                       {phase.fee}
                     </div>
-                    <p className="font-['Inter'] text-xs text-[#57534e] leading-relaxed">
+                    <p className="font-['Inter'] text-xs text-[#dcdfe3] leading-relaxed">
                       {phase.description}
                     </p>
                   </div>
-                  <div className="mt-5 pt-3 border-t border-[#eaddcf] flex items-center gap-1.5 text-[11px] text-[#ee8733] font-bold">
+                  <div className="mt-5 pt-3 border-t border-[rgba(220,223,227,0.12)] flex items-center gap-1.5 text-[11px] text-[#ee8733] font-bold">
                     <span>Phase Step 0{pIdx + 1}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
@@ -350,31 +350,31 @@ export default function PricingPage() {
         {/* AD SPEND FRAMEWORK TABLE */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="font-['Plus_Jakarta_Sans'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-2">
+            <span className="font-['Inter'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-2">
               RETAINER GUIDELINES
             </span>
-            <h2 className="font-['Space_Grotesk'] text-3xl font-extrabold text-[#0c0a09]">
+            <h2 className="font-['Inter'] text-3xl font-extrabold text-[#ffffff]">
               Suggested Ad-Spend Framework
             </h2>
-            <p className="font-['Inter'] text-xs sm:text-sm text-[#57534e] mt-2">
+            <p className="font-['Inter'] text-xs sm:text-sm text-[#dcdfe3] mt-2">
               For smaller accounts, a fixed monthly retainer is recommended rather than a pure percentage-of-spend. For larger accounts, a hybrid structure applies.
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-[#eaddcf] bg-[#ffffff] shadow-xs">
+          <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden border border-[rgba(220,223,227,0.12)] bg-[#0c0e14] shadow-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-left font-['Inter'] text-xs sm:text-sm">
                 <thead>
-                  <tr className="bg-[#fcf2e8] border-b border-[#eaddcf] text-[#0c0a09] font-['Plus_Jakarta_Sans'] uppercase tracking-wider text-xs font-bold">
+                  <tr className="bg-[#171c29] border-b border-[rgba(220,223,227,0.12)] text-[#ffffff] font-['Inter'] uppercase tracking-wider text-xs font-bold">
                     <th className="py-4 px-6">Approx. Monthly Ad Spend</th>
                     <th className="py-4 px-6">Suggested Management Model</th>
                     <th className="py-4 px-6">Strategic Focus</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#eaddcf] text-[#57534e]">
+                <tbody className="divide-y divide-[rgba(220,223,227,0.12)] text-[#dcdfe3]">
                   {AD_SPEND_FRAMEWORK.map((row) => (
-                    <tr key={row.spendTier} className="hover:bg-[#fcf2e8]/50 transition-colors">
-                      <td className="py-4 px-6 font-bold text-[#0c0a09]">
+                    <tr key={row.spendTier} className="hover:bg-[#171c29]/50 transition-colors">
+                      <td className="py-4 px-6 font-bold text-[#ffffff]">
                         {row.spendTier}
                       </td>
                       <td className="py-4 px-6 text-[#ee8733] font-bold">
@@ -391,14 +391,14 @@ export default function PricingPage() {
 
         {/* TERMS & COMMERCIAL NOTES */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-24">
-          <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-[#ffffff] border border-[#eaddcf] shadow-xs">
+          <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs">
             <div className="flex items-center gap-2 mb-4">
               <FileText className="w-4 h-4 text-[#ee8733]" />
-              <h3 className="font-['Space_Grotesk'] text-lg font-bold text-[#0c0a09]">
+              <h3 className="font-['Inter'] text-lg font-bold text-[#ffffff]">
                 Terms &amp; Commercial Notes
               </h3>
             </div>
-            <ul className="flex flex-col gap-2.5 font-['Inter'] text-xs text-[#57534e] leading-relaxed">
+            <ul className="flex flex-col gap-2.5 font-['Inter'] text-xs text-[#dcdfe3] leading-relaxed">
               {COMMERCIAL_TERMS.map((term, tIdx) => (
                 <li key={tIdx} className="flex items-start gap-2">
                   <span className="text-[#ee8733] font-bold">&bull;</span>
@@ -412,10 +412,10 @@ export default function PricingPage() {
         {/* FREQUENTLY ASKED QUESTIONS */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 mb-16">
           <div className="text-center mb-10">
-            <span className="font-['Plus_Jakarta_Sans'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-2">
+            <span className="font-['Inter'] text-xs font-extrabold text-[#ee8733] uppercase tracking-widest block mb-2">
               COMMON INQUIRIES
             </span>
-            <h2 className="font-['Space_Grotesk'] text-3xl font-extrabold text-[#0c0a09]">
+            <h2 className="font-['Inter'] text-3xl font-extrabold text-[#ffffff]">
               Frequently Asked Questions
             </h2>
           </div>
@@ -424,15 +424,15 @@ export default function PricingPage() {
             {FAQS.map((faq, fIdx) => (
               <div
                 key={fIdx}
-                className="p-6 rounded-2xl bg-[#ffffff] border border-[#eaddcf] shadow-xs"
+                className="p-6 rounded-2xl bg-[#0c0e14] border border-[rgba(220,223,227,0.12)] shadow-xs"
               >
                 <div className="flex items-start gap-3">
                   <HelpCircle className="w-4 h-4 text-[#ee8733] shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-['Space_Grotesk'] text-base font-bold text-[#0c0a09] mb-1.5">
+                    <h4 className="font-['Inter'] text-base font-bold text-[#ffffff] mb-1.5">
                       {faq.q}
                     </h4>
-                    <p className="font-['Inter'] text-xs sm:text-sm text-[#57534e] leading-relaxed">
+                    <p className="font-['Inter'] text-xs sm:text-sm text-[#dcdfe3] leading-relaxed">
                       {faq.a}
                     </p>
                   </div>
